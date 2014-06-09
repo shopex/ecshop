@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+  <section id="list">
+    <title>用户评论列表</title>
+    <content>
+    <![CDATA[
+	<p>此页面列出所有站内的评论信息</p>
+	<p>在此您可以进行如下操作:</p>
+	
+	<strong>浏览用户评论信息</strong>
+	<p>此页面列出最新的用户评论信息，包括用户名，评论的类型，评论的对象，发表的时间等等。<br>
+	评论内容可以按字段一排序，点击相应的字段便可以。<br>
+	点击列表右侧的 <span class="link"> 查看详情 </span>链接，便可查看详细的评论内容。</p>
+	
+	<strong>回复用户的评论</strong>
+	<p>您只要点击列表右边的<span class="link"> 查看详情 </span>链接，即可进入到评论详情页面，进行回复的操作。</p>
+	
+	<strong>批量删除用户评论</strong>
+	<p>单击<span class="link"> 编号 </span>右边选择框，评论将处于被选中状态。此时点击右下角的<span class="link"> 删除评论 </span>按钮，按系统提示即可完成删除的操作。</p>
+	
+	]]>
+    </content>
+  </section>
+  <section id="reply">
+    <title>查看评论详情</title>
+    <content>
+    <![CDATA[
+	<p>此页面列出了评论的详细信息。</p>
+	<p>您可以在此页面对评论进行<br><span class="link"> 回复、审核 </span>的操作。</p>
+	
+	<strong>评论的审核：</strong>
+	<p>在评论内容的右侧，显示出当前的评论的状态。<br>如果是<span class="link"> 允许显示 </span>，那么此条评论处于禁止状态。点击此链接将允许显示，此条评论审核通过。反之将被禁止。</p>
+	
+	<strong>评论的回复：</strong>
+	<p>在评论内容的下方，是回复评论的表单。<br>如果当前评论已被回复过，那么回复的内容会显示。再次回复将更新原来回复的内容。</p>
+	
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	]]>
+    </content>
+  </section>
+</help>

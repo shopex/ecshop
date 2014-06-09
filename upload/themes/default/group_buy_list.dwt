@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="block box">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+<div class="blank"></div>
+<div class="block clearfix">
+  <!--left start-->
+  <div class="AreaL">
+    <!-- TemplateBeginEditable name="左边区域" -->
+    <!-- #BeginLibraryItem "/library/cart.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_related.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_fittings.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_article.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_attrlinked.lbi" --><!-- #EndLibraryItem -->
+    <!-- TemplateEndEditable -->
+    <!-- TemplateBeginEditable name="左边广告区域（宽200px）" -->
+    <!-- TemplateEndEditable -->
+    <!--AD end-->
+    <!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+  </div>
+  <!--left end-->
+  <!--right start-->
+  <div class="AreaR">
+	 <!-- TemplateBeginEditable name="右边通栏广告（宽750px）" -->
+   <!-- TemplateEndEditable -->
+   <div class="blank5"></div>
+   <div class="box">
+   <div class="box_1">
+    <h3><span>{$lang.gb_goods_name}</span></h3>
+    <div class="boxCenterList">
+      <!-- {if $gb_list} 如果有团购活动 -->
+      <!-- {foreach from=$gb_list item=group_buy} 循环团购活动开始 -->
+      <ul class="group clearfix">
+      <li style="margin-right:8px; text-align:center;">
+      <a href="{$group_buy.url}"><img src="{$group_buy.goods_thumb}" border="0" alt="{$group_buy.goods_name|escape:html}" style="vertical-align: middle" /></a>
+      </li>
+      <li style="width:555px; line-height:23px;">
+      {$lang.gb_goods_name}<a href="{$group_buy.url}" class="f5">{$group_buy.goods_name|escape:html}</a><br />
+      {$lang.act_time}：{$group_buy.formated_start_date} -- {$group_buy.formated_end_date}<br />
+      {$lang.gb_price_ladder}<br />
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+       <tr>
+          <th width="29%" bgcolor="#FFFFFF">{$lang.gb_ladder_amount}</th>
+         <th width="71%" bgcolor="#FFFFFF">{$lang.gb_ladder_price}</th>
+        </tr>
+        <!-- {foreach from=$group_buy.price_ladder item=item} -->
+        <tr>
+          <td width="29%" bgcolor="#FFFFFF">{$item.amount}</td>
+         <td width="71%" bgcolor="#FFFFFF">{$item.formated_price}</td>
+        </tr>
+        <!-- {/foreach} -->
+      </table>
+      </li>
+      </ul>
+      <!--{/foreach}-->
+      <!-- {else} -->
+       <span style="margin:2px 10px; font-size:14px; line-height:36px;">{$lang.group_goods_empty}</span>
+      <!-- {/if} -->
+    </div>
+   </div>
+  </div>
+  <div class="blank5"></div>
+  <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+  </div>
+  <!--right end-->
+</div>
+<div class="blank5"></div>
+<!--帮助-->
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+   </div>
+  </div>
+</div>
+<div class="blank"></div>
+<!--帮助-->
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div id="bottomNav" class="box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+<!--{/if}-->
+<!--友情链接 end-->
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

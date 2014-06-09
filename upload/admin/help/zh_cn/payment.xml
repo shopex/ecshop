@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="gbk"?>
+<help>
+  <section id="list">
+    <title>支付方式列表</title>
+    <content>
+    <![CDATA[
+
+	<p>本页面列出当前的支付方式信息.<br>在此您可以进行如下操作：</p>
+	<strong>安装支付方式</strong>
+	<p>您只需要点击列表右侧的<span class="link"> 安装 </span>链接，填写配置信息后即可成功启用。</p>
+    <strong>卸裁支付方式</strong>
+	<p>如果您已经安装了支付方式，需要卸载时，只需要点击列表右侧的<span class="link"> 卸载 </span>链接，系统提示操作成功后操作即可完成。</p>
+
+	]]>
+    </content>
+  </section>
+</help>

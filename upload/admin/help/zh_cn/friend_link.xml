@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+  <section id="list">
+    <title>友情链接列表</title>
+    <content>
+    <![CDATA[
+	<p>此页面列出您的友情链接信息</p>
+	<p>在此您可以进行如下操作:</p>
+	
+	<strong>快速编辑链接名称</strong>
+	<p>您可以快速编辑链接名称，单击即可出现编辑文本框。输入您的新内容后回车，修改即可生效！</p>
+	
+	<strong>按字段排序内容</strong>
+	<p>您只要点击相应的字段名称，列表内容便会自动按<span class="link"> 升序/降序 </span>来排列列表的内容。<br>也方便您按链接类型来排序。</p>
+	
+	<strong>添加新的友情链接</strong>
+	<p>您只要点击列表右边的<a href="friend_link.php?act=add" target="main-frame"><span class="link"> 添加新链接 </span></a>，即可进入到添加的操作页面。</p>
+
+	<strong>编辑新链接</strong>
+	<p>您只要单击列表右边的<span class="link"> 编辑 </span>链接，即可进行相应的编辑操作。</p>
+	
+	<strong>删除友情链接</strong>
+	<p>您只要点击列表右边的<span class="link"> 删除 </span>链接，按系统提示即可完成删除的操作。</p>
+	
+	]]>
+    </content>
+  </section>
+  <section id="add">
+    <title>添加友情链接</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行友情链接的添加操作</p>
+	
+	<strong>链接名称</strong>
+	<p>在此您可以输入您新链接的链接名称。如：手机之家，18900手机商城...</p>
+	<p><span class="tips"> 提示：<br>如果您要添加的友情链接只是文字类型的，那么此链接的名称将作为链接的LOGO显示。 </span></p>
+
+	
+	<strong>链接地址</strong>
+	<p>在此输入点击此友情链接后，页面跳转到的网址。必须是一个网址格式！</p>
+
+	<strong>链接LOGO</strong>
+	<p>如果您添加的友情链接是图片类型的，那么您必须在此上传您的链接LOGO图片。<br>您也可以通过<span class="link"> 或LOGO地址 </span>这个表单来输入您的链接LOGO的图片。</p>
+	<p><span class="tips"> 提示：<br>如果您既上传了链接LOGO图片，又指定了远程图片地址，那么链接LOGO将以后者为准。 </span></p>
+
+	]]>
+    </content>
+  </section>
+  <section id="edit">
+    <title>编辑友情链接</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行友情链接的编辑操作<br>(详细帮助信息请参见 <a href="friend_link.php?act=add" target="main-frame"><span class="link">添加友情链接 </span></a> 部分)</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+]]>
+    </content>
+  </section>
+</help>

@@ -1,0 +1,86 @@
+<!-- $Id: snatch_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="form-div">
+  <form action="javascript:searchSnatch()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    {$lang.snatch_name} <input type="text" name="keyword" /> <input type="submit" value="{$lang.button_search}" class="button" />
+  </form>
+</div>
+
+<form method="post" action="" name="listForm">
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th><a href="javascript:listTable.sort('act_id'); ">{$lang.record_id}</a>{$sort_act_id}</th>
+      <th><a href="javascript:listTable.sort('snatch_name'); ">{$lang.snatch_name}</a>{$sort_snatch_name}</th>
+      <th><a href="javascript:listTable.sort('goods_name'); ">{$lang.goods_name}</a>{$sort_goods_name}</th>
+      <th><a href="javascript:listTable.sort('start_time'); ">{$lang.start_time}</a>{$sort_start_time}</th>
+      <th><a href="javascript:listTable.sort('end_time'); ">{$lang.end_time}</a>{$sort_end_time}</th>
+      <th>{$lang.min_price}</a></th>
+      <th>{$lang.integral}</a></th>
+      <th>{$lang.handler}</th>
+    </tr>
+    {foreach from=$snatch_list item=snatch}
+    <tr>
+      <td align="center">{$snatch.act_id}</td>
+      <td class="first-cell"><span onclick="listTable.edit(this, 'edit_snatch_name', {$snatch.act_id})">{$snatch.snatch_name}</span></td>
+      <td><span>{$snatch.goods_name}</span></td>
+      <td align="center">{$snatch.start_time}</td>
+      <td align="center">{$snatch.end_time}</td>
+      <td align="right">{$snatch.start_price}</td>
+      <td align="right">{$snatch.cost_points}</td>
+      <td align="center">
+        <a href="snatch.php?act=view&amp;snatch_id={$snatch.act_id}" title="{$lang.view_detail}"><img src="images/icon_view.gif" border="0" height="16" width="16"></a>
+        <a href="snatch.php?act=edit&amp;id={$snatch.act_id}" title="{$lang.edit}"><img src="images/icon_edit.gif" border="0" height="16" width="16"></a>
+        <a href="javascript:;" onclick="listTable.remove({$snatch.act_id},'{$lang.drop_confirm}')" title="{$lang.remove}"><img src="images/icon_drop.gif" border="0" height="16" width="16"></a>
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+    {/foreach}
+    <tr>
+      <td align="right" nowrap="true" colspan="10">{include file="page.htm"}</td>
+    </tr>
+  </table>
+
+{if $full_page}
+</div>
+</form>
+<!-- end article list -->
+
+<script type="text/javascript" language="JavaScript">
+<!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+      document.forms['searchForm'].elements['keyword'].focus();
+      // 开始检查订单
+      startCheckOrder();
+  }
+
+  /**
+   * 搜索文章
+   */
+  function searchSnatch()
+  {
+    var keyword = Utils.trim(document.forms['searchForm'].elements['keyword'].value);
+    listTable.filter.keywords = keyword;
+    listTable.filter.page = 1;
+    listTable.loadList();
+  }
+  {/literal}
+//-->
+</script>
+{include file="pagefooter.htm"}
+{/if}

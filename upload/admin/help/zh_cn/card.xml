@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list">
+    <title>贺卡列表</title>
+    <content>
+    <![CDATA[
+	<p><strong>贺卡列表</strong></p>
+	<p>列出所有能使用的贺卡。如果上传过贺卡预览图贺卡名称的小图标为彩色，点击小图标即可预览贺卡图片。贺卡名称、贺卡费用和贺卡免额度可以直接编辑。</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="add">
+    <title>添加贺卡</title>
+    <content>
+    <![CDATA[
+	<p><strong>添加贺卡</strong></p>
+	<p>点击“？”图标可查看当前选项的帮助。</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="edit">
+    <title>编辑贺卡</title>
+    <content>
+    <![CDATA[
+	<p><strong>编辑贺卡</strong></p>
+	<p>贺卡图纸前如果有黄色感叹号，说明你已经上传过贺卡图纸。再次上传将覆盖原来图纸。</p>
+	]]>
+    </content>
+  </section>
+</help>

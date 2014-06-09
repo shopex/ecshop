@@ -1,0 +1,31 @@
+<!DOCTYPE wml PUBLIC '-//WAPFORUM//DTD WML 1.1//EN' 'http://www.wapforum.org/DTD/wml_1.1.xml'>
+<wml>
+<head><meta http-equiv='Cache-Control' content='max-age=0'/></head>
+<card id='ecshop' title='ECShop_WAP'>
+<p align='left'>
+{$cat_name}的商品列表<br/>
+--------------<br/>
+{if $cat_children}
+    {foreach from=$cat_children item=child_data}
+        <a href='category.php?c_id={$child_data.id}'>{$child_data.name}</a><br/>
+    {/foreach}
+    --------------<br/>
+{/if}
+{foreach from=$goods_data item=goods}
+    {$goods.i}.<a href='goods.php?id={$goods.id}'>{$goods.name}</a>[{$goods.price}]<br/>
+{foreachelse}
+    暂无此类商品<br/>
+{/foreach}
+{if $pagebar}
+{$pagebar}<br/>
+{/if}
+--------------<br/>
+<anchor title='back'>回上一页<prev/></anchor><br/>
+{if $pcat_array}
+    <a href='category.php?c_id={$pcat_array.cat_id}'>回{$pcat_array.cat_name}</a><br/>
+{/if}
+<a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</card>
+</wml>

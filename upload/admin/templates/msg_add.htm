@@ -1,0 +1,69 @@
+<!-- $Id: msg_add.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<div class="main-div">
+<div>
+{foreach from=$msg_list item=msg}
+<div style="margin-bottom:10px;border:1px solid #ccc;background:white;">
+<div style="border-bottom: 1px solid #eee;position:relative;"><strong>{$msg.msg_title|escape:"html"}</strong><a href="user_msg.php?act=remove_msg&order_id={$order_id}&user_id={$user_id}&msg_id={$msg.msg_id}" style="position:absolute ;right:5px" onclick="if (!confirm('{$lang.confirm_delete}')) return false;"><img src="images/icon_drop.gif"  border="0" /></a></div>
+<div>{$msg.msg_content|escape:"html"|nl2br}</div>
+{if $msg.message_img}
+<div align="right">
+  <a href="../data/feedbackimg/{$msg.message_img}" target="_bank" width="300" height="400">{$lang.view_upload_file}</a>
+  <a href="user_msg.php?act=drop_file&id={$msg.msg_id}&file={$msg.message_img}">{$lang.drop}</a>
+</div>
+{/if}
+<div align="right"  nowrap="nowrap"><a href="mailto:{$msg.user_email}">{$msg.user_name}</a> @ {$msg.msg_time}</div>
+</div>
+{/foreach}
+</div>
+<form method="post" action="user_msg.php?act=insert" name="theForm"  onsubmit="return validate()">
+  <table border="0" width="100%">
+    <tr>
+      <td>{$lang.msg_title}:</td>
+      <td><input name="msg_title" id="msg_title"  type="text" value="{$msg.reply_email}" /></td>
+    </tr>
+    <tr>
+      <td>{$lang.msg_content}:</td>
+      <td><textarea name="msg_content" cols="50" rows="4" wrap="VIRTUAL" id="msg_content">{$msg.reply_content}</textarea></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+          <input type="hidden" name="order_id" value="{$order_id}" />
+          <input type="hidden" name="user_id" value="{$user_id}" />
+          <input name="Submit" value="{$lang.button_submit}" type="submit" class="button" />
+      </td>
+    </tr>
+  </table>
+</form>
+</div>
+{insert_scripts files="../js/utils.js,validator.js"}
+<script language="JavaScript">
+<!--
+{literal}
+document.forms['theForm'].elements['msg_content'].focus();
+
+/**
+ * 检查表单输入的数据
+ */
+function validate()
+{
+  var validator = new Validator("theForm");
+  validator.required("msg_title",  no_title);
+  validator.required("msg_content",  no_content);
+  return validator.passed();
+}
+
+onload = function()
+{
+  // 开始检查订单
+  startCheckOrder();
+}
+//-->
+{/literal}
+</script>
+{include file="pagefooter.htm"}

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ECShop_mobile</title>
+</head>
+
+<body>
+
+<p align='left'>
+{if $user_name}
+    [<a href='user.php?act=user_center'>用户中心</a>]&nbsp;[<a href='user.php?act=logout'>退出</a>]<br/>
+{else}
+    ［<a href='user.php?act=login'>登录</a>］&nbsp;［<a href='user.php?act=register'>免费注册</a>］<br/>
+{/if}
+<img src='{$wap_logo|default:../images/wap_logo.png}' alt='LOGO' /><br/>
+
+<form name="searchForm" method="get" action="search.php">
+ <input name="keywords" type="text" />
+ <input type="submit" value="商品搜索"/>
+</form>
+{if $searchkeywords}
+ 热门搜索 ：
+ {foreach from=$searchkeywords item=val}
+ <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+ {/foreach}
+{/if}
+<br/>--------------<br/>
+{if $best_num > 0}
+[精品推荐]&gt;&gt;<a href='goods_list.php?type=best'>更多</a><br/>
+  {foreach from=$best_goods item=best_data}
+      <a href='goods.php?id={$best_data.id}'>{$best_data.name}</a>[{$best_data.shop_price}]<br/>
+  {/foreach}
+{/if}
+<br/>--------------<br/>
+{if $promote_num > 0}
+[促销商品]&gt;&gt;<a href='goods_list.php?type=promote'>更多</a><br/>
+  {foreach from=$promote_goods item=promote_data}
+      <a href='goods.php?id={$promote_data.id}'>{$promote_data.name}</a>[{$promote_data.shop_price}]<br/>
+  {/foreach}
+{/if}
+<br/>--------------<br/>
+{if $hot_num > 0}
+[热门商品]&gt;&gt;<a href='goods_list.php?type=hot'>更多</a><br/>
+  {foreach from=$hot_goods item=hot_data}
+      <a href='goods.php?id={$hot_data.id}'>{$hot_data.name}</a>[{$hot_data.shop_price}]<br/>
+  {/foreach}
+{/if}
+<br/>--------------<br/>
+&gt;&gt;商品分类&gt;&gt;<a href='cat_all.php'>更多</a><br/><br/>
+
+{foreach from=$pcat_array item=pcat_data}
+<a href='category.php?c_id={$pcat_data.id}'>{$pcat_data.name}</a>|&nbsp;&nbsp;
+{foreach from=$pcat_data['cat_id'] item=cat_data name=foo}
+{if $smarty.foreach.foo.iteration <= 3}
+<a href='category.php?c_id={$cat_data.id}'>{$cat_data.name}</a>
+{/if}
+{/foreach}
+&nbsp;&nbsp;<a href='cat_all.php'>...更多</a><br/>
+{/foreach}
+<br/>--------------<br/>
+{if $brand_array}
+品牌专区&gt;&gt;<a href='brands.php'>更多</a><br/>
+{foreach from=$brand_array item=brand_data}
+<a href='brands.php?b_id={$brand_data.brand_id}'>{$brand_data.brand_name}</a><br/>
+{/foreach}
+{/if}
+<br/>--------------<br/>
+[站内资讯]&gt;&gt;<a href='article.php'>更多</a><br/>
+{if $article_array}
+{foreach from=$article_array item=article_data}
+<a href='article.php?act=detail&amp;a_id={$article_data.article_id}'>{$article_data.title}</a><br/>
+{/foreach}
+{/if}
+{$footer}
+</p>
+
+</body>
+</html>

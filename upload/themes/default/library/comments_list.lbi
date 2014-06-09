@@ -1,0 +1,214 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--用户评论 START-->
+     <div class="box">
+     <div class="box_1">
+      <h3><span class="text">{$lang.user_comment}</span>({$lang.total}<font class="f1">{$pager.record_count}</font>{$lang.user_comment_num})</h3>
+      <div class="boxCenterList clearfix" style="height:1%;">
+       <ul class="comments">
+       <!-- {if $comments} -->
+       <!-- {foreach from=$comments item=comment} -->
+        <li class="word">
+        <font class="f2"><!-- {if $comment.username} -->{$comment.username|escape:html}<!-- {else} -->{$lang.anonymous}<!-- {/if} --></font> <font class="f3">( {$comment.add_time} )</font><br />
+        <img src="../images/stars{$comment.rank}.gif" alt="{$comment.comment_rank}" />
+        <p>{$comment.content}</p>
+				<!-- {if $comment.re_content} -->
+        <p><font class="f1">{$lang.admin_username}</font>{$comment.re_content}</p>
+				<!-- {/if} -->
+        </li>
+        <!-- {/foreach} -->
+        <!--{else}-->
+        <li>{$lang.no_comments}</li>
+        <!--{/if}-->
+       </ul>
+       <!--翻页 start-->
+       <div id="pagebar" class="f_r">
+        <form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
+        <!-- {if $pager.styleid eq 0 } -->
+        <div id="pager">
+          {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+            <!--{foreach from=$pager.search key=key item=item}-->
+            <input type="hidden" name="{$key}" value="{$item}" />
+            <!--{/foreach}-->
+        </div>
+        <!--{else}-->
+
+        <!--翻页 start-->
+         <div id="pager" class="pagebar">
+          <span class="f_l f6" style="margin-right:10px;">{$lang.total} <b>{$pager.record_count}</b> {$lang.user_comment_num}</span>
+          <!-- {if $pager.page_first} --><a href="{$pager.page_first}">1 ...</a><!-- {/if} -->
+          <!-- {if $pager.page_prev} --><a class="prev" href="{$pager.page_prev}">{$lang.page_prev}</a><!-- {/if} -->
+          <!--{foreach from=$pager.page_number key=key item=item}-->
+                <!-- {if $pager.page eq $key} -->
+                <span class="page_now">{$key}</span>
+                <!-- {else} -->
+                <a href="{$item}">[{$key}]</a>
+                <!-- {/if} -->
+            <!--{/foreach}-->
+
+          <!-- {if $pager.page_next} --><a class="next" href="{$pager.page_next}">{$lang.page_next}</a><!-- {/if} -->
+          <!-- {if $pager.page_last} --><a class="last" href="{$pager.page_last}">...{$pager.page_count}</a><!-- {/if} -->
+          <!-- {if $pager.page_kbd} -->
+            <!--{foreach from=$pager.search key=key item=item}-->
+            <input type="hidden" name="{$key}" value="{$item}" />
+            <!--{/foreach}-->
+            <kbd style="float:left; margin-left:8px; position:relative; bottom:3px;"><input type="text" name="page" onkeydown="if(event.keyCode==13)selectPage(this)" size="3" class="B_blue" /></kbd>
+            <!-- {/if} -->
+        </div>
+        <!--翻页 END-->
+
+        <!-- {/if} -->
+        </form>
+        <script type="Text/Javascript" language="JavaScript">
+        <!--
+        {literal}
+        function selectPage(sel)
+        {
+          sel.form.submit();
+        }
+        {/literal}
+        //-->
+        </script>
+      </div>
+      <!--翻页 END-->
+      <div class="blank5"></div>
+      <!--评论表单 start-->
+      <div class="commentsList">
+      <form action="javascript:;" onsubmit="submitComment(this)" method="post" name="commentForm" id="commentForm">
+       <table width="710" border="0" cellspacing="5" cellpadding="0">
+        <tr>
+          <td width="64" align="right">{$lang.username}：</td>
+          <td width="631"{if !$enabled_captcha}{/if}><!--{if $smarty.session.user_name}-->{$smarty.session.user_name}<!--{else}-->{$lang.anonymous}<!--{/if}--></td>
+        </tr>
+        <tr>
+          <td align="right">E-mail：</td>
+          <td>
+          <input type="text" name="email" id="email"  maxlength="100" value="{$smarty.session.email|escape}" class="inputBorder"/>
+          </td>
+        </tr>
+        <tr>
+          <td align="right">{$lang.comment_rank}：</td>
+          <td>
+          <input name="comment_rank" type="radio" value="1" id="comment_rank1" /> <img src="../images/stars1.gif" />
+          <input name="comment_rank" type="radio" value="2" id="comment_rank2" /> <img src="../images/stars2.gif" />
+          <input name="comment_rank" type="radio" value="3" id="comment_rank3" /> <img src="../images/stars3.gif" />
+          <input name="comment_rank" type="radio" value="4" id="comment_rank4" /> <img src="../images/stars4.gif" />
+          <input name="comment_rank" type="radio" value="5" checked="checked" id="comment_rank5" /> <img src="../images/stars5.gif" />
+          </td>
+        </tr>
+        <tr>
+          <td align="right" valign="top">{$lang.comment_content}：</td>
+          <td>
+          <textarea name="content" class="inputBorder" style="height:50px; width:620px;"></textarea>
+          <input type="hidden" name="cmt_type" value="{$comment_type}" />
+          <input type="hidden" name="id" value="{$id}" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          <!-- 判断是否启用验证码{if $enabled_captcha} -->
+          <div style="padding-left:15px; text-align:left; float:left;">
+          {$lang.comment_captcha}：<input type="text" name="captcha"  class="inputBorder" style="width:50px; margin-left:5px;"/>
+          <img src="captcha.php?{$rand}" alt="captcha" onClick="this.src='captcha.php?'+Math.random()" class="captcha">
+          </div>
+          <!-- {/if} -->
+          <input name="" type="submit"  value="" class="f_r" style="border:none; background:url(../images/commentsBnt.gif); width:75px; height:21px; margin-right:8px;">
+          </td>
+        </tr>
+      </table>
+      </form>
+      </div>
+      <!--评论表单 end-->
+      </div>
+     </div>
+    </div>
+    <div class="blank5"></div>
+  <!--用户评论 END-->
+<script type="text/javascript">
+//<![CDATA[
+{foreach from=$lang.cmt_lang item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{literal}
+/**
+ * 提交评论信息
+*/
+function submitComment(frm)
+{
+  var cmt = new Object;
+
+  //cmt.username        = frm.elements['username'].value;
+  cmt.email           = frm.elements['email'].value;
+  cmt.content         = frm.elements['content'].value;
+  cmt.type            = frm.elements['cmt_type'].value;
+  cmt.id              = frm.elements['id'].value;
+  cmt.enabled_captcha = frm.elements['enabled_captcha'] ? frm.elements['enabled_captcha'].value : '0';
+  cmt.captcha         = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+  cmt.rank            = 0;
+
+  for (i = 0; i < frm.elements['comment_rank'].length; i++)
+  {
+    if (frm.elements['comment_rank'][i].checked)
+    {
+       cmt.rank = frm.elements['comment_rank'][i].value;
+     }
+  }
+
+//  if (cmt.username.length == 0)
+//  {
+//     alert(cmt_empty_username);
+//     return false;
+//  }
+
+  if (cmt.email.length > 0)
+  {
+     if (!(Utils.isEmail(cmt.email)))
+     {
+        alert(cmt_error_email);
+        return false;
+      }
+   }
+   else
+   {
+        alert(cmt_empty_email);
+        return false;
+   }
+
+   if (cmt.content.length == 0)
+   {
+      alert(cmt_empty_content);
+      return false;
+   }
+
+   if (cmt.enabled_captcha > 0 && cmt.captcha.length == 0 )
+   {
+      alert(captcha_not_null);
+      return false;
+   }
+
+   Ajax.call('comment.php', 'cmt=' + cmt.toJSONString(), commentResponse, 'POST', 'JSON');
+   return false;
+}
+
+/**
+ * 处理提交评论的反馈信息
+*/
+  function commentResponse(result)
+  {
+    if (result.message)
+    {
+      alert(result.message);
+    }
+
+    if (result.error == 0)
+    {
+      var layer = document.getElementById('ECS_COMMENT');
+
+      if (layer)
+      {
+        layer.innerHTML = result.content;
+      }
+    }
+  }
+{/literal}
+//]]>
+</script>

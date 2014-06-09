@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list_cat">
+    <title>帮助分类管理</title>
+    <content>
+    <![CDATA[
+	<p><strong>添加一个新分类</strong></p>
+	<p>在该页面添加新分类选项中填入“新分类名”，确定即可添加一个新的文章分类</p>
+	<p><strong>对分类的操作</strong></p>
+	<p>添加一新分类后可在该分类下删除、添加文章或查看分类下的文章列表。分类名，排序可直接编辑。<span class="tips">排序按从小到大顺序排列，本页面排序结果刷新后才能看到</span></p>
+	]]>
+    </content>
+  </section>
+
+  <section id="list_article">
+    <title>帮助文章列表</title>
+    <content>
+    <![CDATA[
+	<p><strong>帮助文章列表</strong></p>
+	<p>在该页面列出所有某个分类下所有的文章，点击右上角<span class="link">添加新帮助文章</span>链接即可<br />
+	在下拉框中选中某分类就可切换到指定分类下</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="add">
+    <title>添加新帮助文章</title>
+    <content>
+    <![CDATA[
+	<p><strong>添加新帮助文章</strong></p>
+	<p><span class="tips">如果分类名为空，请先添加帮助分类</span><br />点击<span class="link">帮助分类列表</span>可进行分类编辑</p>
+	]]>
+    </content>
+  </section>
+</help>

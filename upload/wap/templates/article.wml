@@ -1,0 +1,19 @@
+<!DOCTYPE wml PUBLIC '-//WAPFORUM//DTD WML 1.1//EN' 'http://www.wapforum.org/DTD/wml_1.1.xml'>
+<wml>
+<head><meta http-equiv='Cache-Control' content='max-age=0'/></head>
+<card id='ecshop' title='ECShop_WAP'>
+<p align='left'>
+{if $article_data}
+    {$article_data.title}<br/>
+    --------------<br/>
+    {$article_data.content}<br/>
+{else}
+    错误地址<br/>
+{/if}
+--------------<br/>
+<anchor title='back'>回上一页<prev/></anchor><br/>
+<a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</card>
+</wml>

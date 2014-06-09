@@ -1,0 +1,18 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if $invoice_list}-->
+<div class="title-div"><img src="../images/invoice_query.gif" alt="invoice query" width="158" height="39" /></div>
+<div class="content-div">
+  <table width="100%" cellpadding="2" cellspacing="0" border="0">
+    <!-- 发货单查询{foreach from=$invoice_list item=invoice} -->
+    <tr align="left">
+      <th width="30%">{$lang.order_number}</th>
+      <td style="font-size:9px">{$invoice.order_sn}</td>
+    </tr>
+    <tr align="left">
+      <th width="30%" style="border-bottom: 1px dashed #DADADA;">{$lang.consignment}</th>
+      <td style="font-size:9px;border-bottom: 1px dashed #DADADA;">{$invoice.invoice_no}</td>
+    </tr>
+    <!-- 结束发货单查询{/foreach}-->
+  </table>
+</div>
+<!-- {/if} -->

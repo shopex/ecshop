@@ -1,0 +1,64 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $myprice.is_end eq false} -->
+<div class="title-div"><img src="../images/snatch_bid.gif" alt="best products" width="158" height="39" /></div>
+<div class="content-div">
+  <form action="javascript:bid()" method="post" name="formBid" id="formBid">
+    <table width="98%" border="0">
+      <tr>
+        <td>{$lang.my_integral}</td>
+        <td>{$myprice.pay_points}</td>
+      </tr>
+      <tr>
+        <td>{$lang.bid}</td>
+        <td><input type="hidden" name="snatch_id" value="{$id}" /><input name="price" type="text" id="price" /></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td><input type="submit" name="Submit" value="{$lang.me_bid}" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div class="title-div"><img src="../images/grey_arrow.gif" width="37" height="37" /> <strong>{$lang.me_now_bid}</strong></div>
+<div class="content-div">
+  <ul>
+    <!--{foreach from=$myprice.bid_price item=item}-->
+    <li>{$item.price}
+      <!--{if $item.is_only}-->
+      ({$lang.only_price})
+      <!--{/if}-->
+    </li>
+    <!--{/foreach}-->
+  </ul>
+</div>
+<!-- {else} -->
+<div class="title-div"><img src="../images/grey_arrow.gif" width="37" height="37" style="vertical-align:middle"/> <strong>{$lang.view_snatch_result}</strong></div>
+<!--{if $result}-->
+<form name="buy" action="snatch.php" method="get">
+<table width="98%" border="0">
+  <tr>
+    <td>{$lang.victory_user}
+</td>
+    <td>{$result.user_name}
+      <input type="hidden" name="act" value="buy" />
+      <input type="hidden" name="id" value="{$id}" />
+    </td>
+  </tr>
+  <tr>
+    <td>{$lang.price_bid}</td>
+    <td>{$result.formated_bid_price} &nbsp;&nbsp;
+    <!-- {if $result.order_count eq 0 and $result.user_id eq $smarty.session.user_id} -->
+      <input type="image" name="bug" src="images/add_cart.gif" title="{$lang.button_buy}" />
+    <!--{/if}-->
+    </td>
+  </tr>
+  <tr>
+    <td>{$lang.bid_time}</td>
+    <td>{$result.bid_time}</td>
+  </tr>
+</table>
+</form>
+<!--{else}-->
+{$lang.not_victory_user}
+<!--{/if}-->
+<!-- {/if} -->

@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>{$lang.quotation} - {$shop_name}</title>
+{literal}
+<style type="text/css" media="all">
+   body,td,th {text-align:left;font-size:13px; padding:2px;}
+   table{border-top:1px solid #000;border-left:1px solid #000;}
+   table td,table th{border-right:1px solid #000;border-bottom:1px solid #000;}
+</style>
+<style type="text/css" media="print">
+    .print_btn{display:none;}
+</style>
+{/literal}
+</head>
+<body>
+<script type="text/javascript">
+//<![CDATA[
+
+    function calc_price(base_price, rank_price)
+    {
+        document.write((base_price * rank_price / 100).toFixed(2));
+    }
+
+//]]>
+</script>
+<h3 align="center">{$shop_name} - {$lang.quotation}</h3>
+<table width="100%" cellspacing="0" cellpadding="0">
+    <tr>
+        <th>{$lang.goods_name}</th>
+        <th>{$lang.specifications}</th>
+        <th>{$lang.goods_category}</th>
+        <!--{if $cfg.use_storage and $cfg.show_goodsnumber}-->
+        <th>{$lang.goods_inventory}</th>
+        <!-- {/if} -->
+        <th>{$lang.price}</th>
+        <!--{foreach from=$extend_price item=ext_price}-->
+        <th>{$ext_price}</th>
+        <!--{/foreach}-->
+    </tr>
+    
+    <!--{foreach from=$goods_list item=goods}-->
+    <tr>
+        <td>{$goods.goods_name}</td>
+        <td>{$goods.product_name}</td>
+        <td>{$goods.goods_category}</td>
+        <!--{if $cfg.use_storage and $cfg.show_goodsnumber}-->
+        <td>{$goods.goods_number}</td>
+        <!-- {/if} -->
+        <td>{$goods.shop_price}</td>
+        <!--{foreach from=$extend_rank[$goods.goods_key] item=ext_rank}-->
+        <td>{$ext_rank.price}</td>
+        <!--{/foreach}-->
+    </tr>
+    <!--{/foreach}-->
+</table>
+<center><input type="button" class="print_btn" value="{$lang.print_quotation}" onClick="window.print()" /></center>
+
+</body>
+</html>

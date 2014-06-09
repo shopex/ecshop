@@ -1,0 +1,56 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<table width="801" border="0" align="center" cellpadding="5" cellspacing="0" style="margin:10px 0 20px 0;" id="footer-table">
+  <tr>
+    <td><img src="../images/ecshop.gif" alt="ECSHOP" width="133" height="46" hspace="10" /></td>
+    <td width="6" id="foot-logo"><img src="../images/footer_bg.gif" width="6" height="80" alt="" /></td>
+    <td> {$copyright}<br />
+      {$shop_address} {$shop_postcode} <br />
+      <!-- 客服电话{if $service_phone} -->
+      Tel: {$service_phone}
+      <!-- 结束客服电话{/if} -->
+      <!-- QQ 号码 {foreach from=$qq item=im} -->
+      <!-- {if $im} -->
+      <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$im}&amp;Site={$shop_name}&amp;Menu=yes" target="_blank"><img src="http://wpa.qq.com/pa?p=1:{$im}:4" height="16" border="0" alt="QQ" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束QQ号码 -->
+      <!-- 淘宝旺旺 {foreach from=$ww item=im} -->
+      <!-- {if $im} -->
+      <a href="http://amos1.taobao.com/msg.ww?v=2&uid={$im|escape:u8_url}&s=2" target="_blank"><img src="http://amos1.taobao.com/online.ww?v=2&uid={$im|escape:u8_url}&s=2" width="16" height="16" border="0" alt="淘宝旺旺" /> {$im}</a>
+      <!-- {/if} -->
+      <!--{/foreach} 结束淘宝旺旺 -->
+      <!-- Yahoo Messenger {foreach from=$ym item=im} -->
+      <!-- {if $im} -->
+      <a href="http://edit.yahoo.com/config/send_webmesg?.target={$im}n&.src=pg" target="_blank"><img src="../images/yahoo.gif" width="18" height="17" border="0" alt="Yahoo Messenger" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束Yahoo Messenger -->
+      <!-- MSN Messenger {foreach from=$msn item=im} -->
+      <!-- {if $im} -->
+      <img src="../images/msn.gif" width="18" height="17" border="0" alt="MSN" /> <a href="msnim:chat?contact={$im}">{$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束MSN Messenger -->
+      <!-- Skype {foreach from=$skype item=im} -->
+      <!-- {if $im} -->
+      <img src="http://mystatus.skype.com/smallclassic/{$im|escape:url}" alt="Skype" /><a href="skype:{$im|escape:url}?call">{$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} -->
+      <!-- {if $navigator_list.bottom} -->
+      <div>
+        <!-- {foreach name=nav_bottom_list from=$navigator_list.bottom item=nav} -->
+        <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+        <!-- {if !$smarty.foreach.nav_bottom_list.last} -->
+        |
+        <!-- {/if} -->
+      <!-- {/foreach} -->
+      </div>
+      <!-- {/if} -->
+      <!-- ICP 证书{if $icp_number} -->
+      <div> {$lang.icp_number}:<a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a> </div>
+      <!-- 结束ICP 证书{/if} -->
+      {insert name='query_info'}<br />
+      <a href="http://www.ecshop.com" target="_blank" style="font-size:10px">Powered by <strong><span style="color: #3366FF">ECShop</span> <span style="color: #FF9966">{$ecs_version}</span></strong></a> {$licensed}<br />
+    </td>
+  </tr>
+</table>
+{if $stats_code}
+<div align="center">{$stats_code}</div>
+{/if}

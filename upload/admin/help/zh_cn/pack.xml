@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list">
+    <title>包装列表</title>
+    <content>
+    <![CDATA[
+	<p><strong>包装列表</strong></p>
+	<p>列出所有能使用的包装。如果上传过包装预览图包装名称的小图标为彩色，点击小图标即可预览包装图片。包装名称、包装费用和包装免额度可以直接编辑。</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="add">
+    <title>添加包装</title>
+    <content>
+    <![CDATA[
+	<p><strong>添加包装</strong></p>
+	<p>点击“？”图标可查看当前选项的帮助。</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="edit">
+    <title>编辑包装</title>
+    <content>
+    <![CDATA[
+	<p><strong>编辑包装</strong></p>
+	<p>包装图纸前如果有黄色感叹号，说明你已经上传过包装图纸。再次上传将覆盖原来图纸。</p>
+	]]>
+    </content>
+  </section>
+</help>

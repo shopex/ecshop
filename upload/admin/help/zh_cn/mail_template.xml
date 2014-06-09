@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list">
+    <title>邮件模板管理</title>
+    <content>
+    <![CDATA[
+	<p><strong>邮件模板管理</strong></p>
+	<p>商城在进行某些操作时可以向用户发送邮件提示。在本页你可以定制自己个性化的邮件的模板。邮件主题为发送邮件的标题。邮件模板中有可以替换的内容都用{$_var}方式表示。以下将解释所有变量含义。</p>
+	<p><strong>公共变量</strong></p>
+	<p><ul><li>{$shop_name}<br />网店名称</li><li>{$sent_date}<br />邮件发送时间</li></ul></p>
+	<p><strong>发送密码模板变量</strong></p>
+	<p><ul><li>{$user_name}<br />注册帐号名</li><li>{$password}<br />网店为用户生成的新密码</li></ul></p>
+    <p><strong>订单确认模板变量</strong></p>
+	<p><ul><li>{$order.consignee}<br />订单收货人姓名</li><li>{$order.order_time}<br />订单生成时间</li><li>{$order.order_sn}<br />订单序号</li></ul></p>
+    <p><strong>发货通知模板变量</strong></p>
+	<p><ul><li>{$order.consignee}<br />收货人姓名</li><li>{$order.shipping_time}<br />发货时间</li><li>{$confirm_url}<br />确认收货的链接地址</li></ul></p>
+    <p><strong>订单取消模板变量</strong></p>
+	<p><ul><li>{$order.consignee}<br />收货人姓名</li><li>{$order.order_sn}<br />订单序号</li></ul></p>
+    <p><strong>订单无效模板变量</strong></p>
+	<p><ul><li>{$order.consignee}<br />收货人姓名</li><li>{$order.order_sn}<br />订单序号</li></ul></p>
+    <p><strong>发送红包模板变量</strong></p>
+	<p><ul><li>{$user_name}<br />用户注册名</li><li>{$count}<br />红包个数</li><li>{$money}<br />红包个数金额</li></ul></p>		
+	]]>
+    </content>
+  </section>
+
+</help>

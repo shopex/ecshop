@@ -1,0 +1,47 @@
+<!DOCTYPE wml PUBLIC '-//WAPFORUM//DTD WML 1.1//EN' 'http://www.wapforum.org/DTD/wml_1.1.xml'>
+<wml>
+<head><meta http-equiv='Cache-Control' content='max-age=0'/></head>
+<card id='ecshop' title='ECShop_WAP'>
+<p align='left'>
+{if $type eq 'best'}
+精品推荐<br/>
+--------------<br/>
+<a href='goods_list.php?type=promote'>促销</a>|<a href='goods_list.php?type=hot'>热门</a>|<a href='goods_list.php?type=new'>最新</a>
+{elseif $type eq 'promote'}
+商家促销<br/>
+--------------<br/>
+<a href='goods_list.php?type=best'>精品</a>|<a href='goods_list.php?type=hot'>热门</a>|<a href='goods_list.php?type=new'>最新</a>
+{elseif $type eq 'hot'}
+热门商品<br/>
+--------------<br/>
+<a href='goods_list.php?type=best'>精品</a>|<a href='goods_list.php?type=promote'>促销</a>|<a href='goods_list.php?type=new'>最新</a>
+{else}
+最新商品<br/>
+--------------<br/>
+<a href='goods_list.php?type=promote'>促销</a>|<a href='goods_list.php?type=hot'>热门</a>|<a href='goods_list.php?type=new'>最新</a>
+{/if}
+<br/>
+{foreach from=$goods_data item=goods}
+    {$goods.i}.<a href='goods.php?id={$goods.id}'>{$goods.name}</a>[{$goods.price}]<br/>
+{foreachelse}
+    暂无此类商品<br/>
+{/foreach}
+{if $pagebar}
+{$pagebar}<br/>
+{/if}
+--------------<br/>
+<anchor title='back'>回上一页<prev/></anchor><br/>
+{if $type eq 'best'}
+<a href='goods_list.php?type=promote'>促销</a>|<a href='goods_list.php?type=hot'>热门</a>|<a href='goods_list.php?type=new'>最新</a>
+{elseif $type eq 'promote'}
+<a href='goods_list.php?type=best'>精品</a>|<a href='goods_list.php?type=hot'>热门</a>|<a href='goods_list.php?type=new'>最新</a>
+{elseif $type eq 'hot'}
+<a href='goods_list.php?type=best'>精品</a>|<a href='goods_list.php?type=promote'>促销</a>|<a href='goods_list.php?type=new'>最新</a>
+{else}
+<a href='goods_list.php?type=promote'>促销</a>|<a href='goods_list.php?type=hot'>热门</a>|<a href='goods_list.php?type=new'>最新</a>
+{/if}
+<br/><a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</card>
+</wml>

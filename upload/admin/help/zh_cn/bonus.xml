@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+  <section id="list">
+    <title>红包信息列表</title>
+    <content>
+    <![CDATA[
+	<p>此页面列出您所有的红包信息</p>
+	<p>在此您可以进行如下操作:</p>
+	
+	<strong>添加红包</strong>
+	<p>您只要点击列表右边的<a href="bonus.php?act=add" target="main-frame"><span class="link"> 添加红包 </span></a>链接，即可进入到添加的操作页面。</p>
+	
+	<strong>删除红包</strong>
+	<p>您只要点击列表右边的<span class="link"> 删除 </span>链接，按系统提示即可完成删除的操作。</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	
+	]]>
+    </content>
+  </section>
+  <section id="add">
+    <title>添加红包</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行红包的添加操作</p>
+	
+	<strong>红包类型</strong>
+	<p>在此选择您要添加的红包所属的类型名称</p>
+	
+	<strong>红包数量</strong>
+	<p>在此输入您要添加的红包的数量。</p>
+
+	<strong>起始序列号</strong>
+	<p>添加红包时，需要指定红包序列号的前面几位。</p>
+	<strong>红包序列号的生成：</strong>
+	<p>由您指定的前三位起始序列号加上随机生成的七位数字组成。</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	]]>
+    </content>
+  </section>
+</help>

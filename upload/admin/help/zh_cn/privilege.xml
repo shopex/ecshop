@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="gbk"?>
+<help>
+  <section id="list">
+    <title>管理员列表</title>
+    <content>
+    <![CDATA[
+	<p>本页面显示网店的管理员信息。</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="add">
+    <title>添加管理员</title>
+    <content>
+    <![CDATA[
+	<p>为网店添加一个新的管理员的操作。</p>
+	]]>
+    </content>
+  </section>
+  
+  <section id="allot">
+    <title>分配权限</title>
+    <content>
+    <![CDATA[
+	<p>对指定的管理员分配相应的操作权限。</p>
+	]]>
+    </content>
+  </section>
+  
+  <section id="edit">
+    <title>编辑管理员</title>
+    <content>
+    <![CDATA[
+	<p>对指定的管理员信息进行编辑的操作。</p>
+	]]>
+    </content>
+  </section>
+</help>

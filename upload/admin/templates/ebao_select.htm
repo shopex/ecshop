@@ -1,0 +1,237 @@
+<!-- $Id: ebao_select.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<div class="main-div">
+  <form name="theForm" method="post" action="ebao_commend.php?act=insert" onsubmit="return getGoodsIDs()">
+    <table cellspacing="1" cellpadding="3" width="100%">
+      <tr>
+        <td class="narrow-label">{$lang.select_method}</td>
+        <td><label>
+          <input name="select_method" type="radio" value="select" checked onclick="toggleSelectMethod(this.value)">
+          {$lang.by_cat}</label>
+          <label>
+          <input name="select_method" type="radio" value="all" onclick="toggleSelectMethod(this.value)">
+          {$lang.by_sn}</label>
+        </td>
+      </tr>
+      <tr>
+        <td class="narrow-label">{$lang.searchkey}</td>
+        <td>&nbsp;
+          <input name="search_key" type="text" />
+          &nbsp;
+          <input name="search" type="button" value="{$lang.search}" onclick="getGoods()"/></td>
+      </tr>
+      <tr>
+        <td class="narrow-label">{$lang.select_cat}</td>
+        <td>&nbsp;
+          <select name="cat" id="cat" onchange="getGoods()">
+            <option value="0" selected>{$lang.select_please}</option>
+            {$cat_list}
+          </select></td>
+      </tr>
+      <tr>
+        <td class="narrow-label">{$lang.select_brand}</td>
+        <td>&nbsp;
+          <select name="brand" id="brand" onchange="getGoods()">
+            <option value="0" selected>{$lang.select_please}</option>
+      {html_options options=$brand_list}
+          </select></td>
+      </tr>
+      <tr id="List">
+        <td class="narrow-label">{$lang.goods_list}</td>
+        <td valign="middle"><table  border="0" cellspacing="1" cellpadding="3">
+            <tr>
+              <td>{$lang.src_list}</td>
+              <td align="center" valign="middle">&nbsp;</td>
+              <td>{$lang.dest_list}</td>
+            </tr>
+            <tr>
+              <td width="45%"><select name="srcList" size="10" multiple id="srcList" style="width: 100%" ondblclick="addGoods()">
+                </select>
+              </td>
+              <td align="center" valign="middle"><input name="add" type="button" class="button" id="add" value="&gt;&gt;" onclick="addGoods()" />
+                <br />
+                <input name="del" class="button" type="button" id="del" value="&lt;&lt;" onclick="delGoods()" /></td>
+              <td width="45%"><select name="destList" size="10" multiple id="destList" style="width: 100%" ondblclick="delGoods()">
+                </select>
+              </td>
+            </tr>
+          </table></td>
+      </tr>
+      <tr>
+        <td class="narrow-label">{$lang.return_method}</td>
+        <td><label>
+          <input name="return_method" type="radio" value="each" checked onclick="method_select(this.value)">
+          {$lang.percentprice}</label>
+          <label>
+          <input type="radio" name="return_method" value="all" onclick="method_select(this.value)">
+          {$lang.all_same}</label>
+        </td>
+      </tr>
+      <tr>
+        <td class="narrow-label">{$lang.return_value}</td>
+        <td><label>
+          <input name="return_value1" type="text" size="4" maxlength="2"/>
+          </label>
+		  <label id="return_language">%</label>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td><input type="submit" name="submit" value="{$lang.go_insert}" class="button" />
+          <input type="hidden" name="goods_ids" value="" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{literal}
+<script language="JavaScript">
+  var ele = document.forms['theForm'].elements;
+  onload = function()
+  {
+    // 开始检查订单
+      startCheckOrder();
+  }
+  /**
+   * 切换选择商品方式：
+   * @param: method 当前方式 cat sn
+   */
+  function toggleSelectMethod(method)
+  {
+    if (method == 'select')
+    {
+        var Display = '';
+    }
+    else
+    {
+        var Display = 'none';
+    }
+    document.getElementById('List').style.display = Display;
+  }
+  /**
+   * 取得商品
+   */
+  function getGoods()
+  {
+      var catId   = ele['cat'].value;
+      var brandId = ele['brand'].value;
+	  var searchKey = ele['search_key'].value;
+      if (catId > 0 || brandId > 0)
+      {
+          Ajax.call('ebao_commend.php?is_ajax=1&act=get_goods', "cat_id="+catId+"&brand_id="+brandId+"&searchkey="+searchKey, getGoodsResponse, "GET", "JSON");
+      }
+      else
+      {
+          ele['srcList'].options.length = 0;
+      }
+  }
+
+  function getGoodsResponse(result)
+  {
+    if (result.error == 0)
+    {
+      ele['srcList'].options.length = 0;
+      for (var i = 0; i < result.content.length; i++)
+      {
+        var opt = document.createElement('OPTION');
+        opt.value = result.content[i].goods_id;
+        opt.text = result.content[i].goods_name;
+        ele['srcList'].options.add(opt);
+      }
+    }
+  }
+  /**
+   * 添加商品
+   */
+  function addGoods()
+  {
+      var src = document.getElementById('srcList');
+      var dest = document.getElementById('destList');
+      for (var i = 0; i < src.options.length; i++)
+      {
+          if (src.options[i].selected)
+          {
+              var exist = false;
+              for (var j = 0; j < dest.options.length; j++)
+              {
+                  if (dest.options[j].value == src.options[i].value)
+                  {
+                      exist = true;
+                      break;
+                  }
+              }
+              if (!exist)
+              {
+                  var opt = document.createElement('OPTION');
+                  opt.value = src.options[i].value;
+                  opt.text = src.options[i].text;
+                  dest.options.add(opt);
+              }
+          }
+      }
+  }
+  /**
+   * 删除商品
+   */
+  function delGoods()
+  {
+      var dest = document.getElementById('destList');
+      for (var i = dest.options.length - 1; i >= 0 ; i--)
+      {
+          if (dest.options[i].selected)
+          {
+              dest.options[i] = null;
+          }
+      }
+  }
+  /**
+   * 取得选择的商品id，赋值给隐藏变量。同时检查是否选择或输入了商品
+   */
+  function getGoodsIDs()
+  {
+      if (document.getElementById('sm_cat').checked)
+      {
+          var idArr = new Array();
+          var dest = document.getElementById('destList');
+          for (var i = 0; i < dest.options.length; i++)
+          {
+              idArr.push(dest.options[i].value);
+          }
+          if (idArr.length <= 0)
+          {
+              alert(please_select_goods);
+              return false;
+          }
+          else
+          {
+              document.forms['theForm'].elements['goods_ids'].value = idArr.join(',');
+              return true;
+          }
+      }
+      else
+      {
+          if (document.forms['theForm'].elements['sn_list'].value == '')
+          {
+              alert(please_input_sn);
+              return false;
+          }
+          else
+          {
+              return true;
+          }
+      }
+  }
+  function method_select(method)
+  {
+    if (method == 'each')
+    {
+        var Language = '%';
+    }
+    else
+    {
+        var Language = '{$lang.money}';
+    }
+    document.getElementById('return_language').innerHTML = Language;
+  }
+</script>
+{/literal}
+{include file="pagefooter.htm"}

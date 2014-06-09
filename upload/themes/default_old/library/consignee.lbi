@@ -1,0 +1,79 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{insert_scripts files='utils.js,transport.js'}
+<table align="center" width="80%" style="margin: 1em auto;">
+  <!-- {if $real_goods_count gt 0} -->
+  <!-- 购物车中存在实体商品显示国家和地区 -->
+  <tr>
+    <td>{$lang.country_province}:</td>
+    <td colspan="3"><select name="country" id="selCountries_{$sn}" onchange="region.changed(this, 1, 'selProvinces_{$sn}')">
+        <option value="0">{$lang.please_select}{$name_of_region[0]}</option>
+        <!-- {foreach from=$country_list item=country} -->
+        <option value="{$country.region_id}" {if $consignee.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="province" id="selProvinces_{$sn}" onchange="region.changed(this, 2, 'selCities_{$sn}')">
+        <option value="0">{$lang.please_select}{$name_of_region[1]}</option>
+        <!-- {foreach from=$province_list.$sn item=province} -->
+        <option value="{$province.region_id}" {if $consignee.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="city" id="selCities_{$sn}" onchange="region.changed(this, 3, 'selDistricts_{$sn}')">
+        <option value="0">{$lang.please_select}{$name_of_region[2]}</option>
+        <!-- {foreach from=$city_list.$sn item=city} -->
+        <option value="{$city.region_id}" {if $consignee.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="district" id="selDistricts_{$sn}" {if !$district_list.$sn}style="display:none"{/if}>
+        <option value="0">{$lang.please_select}{$name_of_region[3]}</option>
+        <!-- {foreach from=$district_list.$sn item=district} -->
+        <option value="{$district.region_id}" {if $consignee.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      {$lang.require_field} </td>
+  </tr>
+  <!-- {/if} -->
+  <tr>
+    <td>{$lang.consignee_name}:</td>
+    <td><input name="consignee" type="text" id="consignee_{$sn}" value="{$consignee.consignee|escape}" />
+      {$lang.require_field} </td>
+    <td>{$lang.email_address}:</td>
+    <td><input name="email" type="text" id="email_{$sn}" value="{$consignee.email|escape}" />
+      {$lang.require_field}</td>
+  </tr>
+  <!-- {if $real_goods_count gt 0} -->
+  <!-- 购物车中存在实体商品显示详细地址以及邮政编码 -->
+  <tr>
+    <td>{$lang.detailed_address}:</td>
+    <td><input name="address" type="text" id="address_{$sn}" value="{$consignee.address|escape}" />
+      {$lang.require_field}</td>
+    <td>{$lang.postalcode}:</td>
+    <td><input name="zipcode" type="text" id="zipcode_{$sn}" value="{$consignee.zipcode|escape}" /></td>
+  </tr>
+  <!-- {/if} -->
+  <tr>
+    <td>{$lang.phone}:</td>
+    <td><input name="tel" type="text" id="tel_{$sn}" value="{$consignee.tel|escape}" />
+      {$lang.require_field}</td>
+    <td>{$lang.backup_phone}:</td>
+    <td><input name="mobile" type="text" id="mobile_{$sn}" value="{$consignee.mobile|escape}" /></td>
+  </tr>
+  <!-- {if $real_goods_count gt 0} -->
+  <!-- 购物车中存在实体商品显示最佳送货时间及标志行建筑 -->
+  <tr>
+    <td>{$lang.sign_building}:</td>
+    <td><input name="sign_building" type="text" id="sign_building_{$sn}" value="{$consignee.sign_building|escape}" /></td>
+    <td>{$lang.deliver_goods_time}:</td>
+    <td><input name="best_time" type="text" id="best_time_{$sn}" value="{$consignee.best_time|escape}" /></td>
+  </tr>
+  <!-- {/if} -->
+  <tr>
+    <td colspan="4" align="center"><input type="submit" name="Submit" value="{$lang.shipping_address}" />
+      <!-- {if $smarty.session.user_id gt 0 and $consignee.address_id gt 0} -->
+      <!-- 如果登录了，显示删除按钮 -->
+      <input name="button" type="button" onclick="if (confirm('{$lang.drop_consignee_confirm}')) location.href='flow.php?step=drop_consignee&amp;id={$consignee.address_id}'" value="{$lang.drop}" />
+      <!-- {/if} -->
+      <input type="hidden" name="step" value="consignee" />
+      <input type="hidden" name="act" value="checkout" />
+      <input name="address_id" type="hidden" value="{$consignee.address_id}" /></td>
+  </tr>
+</table>

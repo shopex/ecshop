@@ -1,0 +1,41 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
+<!-- {if $pager.styleid eq 0 } -->
+  <div id="pager"> {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+    <!--{foreach from=$pager.search key=key item=item}-->
+    <input type="hidden" name="{$key}" value="{$item}" />
+    <!--{/foreach}-->
+    <select name="page" id="page" onchange="selectPage(this)">
+    {html_options options=$pager.array selected=$pager.page}
+    </select>
+  </div>
+<!-- {else} -->
+    <div id="pager" class="pages"><em>{$pager.record_count}</em><!-- {if $pager.page_first} --><a class="first" href="{$pager.page_first}">1 ...</a><!-- {/if} --><!-- {if $pager.page_prev} --><a class="prev" href="{$pager.page_prev}">&lsaquo;&lsaquo;</a><!-- {/if} -->
+    <!--{foreach from=$pager.page_number key=key item=item}-->
+        <!-- {if $pager.page eq $key} -->
+        <strong>{$key}</strong>
+        <!-- {else} -->
+        <a href="{$item}">{$key}</a>
+        <!-- {/if} -->
+    
+    <!--{/foreach}-->
+    <!-- {if $pager.page_next} --><a class="next" href="{$pager.page_next}">&rsaquo;&rsaquo;</a><!-- {/if} --><!-- {if $pager.page_last} --><a class="last" href="{$pager.page_last}">...{$pager.page_count}</a><!-- {/if} -->
+    <!-- {if $pager.page_kbd} -->
+    <!--{foreach from=$pager.search key=key item=item}-->
+    <input type="hidden" name="{$key}" value="{$item}" />
+    <!--{/foreach}-->
+    <kbd><input type="text" name="page" onkeydown="if(event.keyCode==13)selectPage(this)" size="3" /></kbd>
+    <!-- {/if} -->
+    </div>
+<!-- {/if} -->
+</form>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>

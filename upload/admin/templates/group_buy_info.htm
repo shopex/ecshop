@@ -1,0 +1,202 @@
+<!-- $Id: group_buy_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js,../js/utils.js"}
+
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+
+<!-- 商品搜索 -->
+<div class="form-div">
+  <form action="javascript:searchGoods()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    <!-- 分类 -->
+    <select name="cat_id"><option value="0">{$lang.all_cat}</caption>{$cat_list}</select>
+    <!-- 品牌 -->
+    <select name="brand_id"><option value="0">{$lang.all_brand}</caption>{html_options options=$brand_list}</select>
+    <!-- 关键字 -->
+    <input type="text" name="keyword" size="20" />
+    <input type="submit" value="{$lang.button_search}" class="button" />
+  </form>
+</div>
+
+<form method="post" action="group_buy.php?act=insert_update" name="theForm" onsubmit="return validate()">
+<div class="main-div">
+<table id="group-table" cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td class="label">{$lang.label_goods_name}</td>
+    <td><select name="goods_id">
+      {if $group_buy.act_id}
+      <option value="{$group_buy.goods_id}">{$group_buy.goods_name}</option>
+      {else}
+      <option value="0">{$lang.notice_goods_name}</option>
+      {/if}
+    </select>    </td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.label_start_date}</td>
+    <td>
+      <input name="start_time" type="text" id="start_time" size="22" value='{$group_buy.start_time}' readonly="readonly" /><input name="selbtn1" type="button" id="selbtn1" onclick="return showCalendar('start_time', '%Y-%m-%d %H:%M', '24', false, 'selbtn1');" value="{$lang.btn_select}" class="button"/>
+    </td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.label_end_date}</td>
+    <td>
+      <input name="end_time" type="text" id="end_time" size="22" value='{$group_buy.end_time}' readonly="readonly" /><input name="selbtn2" type="button" id="selbtn2" onclick="return showCalendar('end_time', '%Y-%m-%d %H:%M', '24', false, 'selbtn2');" value="{$lang.btn_select}" class="button"/>
+    </td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.label_deposit}</td>
+    <td><input name="deposit" type="text" id="deposit" value="{$group_buy.deposit|default:0}" size="30"></td>
+  </tr>
+  <tr>
+    <td class="label"><a href="javascript:showNotice('noticRestrict');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.label_restrict_amount}</td>
+    <td><input type="text" name="restrict_amount" value="{$group_buy.restrict_amount|default:0}" size="30" />
+      <br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticRestrict">{$lang.notice_restrict_amount}</span>    </td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.label_gift_integral}</td>
+    <td><input type="text" name="gift_integral" value="{$group_buy.gift_integral|default:0}" size="30" /></td>
+  </tr>
+  {foreach from=$group_buy.price_ladder key=key item=item}
+  {if $key eq 0}
+  <tr>
+    <td class="label">{$lang.label_price_ladder}</td>
+    <td>{$lang.notice_ladder_amount} <input type="text" name="ladder_amount[]" value="{$item.amount}" size="8" />&nbsp;&nbsp;
+      {$lang.notice_ladder_price} <input type="text" name="ladder_price[]" value="{$item.price}" size="8" />
+      <a href="javascript:;" onclick="addLadder(this)"><strong>[+]</strong></a>    </td>
+  </tr>
+  {else}
+  <tr>
+    <td></td>
+    <td>{$lang.notice_ladder_amount} <input type="text" name="ladder_amount[]" value="{$item.amount}" size="8" />&nbsp;&nbsp;
+      {$lang.notice_ladder_price} <input type="text" name="ladder_price[]" value="{$item.price}" size="8" />
+      <a href="javascript:;" onclick="removeLadder(this)"><strong>[-]</strong></a>    </td>
+  </tr>
+  {/if}
+  {/foreach}
+  <tr>
+    <td class="label">{$lang.label_desc}</td>
+    <td><textarea  name="act_desc" cols="40" rows="3"  >{$group_buy.act_desc}</textarea></td>
+  </tr>
+  <tr>
+    <td class="label">&nbsp;</td>
+    <td>
+      <input name="act_id" type="hidden" id="act_id" value="{$group_buy.act_id}">
+      <input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+      {if $group_buy.status eq 1}
+      <input type="submit" name="finish" value="{$lang.button_finish}" class="button" onclick="return confirm('{$lang.notice_finish}')"/>
+      {elseif $group_buy.status eq 2}
+      <input type="submit" name="succeed" value="{$lang.button_succeed}" class="button" onclick="return confirm(succeed_confirm)" />{$lang.notice_succeed}<br />
+      <input type="submit" name="fail" value="{$lang.button_fail}" class="button" onclick="return confirm(fail_confirm)" />{$lang.notice_fail}
+      {elseif $group_buy.status eq 3}
+      <input type="submit" name="mail" value="{$lang.button_mail}" class="button" onclick="return confirm('{$lang.notice_mail}')" />
+      {/if}    </td>
+  </tr>
+</table>
+</div>
+</form>
+<script language="JavaScript">
+<!--
+{literal}
+
+// 检查新订单
+startCheckOrder();
+
+/**
+ * 检查表单输入的数据
+ */
+function validate()
+{
+  validator = new Validator("theForm");
+  var eles = document.forms['theForm'].elements;
+
+  var goods_id = eles['goods_id'].value;
+  if (goods_id <= 0)
+  {
+    validator.addErrorMsg(error_goods_null);
+  }
+  validator.isNumber('deposit', error_deposit, false);
+  validator.isInt('restrict_amount', error_restrict_amount, false);
+  validator.isInt('gift_integral', error_gift_integral, false);
+  return validator.passed();
+}
+
+/**
+ * 搜索商品
+ */
+function searchGoods()
+{
+  var filter = new Object;
+  filter.cat_id   = document.forms['searchForm'].elements['cat_id'].value;
+  filter.brand_id = document.forms['searchForm'].elements['brand_id'].value;
+  filter.keyword  = document.forms['searchForm'].elements['keyword'].value;
+
+  Ajax.call('group_buy.php?is_ajax=1&act=search_goods', filter, searchGoodsResponse, 'GET', 'JSON');
+}
+
+function searchGoodsResponse(result)
+{
+  if (result.error == '1' && result.message != '')
+  {
+    alert(result.message);
+	return;
+  }
+
+  var sel = document.forms['theForm'].elements['goods_id'];
+
+  sel.length = 0;
+
+  /* 创建 options */
+  var goods = result.content;
+  if (goods)
+  {
+    for (i = 0; i < goods.length; i++)
+    {
+      var opt = document.createElement("OPTION");
+      opt.value = goods[i].goods_id;
+      opt.text  = goods[i].goods_name;
+      sel.options.add(opt);
+    }
+  }
+  else
+  {
+    var opt = document.createElement("OPTION");
+    opt.value = 0;
+    opt.text  = search_is_null;
+    sel.options.add(opt);
+  }
+
+  return;
+}
+/**
+ * 新增一个价格阶梯
+ */
+function addLadder(obj, amount, price)
+{
+  var src  = obj.parentNode.parentNode;
+  var idx  = rowindex(src);
+  var tbl  = document.getElementById('group-table');
+  var row  = tbl.insertRow(idx + 1);
+  var cell = row.insertCell(-1);
+  cell.innerHTML = '';
+  var cell = row.insertCell(-1);
+  cell.innerHTML = src.cells[1].innerHTML.replace(/(.*)(addLadder)(.*)(\[)(\+)/i, "$1removeLadder$3$4-");;
+}
+
+/**
+ * 删除一个价格阶梯
+ */
+function removeLadder(obj)
+{
+  var row = rowindex(obj.parentNode.parentNode);
+  var tbl = document.getElementById('group-table');
+
+  tbl.deleteRow(row);
+}
+
+//-->
+{/literal}
+</script>
+
+{include file="pagefooter.htm"}

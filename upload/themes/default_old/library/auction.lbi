@@ -1,0 +1,19 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $auction_list} -->
+<div class="title-div"><img src="../images/auction.gif" alt="auction" width="158" height="39" /></div>
+<div class="content-div">
+  <!--{foreach from=$auction_list item=auction}-->
+  <table border="0" cellpadding="3" cellspacing="1" class="goods-table" style="float: left">
+    <tr>
+      <td align="center"><a href="{$auction.url}"><img src="{$auction.thumb}" border="0" alt="{$auction.goods_name|escape:html}" class="thumb" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="{$auction.url}" title="{$auction.goods_name|escape:html}">{$auction.short_style_name|escape:html}</a> <br />
+        <span class="goods-price">{$auction.formated_start_price}</span> </td>
+    </tr>
+  </table>
+  <!--{/foreach}-->
+  <br style="clear:both"/>
+  <div style="text-align:right"><a href="auction.php">more...</a></div>
+</div>
+<!-- {/if} -->

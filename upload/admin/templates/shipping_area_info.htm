@@ -1,0 +1,252 @@
+<!-- $Id: shipping_area_info.htm 16819 2009-11-25 06:21:17Z sxc_shop $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js,../js/transport.js,../js/region.js"}
+<div class="main-div">
+<form method="post" action="shipping_area.php" name="theForm" onsubmit="return validate()" style="background:#FFF">
+<fieldset style="border:1px solid #DDEEF2">
+  <table >
+    <tr>
+      <td class="label">{$lang.shipping_area_name}:</td>
+<td><input type="text" name="shipping_area_name" maxlength="60" size="30" value="{$shipping_area.shipping_area_name}" />{$lang.require_field}</td>
+    </tr>
+  {if $shipping_area.shipping_code =='ems' || $shipping_area.shipping_code =='yto' || $shipping_area.shipping_code =='zto' || $shipping_area.shipping_code =='sto_express' || $shipping_area.shipping_code =='post_mail' || $shipping_area.shipping_code =='sf_express' || $shipping_area.shipping_code =='post_express' }
+    <tr>
+    <td class="label">{$lang.fee_compute_mode}:</td>
+    <td>
+    <input type="radio"  {if $fee_compute_mode != 'by_number' }checked="true"{/if} onclick="compute_mode('{$shipping_area.shipping_code}','weight')" name="fee_compute_mode" value="by_weight" />{$lang.fee_by_weight}
+    <input type="radio" {if $fee_compute_mode == 'by_number'}checked="true"{/if}  onclick="compute_mode('{$shipping_area.shipping_code}','number')" name="fee_compute_mode" value="by_number" />{$lang.fee_by_number}
+    </td>
+    </tr>
+  {/if}
+<!--{if $shipping_area.shipping_code != 'cac'}-->
+    {foreach from=$fields item=field}
+    <!--{if $fee_compute_mode == 'by_number'}-->
+       <!--{if $field.name == 'item_fee' || $field.name == 'free_money' || $field.name == 'pay_fee'}-->
+            <tr id="{$field.name}" >
+              <td class="label">{$field.label}</td>
+              <td><input type="text" name="{$field.name}"  maxlength="60" size="20" value="{$field.value}" />{$lang.require_field}</td>
+            </tr>
+            <!--{else}-->
+            <tr id="{$field.name}" style="display:none">
+              <td class="label">{$field.label}</td>
+              <td><input type="text" name="{$field.name}"  maxlength="60" size="20" value="{$field.value}" />{$lang.require_field}</td>
+            </tr>
+        <!--{/if}-->
+    <!--{else}-->
+        <!--{if $field.name != 'item_fee'}-->
+            <tr id="{$field.name}">
+              <td class="label">{$field.label}</td>
+              <td><input type="text" name="{$field.name}"  maxlength="60" size="20" value="{$field.value}" />{$lang.require_field}</td>
+            </tr>
+        <!--{else}-->
+            <tr id="{$field.name}" style="display:none">
+              <td class="label">{$field.label}</td>
+              <td><input type="text" name="{$field.name}"  maxlength="60" size="20" value="{$field.value}" />{$lang.require_field}</td>
+            </tr>
+        <!--{/if}-->
+     <!--{/if}-->
+    {/foreach}
+<!--{/if}-->
+  </table>
+</fieldset>
+
+<fieldset style="border:1px solid #DDEEF2">
+  <legend style="background:#FFF">{$lang.shipping_area_regions}:</legend>
+  <table style="width:600px" align="center">
+  <tr>
+    <td id="regionCell">
+      {foreach from=$regions item=region key=id}
+      <input type="checkbox" name="regions[]" value="{$id}" checked="true" /> {$region}&nbsp;&nbsp;
+      {/foreach}
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <span  style="vertical-align: top">{$lang.label_country} </span>
+        <select name="country" id="selCountries" onchange="region.changed(this, 1, 'selProvinces')" size="10" style="width:80px">
+          {foreach from=$countries item=country}
+          <option value="{$country.region_id}">{$country.region_name|escape:html}</option>
+          {/foreach}
+        </select>
+        <span  style="vertical-align: top">{$lang.label_province} </span>
+        <select name="province" id="selProvinces" onchange="region.changed(this, 2, 'selCities')" size="10" style="width:80px">
+          <option value=''>{$lang.select_please}</option>
+        </select>
+        <span  style="vertical-align: top">{$lang.label_city} </span>
+        <select name="city" id="selCities" onchange="region.changed(this, 3, 'selDistricts')" size="10" style="width:80px">
+          <option value=''>{$lang.select_please}</option>
+        </select>
+        <span  style="vertical-align: top">{$lang.label_district}</span>
+        <select name="district" id="selDistricts" size="10" style="width:130px">
+          <option value=''>{$lang.select_please}</option>
+        </select>
+        <span  style="vertical-align: top"><input type="button" value="+" class="button" onclick="addRegion()" /></span>
+    </td>
+  </tr>
+  </table >
+</fieldset>
+
+  <table >
+  <tr>
+    <td colspan="2" align="center">
+      <input type="submit" value="{$lang.button_submit}" class="button" />
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+      <input type="hidden" name="act" value="{$form_action}" />
+      <input type="hidden" name="id" value="{$shipping_area.shipping_area_id}" />
+      <input type="hidden" name="shipping" value="{$shipping_area.shipping_id}" />
+    </td>
+  </tr>
+</table>
+
+</form>
+</div>
+<script language="JavaScript">
+<!--
+{literal}
+region.isAdmin = true;
+onload = function()
+{
+    document.forms['theForm'].elements['shipping_area_name'].focus();
+
+    var selCountry = document.forms['theForm'].elements['country'];
+    if (selCountry.selectedIndex <= 0)
+    {
+      selCountry.selectedIndex = 0;
+    }
+
+    region.loadProvinces(selCountry.options[selCountry.selectedIndex].value);
+
+    // 开始检查订单
+    startCheckOrder();
+}
+
+/**
+ * 检查表单输入的数据
+ */
+function validate()
+{
+    validator = new Validator("theForm");
+
+    validator.required('shipping_area_name', no_area_name);
+    validator.isInt('free_money', invalid_free_mondy, true);
+
+    var regions_chk_cnt = 0;
+    for (i=0; i<document.getElementsByName('regions[]').length; i++)
+    {
+      if (document.getElementsByName('regions[]')[i].checked == true)
+      {
+        regions_chk_cnt++;
+      }
+    }
+
+    if (regions_chk_cnt == 0)
+    {
+      validator.addErrorMsg(blank_shipping_area);
+    }
+    
+    return validator.passed();
+}
+
+/**
+ * 添加一个区域
+ */
+function addRegion()
+{
+    var selCountry  = document.forms['theForm'].elements['country'];
+    var selProvince = document.forms['theForm'].elements['province'];
+    var selCity     = document.forms['theForm'].elements['city'];
+    var selDistrict = document.forms['theForm'].elements['district'];
+    var regionCell  = document.getElementById("regionCell");
+
+    if (selDistrict.selectedIndex > 0)
+    {
+        regionId = selDistrict.options[selDistrict.selectedIndex].value;
+        regionName = selDistrict.options[selDistrict.selectedIndex].text;
+    }
+    else
+    {
+        if (selCity.selectedIndex > 0)
+        {
+            regionId = selCity.options[selCity.selectedIndex].value;
+            regionName = selCity.options[selCity.selectedIndex].text;
+        }
+        else
+        {
+            if (selProvince.selectedIndex > 0)
+            {
+                regionId = selProvince.options[selProvince.selectedIndex].value;
+                regionName = selProvince.options[selProvince.selectedIndex].text;
+            }
+            else
+            {
+                if (selCountry.selectedIndex >= 0)
+                {
+                    regionId = selCountry.options[selCountry.selectedIndex].value;
+                    regionName = selCountry.options[selCountry.selectedIndex].text;
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+    }
+
+    // 检查该地区是否已经存在
+    exists = false;
+    for (i = 0; i < document.forms['theForm'].elements.length; i++)
+    {
+      if (document.forms['theForm'].elements[i].type=="checkbox")
+      {
+        if (document.forms['theForm'].elements[i].value == regionId)
+        {
+          exists = true;
+          alert(region_exists);
+        }
+      }
+    }
+    // 创建checkbox
+    if (!exists)
+    {
+      regionCell.innerHTML += "<input type='checkbox' name='regions[]' value='" + regionId + "' checked='true' /> " + regionName + "&nbsp;&nbsp;";
+    }
+}
+
+/**
+ * 配送费用计算方式
+ */
+function compute_mode(shipping_code,mode)
+{
+    var base_fee  = document.getElementById("base_fee");
+    var step_fee  = document.getElementById("step_fee");
+    var item_fee  = document.getElementById("item_fee");
+    if(shipping_code == 'post_mail' || shipping_code == 'post_express')
+    {
+     var step_fee1  = document.getElementById("step_fee1");
+    }
+
+    if(mode == 'number')
+    {
+      item_fee.style.display = '';
+      base_fee.style.display = 'none';
+      step_fee.style.display = 'none';
+      if(shipping_code == 'post_mail' || shipping_code == 'post_express')
+      {
+       step_fee1.style.display = 'none';
+      }
+    }
+    else
+    {
+      item_fee.style.display = 'none';
+      base_fee.style.display = '';
+      step_fee.style.display = '';
+      if(shipping_code == 'post_mail' || shipping_code == 'post_express')
+      {
+       step_fee1.style.display = '';
+      }
+    }
+}
+//-->
+{/literal}
+</script>
+{include file="pagefooter.htm"}

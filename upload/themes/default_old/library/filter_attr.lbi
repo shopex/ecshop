@@ -1,0 +1,15 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $filter_attr_list} -->
+<div class="title-div"><img src="../images/blue_arrow.gif" width="37" height="37" alt="" border="0" style="vertical-align:middle" />{$filter_attr_name}</div>
+<div class="content-div">
+  <div style="list-style: none; margin: 10px; padding: 0;">
+    <!-- {foreach from=$filter_attr_list item=attr} -->
+    {if $attr.selected}
+    <div style="font:10px Arial;line-height:2em;background:url(../images/cat_arrow.gif) no-repeat left top;padding-left:12px;font-style:italic;font-weight:bold;"><a href="{$attr.url}">{$attr.attr_value}{if $attr.goods_num}({$attr.goods_num}){/if}</a></div>
+    {else}
+    <div style="font:10px Arial;line-height:2em;background:url(../images/cat_arrow.gif) no-repeat left top;padding-left:12px;"><a href="{$attr.url}">{$attr.attr_value}{if $attr.goods_num}({$attr.goods_num}){/if}</a></div>
+    {/if}
+    <!-- {/foreach} -->
+  </div>
+</div>
+<!-- {/if} -->

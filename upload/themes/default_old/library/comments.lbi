@@ -1,0 +1,5 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+{insert_scripts files='transport.js,utils.js'}
+<div class="title-div"><img src="../images/comments.gif" alt="comments" width="158" height="39" /></div>
+<div id="ECS_COMMENT" class="content"> {* ECSHOP 提醒您：动态载入comments_list.lbi，显示评论列表和评论表单 *}{insert name='comments' type=$type id=$id}</div>

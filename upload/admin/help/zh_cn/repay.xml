@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list_all">
+    <title>退款申请列表</title>
+    <content>
+    <![CDATA[
+	<p><strong>退款申请列表</strong></p>
+	<p>列出所有的退款申请记录。可点击任意一列标题栏对该列进行排序处理。默认按申请提交顺序排列。“是否处理”列用标识该记录是否已经处理。点击“查看详情”进行进一步处理</p>
+	
+	]]>
+    </content>
+  </section>
+
+  <section id="dispose">
+    <title>退款申请详情</title>
+    <content>
+    <![CDATA[
+	<p><strong>退款申请详情</strong></p>
+	<p>本页面能查看到用户申请金额和用户余额。如果点击同意退款，将从用户余额中扣除申请金额。点击忽略申请只保存处理备注，用户余额不变。<br/>
+	点击右上角的<a href="repay.php?act=list_all" target="main-frame"><span class="link">退款申请管理</span></a>链接就可回到列表页面
+	</p>
+	
+	]]>
+    </content>
+  </section>
+
+</help>

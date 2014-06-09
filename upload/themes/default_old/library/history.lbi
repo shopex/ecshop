@@ -1,0 +1,7 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="title-div"><img src="../images/history.gif" alt="History" width="158" height="39" /></div>
+<div class="content-div">
+  <ul class="history-list">
+    {insert name='history'}
+  </ul>
+</div>

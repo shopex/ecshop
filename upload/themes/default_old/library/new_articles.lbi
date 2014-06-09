@@ -1,0 +1,54 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div id="tab-title">
+<span id="ECS_NOTICE" class="tab-front">{$lang.shop_notice}</span>
+<span id="ECS_ARTICLE" class="tab-back">{$lang.new_article}</span>
+</div>
+<!-- 商店公告内容 -->
+<div class="content-div" id="ECS_NOTICE_BODY">
+  {$shop_notice}
+</div>
+<!-- 最新文章 -->
+<div class="content-div" id="ECS_ARTICLE_BODY" style="display:none" >
+  <ul class="article-list">
+    <!--{foreach from=$new_articles item=article}-->
+    <li>[<a href="{$article.cat_url}">{$article.cat_name}</a>] <a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title}</a></li>
+    <!--{/foreach}-->
+  </ul>
+</div>
+<script type="text/javascript">
+{literal}
+  var cycleList = ['ECS_NOTICE', 'ECS_ARTICLE'];
+  var tabFront = 'tab-front';
+  var tabBack = 'tab-back';
+  function cycleShow(obj)
+  {
+    var curObj;
+    var curBody;
+    for (i=0; i < cycleList.length; i++)
+    {
+      curObj = document.getElementById(cycleList[i]);
+      curBody = document.getElementById(cycleList[i] + '_BODY');
+      if (obj.id == curObj.id)
+      {
+        curObj.className = tabFront;
+        curBody.style.display = "";
+      }
+      else
+      {
+        curObj.className = tabBack;
+        curBody.style.display = "none";
+      }
+    }
+  }
+
+  // 添加事件
+  for (i=0; i< cycleList.length; i++)
+  {
+    document.getElementById(cycleList[i]).onmousemove = function()
+    {
+      cycleShow(this);
+    };
+  }
+{/literal}
+</script>
+

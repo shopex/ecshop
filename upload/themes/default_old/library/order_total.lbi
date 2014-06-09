@@ -1,0 +1,59 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{insert_scripts files='transport.js,utils.js'}
+<table width="100%" border="0" align="center" cellpadding="4" cellspacing="2">
+  <!-- {if $smarty.session.user_id > 0 and ($config.use_integral or $config.use_bonus)} -->
+  <tr>
+    <td align="right">
+      {$lang.complete_acquisition} {$total.will_get_integral} {$points_name}
+      <!-- {if $total.will_get_bonus} 是否有红包-->
+      ，{$lang.with_price} {$total.will_get_bonus}{$lang.de}{$lang.bonus}。
+      <!-- {/if} -->
+    </td>
+  </tr>
+  <!-- {/if} -->
+  <tr>
+    <td align="right">
+      {$lang.goods_all_price}: {$total.goods_price_formated}
+      <!-- {if $total.discount gt 0} 折扣 -->
+      - {$lang.discount}: {$total.discount_formated}
+      <!-- {/if} -->
+      <!-- {if $total.tax gt 0} 税 -->
+      + {$lang.tax}: {$total.tax_formated}
+      <!-- {/if} -->
+      <!-- {if $total.shipping_fee > 0} 配送费用 -->
+      + {$lang.shipping_fee}: {$total.shipping_fee_formated}
+      <!-- {/if} -->
+      <!-- {if $total.shipping_insure > 0} 保价费用 -->
+      + {$lang.insure_fee}: {$total.shipping_insure_formated}
+      <!-- {/if} -->
+      <!-- {if $total.pay_fee > 0} 支付费用 -->
+      + {$lang.pay_fee}: {$total.pay_fee_formated}
+      <!-- {/if} -->
+      <!-- {if $total.pack_fee > 0} 包装费用-->
+      + {$lang.pack_fee}: {$total.pack_fee_formated}
+      <!-- {/if} -->
+      <!-- {if $total.card_fee > 0} 贺卡费用-->
+      + {$lang.card_fee}: {$total.card_fee_formated}
+      <!-- {/if} -->
+    </td>
+  </tr>
+  <!-- {if $total.surplus > 0 or $total.integral > 0 or $total.bonus > 0} 使用余额或积分或红包 -->
+  <tr>
+    <td align="right">
+      <!-- {if $total.surplus > 0} 使用余额 -->
+      - {$lang.use_surplus}: {$total.surplus_formated}
+      <!-- {/if} -->
+      <!-- {if $total.integral > 0} 使用积分 -->
+      - {$lang.use_integral}: {$total.integral_formated}
+      <!-- {/if} -->
+      <!-- {if $total.bonus > 0} 使用红包 -->
+      - {$lang.use_bonus}: {$total.bonus_formated}
+      <!-- {/if} -->
+    </td>
+  </tr>
+  <!-- {/if} 使用余额或积分或红包 -->
+  <tr>
+    <td align="right" style="border-top: 1px dotted #DADADA"> {$lang.total_fee}: {$total.amount_formated}
+  {if $is_group_buy}<br />{$lang.notice_gb_order_amount}{/if}</td>
+  </tr>
+</table>

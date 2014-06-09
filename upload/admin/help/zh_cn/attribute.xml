@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+  <section id="list">
+    <title>商品属性列表</title>
+    <content>
+    <![CDATA[
+	<p>此页面列出您所有的商品属性信息</p>
+	<p>在此您可以进行如下操作:</p>
+	
+	<strong>快速编辑属性信息</strong>
+	<p>您可以快速编辑包括：<br><span class="link">属性名称</span> <span class="link">排列顺序</span> 等内容。<br>单击即可出现编辑文本框。输入您的新内容后回车，修改即可生效！</p>
+	
+	<strong>批量删除的操作</strong>
+	<p>单击<span class="link"> 编号 </span>左边的方框，本页面的属性即为选中状态。再单击左下角的<span class="link"> 删除 </span>按钮,即可完成属性的删除操作。</p>
+	
+	<strong>添加属性</strong>
+	<p>您只要点击列表右边的<a href="attribute.php?act=add" target="main-frame"><span class="link"> 添加属性 </span></a>链接，即可进入到添加的操作页面。</p>
+	
+	<strong>编辑属性信息</strong>
+	<p>您只要单击列表右边的<span class="link"> 编辑 </span>链接，即可进行相应的编辑操作。</p>
+	
+	<strong>删除属性</strong>
+	<p>您只要点击列表右边的<span class="link"> 删除 </span>链接，按系统提示即可完成删除的操作。</p>
+	
+	]]>
+    </content>
+  </section>
+  <section id="add">
+    <title>添加商品属性</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行商品属性的添加操作</p>
+	
+	<strong>属性名称</strong>
+	<p>在此您可以输入您要添加的属性的名称。如：颜色，面料，大小等等。属性名称建议在2～4个汉字之间为最佳！</p>
+	
+	<strong>所属商品类型</strong>
+	<p>在此选择该属性所属的商品类型，在添加新商品时，会自动列出该商品类型的所有属性。</p>
+
+	<strong>该属性值的录入方式</strong>
+	<p>此项有两个选择项：<br><span class="tips">手工录入：</span>指的是该属性的值相对多变，且只是一个值，则需在添加商品时填写。如：面料：50％棉＋40％涤＋10％莱卡... 
+	<br><span class="tips">从下面的列表中选择：</span>某些属性如果有多个选择值，并且可能会影响到商品的价格，这个时候您需要选择此项。比如：属性名称为显示器，那么可选值就会有15英寸，17英寸，19英寸等几个选项。</p>
+
+	<strong>可选值列表</strong>
+	<p>指的是如果选择了 <span class="link">从下面的列表中选择</span> ，那么此处就输入该属性能让用户所选择的项目。比如：黑，白，红等等。</p>
+	]]>
+    </content>
+  </section>
+  <section id="edit">
+    <title>编辑红商品属性信息</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行商品属性信息的编辑操作<br>(详细帮助信息请参见<a href="attribute.php?act=add" target="main-frame"><span class="link"> 添加属性 </span></a> 部分)</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+]]>
+    </content>
+  </section>
+</help>

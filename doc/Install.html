@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/Doc.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+body
+{
+  font-family: "Tahoma,Arial,Courier";
+  font-size: 14px;
+  color: #000000;
+  line-height: 130%;
+}
+h2
+{
+    font-size: 24px;
+}
+h3
+{
+    color: #000080;
+    font-size: 14px;
+}
+dt
+{
+    margin-left:    20px;
+    margin-top:     5px;
+    margin-bottom:  5px;
+    font-weight:bold;
+}
+</style>
+
+<title>ECSHOP 安装说明</title>
+</head>
+<body>
+<div>
+  <h2 align="center">ECSHOP 安装说明</h2>
+
+  <p>本文介绍了ECSHOP安装步骤以及安装中应注意的问题。</p>
+  <ol>
+    <li><a href="#requirement">系统需求</a></li>
+    <li><a href="#quickinstall">快速安装</a></li>
+  </ol>
+
+  <a name="requirement" />
+  <h3>1. 系统需求</h3>
+  <ul>
+    <li>操作平台不限，推荐使用linux，以获得更好的性能</li>
+    <li>可提供web服务的服务器，推荐web服务器使用apache</li>
+    <li>PHP版本等于或大于4.1.0，支持MySQL数据库，推荐使用 4.4 或者 5.1 系列的最新版本 [可选方案：支持GD库，就可使用自动生成商品缩略图功能]</li>
+    <li>MySQL (3.23 或者更高版本)，推荐使用 4.1 或者 5.0 系列的最新版本</li>
+  </ul>
+
+  <a name="quickinstall" />
+  <h3>2.快速安装</h3>
+  <p>你可以通过下面的步骤进行快速的安装。</p>
+  <dl>
+    <dt>2.1 下载ECSHOP软件包</dt>
+    <dd>请到 <a href="http://www.ecshop.com" target="_blank">http://www.ecshop.com</a> 下载最新的ECSHOP软件包。</dd>
+    <dt>2.2 解压缩ECSHOP软件包，并上传到服务器</dt>
+    <dd>ECSHOP软件包使用普通解压缩软件(如WinRAR)就可解压缩。将解压缩文件上传到服务器指定目录，该目录要求在浏览器中能够访问。</dd>
+    <dt>2.3 修改目录权限</dt>
+    <dd>
+      <p>文件上传到服务器后，需要更改几个目录权限才能保证ECSHOP的正常运行</p>
+        <ul>
+          <li>data/ 目录及其所有子目录</li>
+          <li>temp/ 目录及其所有子目录</li>
+          <li>cert/ 目录</li>
+          <li>includes/ 目录及其所有子目录</li>
+          <li>images/ 目录及其所有子目录</li>
+          <li>themes/ 目录及其所有子目录</li>
+        </ul>
+        <p>以上目录、文件在网站运行过程中会被动态更新，因此需确保可以向以上目录、文件写写入数据。可以使用以下方法：</p>
+        <ul>
+          <li>你可以使用ftp软件将以上目录及其子目录、文件属性设置为777</li>
+          <li>linux平台下你有shell权限则通过执行<strong>chmod</strong>来修改目录权限。</li>
+          <li>windows平台下，一般默认就可读写，不用设置</li>
+        </ul>
+    </dd>
+    <dt>2.4 开始安装</dt>
+    <dd><p>在浏览器中 访问http://你的网址/，根据页面提示填写参数。安装程序将自动完成config.php文件配置。 <br />
+    填写参数时注意以下几点：</p>
+      <ul>
+        <li>若不清楚mysql服务器地址，用户名，密码，数据库名可向虚拟空间提供商咨询。</li>
+        <li>填写管理员信息时设置一个安全且不易忘记的密码。</li>
+      </ul>
+      <p>安装完成后，在浏览器中访问 http://你的网址/admin/ 页面，输入正确的用户名和密码就可对你的电子商城进行更加详尽的设置。 </p></dd>
+  </dl>
+  <p>&nbsp;</p>
+
+    <div align="right"><em>版本：$Id: Install.html 16376 2009-06-26 06:31:03Z likai $</em></div>
+  <!-- InstanceEndEditable --></div>
+</body>
+<!-- InstanceEnd --></html>

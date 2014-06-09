@@ -1,0 +1,76 @@
+<!-- $Id: bonus_by_goods.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,selectzone.js"}
+<!-- 商品搜索 -->
+<div class="form-div">
+  <form action="javascript:searchGoods()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    <!-- 分类 -->
+    <select name="cat_id"><option value="0">{$lang.all_category}</caption>{$cat_list}</select>
+    <!-- 品牌 -->
+    <select name="brand_id"><option value="0">{$lang.all_brand}</caption>{html_options options=$brand_list}</select>
+    <!-- 关键字 -->
+    <input type="text" name="keyword" size="30" />
+    <input type="submit" value="{$lang.button_search}" class="button" />
+  </form>
+</div>
+
+<!-- 商品列表 -->
+<div class="list-div">
+<form name="theForm">
+<table cellspacing='1' cellpadding='3'>
+  <tr>
+    <th>{$lang.all_goods}</th>
+    <th>{$lang.handler}</th>
+    <th>{$lang.send_bouns_goods}</th>
+  </tr>
+  <tr>
+    <td width="45%" align="center">
+      <select name="source_select" size="20" style="width:90%" ondblclick="sz.addItem(false, 'add_bonus_goods', bounsTypeId)" multiple="true">
+      </select>
+    </td>
+    <td align="center">
+      <p><input type="button" value="&gt;&gt;" onclick="sz.addItem(true, 'add_bonus_goods', bounsTypeId)" class="button" /></p>
+      <p><input type="button" value="&gt;" onclick="sz.addItem(false, 'add_bonus_goods', bounsTypeId)" class="button" /></p>
+      <p><input type="button" value="&lt;" onclick="sz.dropItem(false, 'drop_bonus_goods', bounsTypeId)" class="button" /></p>
+      <p><input type="button" value="&lt;&lt;" onclick="sz.dropItem(true, 'drop_bonus_goods', bounsTypeId)" class="button" /></p>
+    </td>
+    <td width="45%" align="center">
+      <select name="target_select" multiple="true" size="20" style="width:90%" ondblclick="sz.dropItem(false, 'drop_bonus_goods', bounsTypeId)">
+        {foreach from=$goods_list item=goods}
+        <option value="{$goods.goods_id}">{$goods.goods_name}</option>
+        {/foreach}
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><input type="button"  class="button" value="{$lang.send}" onClick="javascript:history.back()" /></td>
+  </td>
+</table>
+</form>
+</div>
+<script language="JavaScript">
+  var bounsTypeId = '{$bonus_type.type_id}';
+  var elements    = document.forms['theForm'].elements;
+  var sz          = new SelectZone(1, elements['source_select'], elements['target_select'], '');
+
+  {literal}
+  onload = function()
+  {
+    startCheckOrder();
+  }
+
+  function searchGoods()
+  {
+    var elements  = document.forms['searchForm'].elements;
+    var filters   = new Object;
+
+    filters.cat_id = elements['cat_id'].value;
+    filters.brand_id = elements['brand_id'].value;
+    filters.keyword = Utils.trim(elements['keyword'].value);
+
+    sz.loadOptions('get_goods_list', filters);
+  }
+{/literal}
+</script>
+{include file="pagefooter.htm"}

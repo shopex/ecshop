@@ -1,0 +1,39 @@
+<!-- $Id: sms_my_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<div class="main-div">
+<table  border="0" cellspacing="0" cellpadding="0">
+   <tr>
+    <td colspan="2" align="center">{$lang.test_now}</td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.sms_user_name}</td>
+    <td>{$sms_my_info.sms_user_name}</td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.sms_domain}</td>
+    <td>{$sms_my_info.sms_domain}</td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.sms_count}</td>
+    <td>{$sms_my_info.sms_count}</td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.sms_total_money}</td>
+    <td>{$sms_my_info.sms_total_money}</td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.sms_balance}</td>
+    <td>{$sms_my_info.sms_balance}</td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.sms_last_request}</td>
+    <td>{$sms_my_info.sms_last_request}</td>
+  </tr>
+</table>
+</div>
+<div class="main-div" style="text-align:center;">
+ <form method="POST" action="sms.php?act=disable">
+  <input type="submit" value="{$lang.disable}" />
+ </form>
+</div>
+{include file="pagefooter.htm"}

@@ -1,0 +1,37 @@
+<div id="custabbar-div">
+    <p>
+      {foreach from=$group_list item=group key=group_key name="bar_group"}
+      {if $group_key eq $current}
+      <span class="custab-front" id="{$group_key}-tab">{$group.text}</span>
+      {else}
+      <span class="custab-back" id="{$group_key}-tab" onclick="javascript:location.href='{$group.url}';">{$group.text}</span>
+      {/if}
+      {/foreach}
+    </p>
+  </div>
+
+  <script language="javascript">
+  /**
+   * 标签上鼠标移动事件的处理函数
+   * @return
+   */
+  document.getElementById("custabbar-div").onmouseover = function(e)
+  {
+    var obj = Utils.srcElement(e);
+
+    if (obj.className == "custab-back")
+    {
+      obj.className = "custab-hover";
+    }
+  }
+
+  document.getElementById("custabbar-div").onmouseout = function(e)
+  {
+    var obj = Utils.srcElement(e);
+
+    if (obj.className == "custab-hover")
+    {
+      obj.className = "custab-back";
+    }
+  }
+  </script>

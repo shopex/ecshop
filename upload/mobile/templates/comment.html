@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ECShop_mobile</title>
+</head>
+
+<body>
+<p align='left'>
+{$goods_info.goods_name}<br/>
+--------------<br/>
+{foreach from=$comment_data item=comment}
+    评论:{$comment.i}.{$comment.content}<br/>
+    发布人:{$comment.username}&nbsp;&nbsp;{$comment.add_time}<br/>
+    {if $comment.re_username}
+        =关于此评论的回复=<br/>
+        {$comment.re_content}<br/>
+        回复人:{$comment.re_username}&nbsp;&nbsp;{$comment.re_add_time}<br/>
+    {/if}
+{foreachelse}
+    暂无此商品评论<br/>
+{/foreach}
+{if $pagebar}
+{$pagebar}<br/>
+{/if}
+--------------<br/>
+<a href="javascript:history.back(-1)">回上一页</a><br/>
+<a href='goods.php?id={$goods_id}'>回商品详细</a><br/>
+<a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</body>
+</html>

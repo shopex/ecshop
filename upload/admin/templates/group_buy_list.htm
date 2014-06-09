@@ -1,0 +1,107 @@
+<!-- $Id: group_buy_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="form-div">
+  <form action="javascript:searchGroupBuy()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    {$lang.goods_name} <input type="text" name="keyword" size="30" />
+    <input type="submit" value="{$lang.button_search}" class="button" />
+  </form>
+</div>
+
+<form method="post" action="group_buy.php?act=batch_drop" name="listForm" onsubmit="return confirm(batch_drop_confirm);">
+<!-- start group_buy list -->
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>
+        <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" />
+        <a href="javascript:listTable.sort('act_id'); ">{$lang.record_id}</a>{$sort_act_id}
+      </th>
+      <th><a href="javascript:listTable.sort('goods_name'); ">{$lang.goods_name}</a>{$sort_goods_name}</th>
+      <th>{$lang.current_status}</a></th>
+      <!-- <th><a href="javascript:listTable.sort('start_time'); ">{$lang.start_date}</a>{$sort_start_time}</th> -->
+      <th><a href="javascript:listTable.sort('end_time'); ">{$lang.end_date}</a>{$sort_end_time}</th>
+      <th><a href="javascript:listTable.sort('deposit'); ">{$lang.deposit}</a>{$sort_deposit}</th>
+      <th><a href="javascript:listTable.sort('restrict_amount'); ">{$lang.restrict_amount}</a>{$sort_restrict_amount}</th>
+      <!-- <th><a href="javascript:listTable.sort('gift_integral'); ">{$lang.gift_integral}</a>{$sort_gift_integral}</th> -->
+      <th>{$lang.valid_goods}</a></th>
+      <th>{$lang.valid_order}</a></th>
+      <th>{$lang.current_price}</a></th>
+      <th>{$lang.handler}</th>
+    </tr>
+
+    {foreach from=$group_buy_list item=group_buy}
+    <tr>
+      <td><input value="{$group_buy.act_id}" name="checkboxes[]" type="checkbox">{$group_buy.act_id}</td>
+      <td>{$group_buy.goods_name|escape:html}</td>
+      <td>{$group_buy.cur_status}</td>
+      <!-- <td align="right">{$group_buy.start_time}</td> -->
+      <td align="right">{$group_buy.end_time}</td>
+      <td align="right"><span onclick="listTable.edit(this, 'edit_deposit', {$group_buy.act_id})">{$group_buy.deposit}</span></td>
+      <td align="right"><span onclick="listTable.edit(this, 'edit_restrict_amount', {$group_buy.act_id})">{$group_buy.restrict_amount}</span></td>
+      <!-- <td align="right">{$group_buy.gift_integral}</td> -->
+      <td align="right">{$group_buy.valid_goods}</td>
+      <td align="right">{$group_buy.valid_order}</td>
+      <td align="right">{$group_buy.cur_price}</td>
+      <td align="center">
+        <a href="order.php?act=list&amp;group_buy_id={$group_buy.act_id}"><img src="images/icon_view.gif" title="{$lang.view_order}" border="0" height="16" width="16" /></a>
+        <a href="group_buy.php?act=edit&amp;id={$group_buy.act_id}" title="{$lang.edit}"><img src="images/icon_edit.gif" border="0" height="16" width="16" /></a>
+        <a href="javascript:;" onclick="listTable.remove({$group_buy.act_id},'{$lang.drop_confirm}')" title="{$lang.remove}"><img src="images/icon_drop.gif" border="0" height="16" width="16" /></a>
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+
+  <table cellpadding="4" cellspacing="0">
+    <tr>
+      <td><input type="submit" name="drop" id="btnSubmit" value="{$lang.drop}" class="button" disabled="true" /></td>
+      <td align="right">{include file="page.htm"}</td>
+    </tr>
+  </table>
+
+{if $full_page}
+</div>
+<!-- end group_buy list -->
+</form>
+
+<script type="text/javascript" language="JavaScript">
+<!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+    document.forms['searchForm'].elements['keyword'].focus();
+
+    startCheckOrder();
+  }
+
+  /**
+   * 搜索团购活动
+   */
+  function searchGroupBuy()
+  {
+
+    var keyword = Utils.trim(document.forms['searchForm'].elements['keyword'].value);
+    listTable.filter['keyword'] = keyword;
+    listTable.filter['page'] = 1;
+    listTable.loadList("group_buy_list");
+  }
+  {/literal}
+//-->
+</script>
+
+{include file="pagefooter.htm"}
+{/if}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list">
+    <title>网店信息管理</title>
+    <content>
+    <![CDATA[
+	<p><strong>网店信息管理</strong></p>
+	<p>本页面列出所有网店信息文章。文章标题可在本页面直接编辑</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="add">
+    <title>添加新网店信息文章</title>
+    <content>
+    <![CDATA[
+	<p><strong>添加新网店信息文章</strong></p>
+	<p>在本页面可添加新网店信息文章</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="edit">
+    <title>编辑网店文章</title>
+    <content>
+    <![CDATA[
+	<p><strong>编辑新网店信息文章</strong></p>
+	<p>在本页面可编辑网店信息文章</p>
+	]]>
+    </content>
+  </section>
+</help>

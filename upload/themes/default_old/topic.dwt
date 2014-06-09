@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+{if $topic.css neq ''}
+<style type="text/css">
+  {$topic.css}
+</style>
+{/if}
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+
+</head>
+<body>
+<div id="globalWrapper">
+<div style="float:left;"><img src="images/page_left.gif" alt="" /></div>
+<div id="wrapper"><!-- #BeginLibraryItem "/library/page_header.lbi" -->
+<table width="100%" border="0" cellpadding="0" cellspacing="3" id="page-header">
+  <tr>
+    <td id="cell-logo"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td rowspan="2"><a href="index.php" name="top" id="top"><img src="images/logo.gif" alt="shopping mall name" width="130" height="56" border="0" /></a></td>
+          <td align="right" valign="top" style="padding: 5px 10px"><a href="flow.php">{$lang.view_cart}</a> | <a href="pick_out.php">{$lang.pick_out}</a> | <a href="group_buy.php">{$lang.group_buy_goods}</a> | <a href="snatch.php">{$lang.snatch}</a> | <a href="catalog.php" onmouseover="showCatalog(this)" onmouseout="hideCatalog()"><strong>{$lang.catalog}</strong></a> | <a href="tag_cloud.php">{$lang.tag_cloud}</a> | <a href="user.php">{$lang.user_center}</a> </td>
+        </tr>
+        <tr>
+          <td align="center"></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td id="cell-nav"><ul>
+        <li><a href="index.php">{$lang.home}</a></li>
+        <!-- {foreach name=nav_list from=$nav_list item=nav} -->
+        <!-- {if $smarty.foreach.nav_list.last}-->
+        <li style="border-right:0px;"><a href="{$nav.url}">{$nav.label}</a></li>
+        <!-- {else}-->
+        <li><a href="{$nav.url}">{$nav.label}</a></li>
+        <!-- {/if}-->
+        <!-- {/foreach} -->
+      </ul></td>
+  </tr>
+</table>
+<div id="ECS_CATALOG" class="catalog-div" style="display:none"
+onmouseover="if (this.style.display != 'block') this.style.display='block';"
+onmouseout="if (this.style.display != 'none') this.style.display = 'none';">
+  <ul>
+    <!--{assign var="level" value=0}-->
+    <!-- {foreach from=$catalog_list item=cat} -->
+    <!-- {if $level > $cat.level} -->
+  </ul>
+  <!-- {/if}-->
+  <!-- {if $level < $cat.level} -->
+  <ul>
+    <!-- {/if} -->
+    <li class="{if $cat.level eq 0}top-cate{else}snd-cate{/if}"><a href="{$cat.url}" title="{if $cat.cat_desc neq ''}{$cat.cat_desc}{/if}">{$cat.cat_name}</a></li>
+    <!--{assign var="level" value=$cat.level}-->
+    <!-- {/foreach} -->
+  </ul>
+</div>
+<!-- #EndLibraryItem --><div id="search-bar">
+<div id="search-left"><!-- TemplateBeginEditable name="导航栏下方左侧" -->
+<!-- #BeginLibraryItem "/library/ur_here.lbi" -->
+
+<div style="padding:3px 15px 0px 15px;">{$lang.ur_here} {$ur_here}</div>
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable --></div>
+<div id="search-right"><!-- TemplateBeginEditable name="导航栏下方右侧" --><!-- #BeginLibraryItem "/library/search_form.lbi" -->
+<div style="padding:0px 15px;">
+  <form id="searchForm" name="searchForm" method="get" action="library/search.php">
+    <img src="images/icon_search.gif" alt="search" />
+    <select name="category" id="category" style="vertical-align:middle;">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list} 
+    </select>
+    <input name="keywords" class="textbox" type="text" id="keyword" value="{$search_keywords|escape}" />
+    <input type="image" name="imageField" src="images/btn_go.gif" />
+    <a href="library/search.php?act=advanced_search">{$lang.advanced_search}</a>
+  </form>
+</div>
+<!-- #EndLibraryItem --><!-- TemplateEndEditable -->
+</div>
+</div><!-- End #search-bar -->
+<div id="" style="border:#ccc 1px solid"> <table width="96%" border="0" cellspacing="0">
+      <tr>
+          <td>{$topic.title}</td>
+      </tr>
+      <tr>
+          <td>{$topic.intro}</td>
+      </tr>
+  </table>
+  
+  <!-- {foreach from=$sort_goods_arr item=sort key=sort_name} -->
+    <table width="100%">
+        <tr>
+        <td style="padding-left:3px; font-weight:bold;">
+          {$sort_name}
+        </td>
+        </tr>
+        <tr>
+        <td >
+     <!-- {foreach from=$sort item=goods} -->
+       <div style=" width:180px; float:left; margin:3px;">
+          <table border="0" cellpadding="3" cellspacing="1" class="goods-table" style="float: left">
+    <tr>
+      <td align="center"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" border="0" alt="{$goods.name|escape:html}" class="thumb" /></a></td>
+    </tr>
+    <tr>
+      <td><A href="{$goods.url}" title="{$goods.goods_name|escape:html}">{$goods.short_style_name}</A><br />
+        <!-- {if $goods.promote_price neq ""} -->
+        {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span>
+        <!-- {else}-->
+        {$lang.shop_price}<span class="goods-price">{$goods.shop_price}</span>
+        <!--{/if}-->
+      </td>
+    </tr>
+  </table>
+           </div>
+     <!-- {/foreach} -->
+         </td>
+         </tr>
+    </table>
+<!-- {/foreach} -->
+</div>
+<!-- #BeginLibraryItem "/library/help.lbi" -->
+<!--{if $helps}-->
+<table width="801" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#DADADA" class="clear" style="margin:10px auto 5px auto;">
+  <tr>
+    <!-- {foreach from=$helps item=help_cat} -->
+    <td class="help-cat"><img src="images/grey_arrow.gif" alt="" width="37" height="37" />{$help_cat.cat_name}</td>
+    <!-- {/foreach} -->
+  </tr>
+  <tr>
+    <!-- {foreach from=$helps item=help_cat} -->
+    <td bgcolor="#FFFFFF" valign="top"><ul>
+        <!-- {foreach from=$help_cat.article item=item} -->
+        <li><a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a></li>
+        <!-- {/foreach} -->
+      </ul></td>
+    <!-- {/foreach} -->
+  </tr>
+</table>
+<!--{/if}-->
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+<table width="801" border="0" align="center" cellpadding="5" cellspacing="0" style="margin:10px 0 20px 0;" id="footer-table">
+  <tr>
+    <td><img src="images/ecshop.gif" alt="ECSHOP" width="133" height="46" hspace="10" /></td>
+    <td width="6" id="foot-logo"><img src="images/footer_bg.gif" width="6" height="80" alt="" /></td>
+    <td> {$copyright}<br />
+      {$shop_address} {$shop_postcode} <br />
+      <!-- 客服电话{if $service_phone} -->
+      Tel: {$service_phone}
+      <!-- 结束客服电话{/if} -->
+      <!-- QQ 号码 {foreach from=$qq item=im} -->
+      <!-- {if $im} -->
+      <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$im}&amp;Site={$shop_name}&amp;Menu=yes" target="_blank"><img src="http://wpa.qq.com/pa?p=1:{$im}:4" height="16" border="0" alt="QQ" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束QQ号码 -->
+      <!-- 淘宝旺旺 {foreach from=$ww item=im} -->
+      <!-- {if $im} -->
+      <a href="http://amos1.taobao.com/msg.ww?v=2&amp;uid={$im|escape:url}&amp;s=2" target="_blank"><img src="http://amos1.taobao.com/online.ww?v=2&amp;uid={$im|escape:url}&amp;s=2" width="16" height="16" border="0" alt="淘宝旺旺" /> {$im}</a>
+      <!-- {/if} -->
+      <!--{/foreach} 结束淘宝旺旺 -->
+      <!-- Yahoo Messenger {foreach from=$ym item=im} -->
+      <!-- {if $im} -->
+      <a href="http://edit.yahoo.com/config/send_webmesg?.target={$im}n&amp;.src=pg" target="_blank"><img src="images/yahoo.gif" width="18" height="17" border="0" alt="Yahoo Messenger" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束Yahoo Messenger -->
+      <!-- MSN Messenger {foreach from=$msn item=im} -->
+      <!-- {if $im} -->
+      <img src="images/msn.gif" width="18" height="17" border="0" alt="MSN" /> {$im}
+      <!-- {/if} -->
+      <!-- {/foreach} 结束MSN Messenger -->
+      <!-- Skype {foreach from=$skype item=im} -->
+      <!-- {if $im} -->
+      <img src="http://mystatus.skype.com/smallclassic/{$im|escape:url}" alt="Skype" /><a href="skype:{$im|escape:url}?call">{$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} -->
+      <div>
+        <!-- 开始相关声明{foreach from=$declaration item=article} -->
+        <a href="{$article.url}" target="_blank">{$article.title}</a>
+        <!-- 相关声明{/foreach}-->
+      </div>
+      <!-- ICP 证书{if $icp_number} -->
+      <div> {$lang.icp_number}:<a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a> </div>
+      <!-- 结束ICP 证书{/if} -->
+      {insert name='query_info'}<br />
+      <a href="http://www.ecshop.com" target="_blank" style="font-size:10px">Powered by <strong><span style="color: #3366FF">ECSHOP</span> <span style="color: #FF9966">{$ecs_version}</span></strong></a><br />
+    </td>
+  </tr>
+</table>
+{if $stats_code}
+<div align="center">{$stats_code}</div>
+{/if}
+
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<!-- #EndLibraryItem --></div>
+<!-- End #Wrapper -->
+<div style="float:left;"><img src="images/page_right.gif" alt="" /></div>
+</div><!-- End #globalWrapper -->
+</body>
+</html>

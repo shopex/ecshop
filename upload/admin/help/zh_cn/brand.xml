@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list">
+    <title>品牌列表</title>
+    <content>
+    <![CDATA[
+    <p><strong>快速编辑品牌</strong></p>
+	<p>你可以直接点击某个品牌的品牌的名称、品牌网址、排序后该区域将变为编辑区。编辑完成回车就完成编辑。放弃编辑只有单击编辑区外任何区域即可。<span class="tips">排序按顺序排序，即序号越小排前面</span>。更多编辑选项请点击操作列中编辑链接。</p>
+	<p><strong>添加新品牌</strong></p>
+	<p>点击右上角的<a href="brand.php?act=add" target="main-frame"><span class="link">添加新品牌</span></a>链接就可进入添加新品牌界面</p>
+	<p><strong>提示</strong></p>
+	<p>如果上传过品牌logo图片，品牌名前的小图标为彩色，否则为灰色</p>
+
+
+	
+	
+	]]>
+    </content>
+    </section>
+
+    <section id="add">
+    <title>添加新品牌</title>
+    <content>
+    <![CDATA[
+	<p><strong>添加新品牌</strong></p>
+	<p>品牌名必须填写。其它选填。点击右上角的<a href="brand.php?act=list" target="main-frame"><span class="link">品牌列表<span></a>链接即可返回列表页面<p>
+	
+	]]>
+    </content>
+  </section>
+
+  <section id="edit">
+    <title>编辑品牌</title>
+    <content>
+    <![CDATA[
+	<p><strong>编辑品牌</strong></p>
+	<p>请参考添加。品牌图标前面如果出现黄色小图标，说明你已经上传过品牌图片，再次上传将覆盖上次上传图片。<br />点击右上角的<a href="brand.php?act=list" target="main-frame"><span class="link">品牌列表<span></a>链接即可返回列表页面<p>
+	
+	]]>
+    </content>
+  </section>
+
+</help>

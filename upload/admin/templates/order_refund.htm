@@ -1,0 +1,58 @@
+<!-- $Id -->
+{include file="pageheader.htm"}
+<form name="theForm" method="get" action="order.php" onsubmit="return check()">
+<div class="list-div">
+<table>
+  <tr>
+    <th>{$lang.label_refund_amount}</th>
+    <td>{$formated_refund_amount}</td>
+  </tr>
+  <tr>
+    <th width="120">{$lang.label_handle_refund}</th>
+    <td><p>{if !$anonymous}<label><input type="radio" name="refund" value="1" />{$lang.return_user_money}</label><br>{/if}
+      <label><input type="radio" name="refund" value="2" />{$lang.create_user_account}</label><br>
+      <label><input name="refund" type="radio" value="3" />
+      {$lang.not_handle}</label><br>
+    </p></td>
+  </tr>
+  <tr>
+    <th>{$lang.label_refund_note}</th>
+    <td><textarea name="refund_note" cols="60" rows="3" id="refund_note">{$refund_note}</textarea></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <div align="center">
+        <input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
+        <input type="hidden" name="order_id" value="{$order_id}" />
+        <input type="hidden" name="func" value="refund" />
+        <input type="hidden" name="act" value="process" />
+        <input type="hidden" name="refund_amount" value="{$refund_amount}" />
+        </div></td>
+  </tr>
+</table>
+</div>
+</form>
+<script language="JavaScript">
+{literal}
+  function check()
+  {
+    var selected = false;
+    for (var i = 0; i < document.forms['theForm'].elements.length; i++)
+    {
+      ele = document.forms['theForm'].elements[i];
+      if (ele.tagName == 'INPUT' && ele.name == 'refund' && ele.checked)
+      {
+        selected = true;
+        break;
+      }
+    }
+    if (!selected)
+    {
+      alert(pls_select_refund);
+      return false;
+    }
+    return true;
+  }
+{/literal}
+</script>
+{include file="pagefooter.htm"}

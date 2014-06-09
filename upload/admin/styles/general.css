@@ -1,0 +1,61 @@
+/*
+$Id: general.css 13504 2007-11-08 09:51:13Z weberliu $
+*/
+
+body {
+  margin: 0px;
+  padding: 0px;
+  color: #192E32;
+  font: 12px "sans-serif", "Arial", "Verdana";
+}
+
+p, td, div {
+  font: 12px "sans-serif", "Arial", "Verdana";
+}
+
+th {
+  font: 12px "sans-serif", "Arial", "Verdana";
+  font-weight: bold;
+}
+
+form {
+  margin: 0px;
+  padding: 0px;
+}
+
+input, textarea, select {
+  font: 12px "courier new";
+}
+
+a:visited {
+  color: #335B64;
+  text-decoration: none;
+}
+
+a:link {
+  color: #335B64;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #EB8A3D;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #EB8A3D;
+  text-decoration: underline;
+}
+
+.clear {
+  clear: both;
+  float: none;
+  font-size: 0px;
+  margin: 0;
+  padding: 0;
+  display:block;
+}
+
+.nowrap {
+  white-space:nowrap;
+}

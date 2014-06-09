@@ -1,0 +1,24 @@
+<!DOCTYPE wml PUBLIC '-//WAPFORUM//DTD WML 1.1//EN' 'http://www.wapforum.org/DTD/wml_1.1.xml'>
+<wml>
+<head><meta http-equiv='Cache-Control' content='max-age=0'/></head>
+<card id='ecshop' title='ECShop_WAP'>
+<p align='left'>
+用户登录<br/>
+--------------<br/>
+{if $login_faild eq 1}
+用户名或密码错误,请重新输入<br/>
+{/if}
+用户名:<input type='text' name='username'/><br/>
+密码:<input type='text' name='pwd'/><br/>
+<anchor title='登录'>
+    登录
+    <go href='user.php?act=do_login' method='post'>
+    <postfield name='username' value='$(username)'/>
+    <postfield name='pwd' value='$(pwd)'/>
+    </go>
+</anchor><br/>
+<a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</card>
+</wml>

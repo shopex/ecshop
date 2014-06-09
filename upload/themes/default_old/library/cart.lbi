@@ -1,0 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{insert_scripts files='transport.js'}
+<div class="title-div"><img src="../images/cart.gif" alt="Cart" width="158" height="39" /></div>
+<div class="cart-div" id="ECS_CARTINFO">{insert name='cart_info'}</div>

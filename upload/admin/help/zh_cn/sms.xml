@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="gbk"?>
+<help>
+  <section id="display_my_info">
+    <title>账号信息</title>
+    <content>
+    <![CDATA[
+	<p>本页面显示了发送短信的账号信息。</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="display_send_ui">
+    <title>短信发送页面</title>
+    <content>
+    <![CDATA[
+	<p>本页面为指定的手机号码发送短信。</p>
+	]]>
+    </content>
+  </section>
+  
+  <section id="display_charge_ui">
+    <title>账户充值</title>
+    <content>
+    <![CDATA[
+	<p>本页面提供账户充值的操作，输入需要充值的金额，按系统提示操作即可完成充值操作。</p>
+	]]>
+    </content>
+  </section>
+  
+  <section id="display_send_history_ui">
+    <title>短信发送记录</title>
+    <content>
+    <![CDATA[
+	<p>在此页面可以查询短信的发送记录。</p>
+	]]>
+    </content>
+  </section>
+  
+  <section id="display_charge_history_ui">
+    <title>充值记录</title>
+    <content>
+    <![CDATA[
+	<p>在此页面可以查询您的充值记录。</p>
+	]]>
+    </content>
+  </section>
+</help>

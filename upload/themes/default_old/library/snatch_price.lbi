@@ -1,0 +1,11 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="title-div"><img src="../images/snatch_price.gif" alt="best products" width="158" height="39" /></div>
+<div class="content-div">
+  <ul>
+    <!--{foreach from=$price_list item=item}-->
+    <li>{$item.user_name}<br />
+      {$item.bid_price}</li>
+    <!--{/foreach}-->
+  </ul>
+  <br style="clear:both"/>
+</div>

@@ -1,0 +1,68 @@
+<!-- $Id: card_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<!-- start goods list -->
+<form method="post" action="" name="listForm">
+<input type="hidden" name="goods_id" value="{$goods_id}" />
+<div class="list-div" id="listDiv">
+{/if}
+  <table cellpadding="3" cellspacing="1">
+  <tr>
+    <th>&nbsp</th>
+    <th><a href="javascript:listTable.sort('card_name');">{$lang.card_name}</a>{$sort_card_name}</th>
+    <th><a href="javascript:listTable.sort('card_fee');">{$lang.card_fee}</a>{$sort_card_fee}</th>
+    <th><a href="javascript:listTable.sort('free_money');">{$lang.free_money}</a>{$sort_free_money}</th>
+    <th>{$lang.card_desc}</th>
+    <th>{$lang.handler}</th>
+  </tr>
+  { foreach from=$card_list item=card}
+  <tr>
+    <td align="center">
+    {if $card.card_img}
+        <a href = "../data/cardimg/{$card.card_img}" target="_brank"><img src="images/picflag.gif" width="16" height="16" border="0" alt="" /></a>
+    {else}
+        <img src="images/picnoflag.gif" width="16" height="16" border="0" alt="" />
+    {/if}
+    </td>
+    <td align="left"><span onclick="listTable.edit(this, 'edit_card_name', {$card.card_id})">{$card.card_name|escape:"html"}</a></td>
+    <td align="right"><span onclick="listTable.edit(this, 'edit_card_fee', {$card.card_id})">{$card.card_fee}</a></td>
+    <td align="right"><span onclick="listTable.edit(this, 'edit_free_money', {$card.card_id})">{$card.free_money}</a></td>
+    <td align="left">{if $card.card_desc}{$card.card_desc|truncate:50|escape:"html"}{else}N/A{/if}</td>
+    <td align="center" nowrap="true" valign="top">
+        <a href="?act=edit&amp;id={$card.card_id}" title="{$lang.edit}"><img src="images/icon_edit.gif" border="0" height="16" width="16"></a>
+        <a href="javascript:;" onclick="listTable.remove({$card.card_id}, '{$lang.drop_confirm}')" title="{$lang.remove}"><img src="images/icon_drop.gif" border="0" height="16" width="16"></a>
+      </td>
+  </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+
+  <table cellpadding="4" cellspacing="0">
+    <tr>
+      <td align="right">{include file="page.htm"}</td>
+    </tr>
+  </table>
+{if $full_page}
+</div>
+</form>
+<!-- end goods list -->
+<script type="text/javascript" language="JavaScript">
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+<!--
+{literal}
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+{/literal}
+//-->
+</script>
+{include file="pagefooter.htm"}
+{/if}

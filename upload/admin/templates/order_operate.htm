@@ -1,0 +1,90 @@
+<!-- $Id -->
+{include file="pageheader.htm"}
+<form name="theForm" method="get" action="order.php" onsubmit="return check()">
+<div class="list-div">
+<table>
+  <tr>
+    <th width="120">{$lang.label_action_note}</th>
+    <td><textarea name="action_note" cols="60" rows="3">{$action_note}</textarea>
+    {if $require_note}{$lang.require_field}{/if}</td>
+  </tr>
+  {if $show_cancel_note}
+  <tr>
+    <th>{$lang.label_cancel_note}</th>
+    <td><textarea name="cancel_note" cols="60" rows="3" id="cancel_note">{$cancel_note}</textarea>
+      {$lang.require_field}{$lang.notice_cancel_note}</td>
+  </tr>
+  {/if}
+  {if $show_invoice_no}
+  <tr>
+    <th>{$lang.label_invoice_no}</th>
+    <td><input name="invoice_no" type="text" size="30" /></td>
+  </tr>
+  {/if}
+  {if $show_refund}
+  <tr>
+    <th>{$lang.label_handle_refund}</th>
+    <td><p>{if !$anonymous}<label><input type="radio" name="refund" value="1" />{$lang.return_user_money}</label><br>{/if}
+      <label><input type="radio" name="refund" value="2" />{$lang.create_user_account}</label><br>
+      <label><input name="refund" type="radio" value="3" />
+      {$lang.not_handle}</label><br>
+    </p></td>
+  </tr>
+  <tr>
+    <th>{$lang.label_refund_note}</th>
+    <td><textarea name="refund_note" cols="60" rows="3" id="refund_note">{$refund_note}</textarea></td>
+  </tr>
+  {/if}
+  <tr>
+    <td colspan="2">
+      <div align="center">
+        <input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
+        <input type="button" name="back" value="{$lang.back}" class="button" onclick="history.back()" />
+        <input type="hidden" name="order_id" value="{$order_id}" />
+        <input type="hidden" name="operation" value="{$operation}" />
+        <input type="hidden" name="act" value="{if $batch}batch_operate_post{else}operate_post{/if}" />
+        </div></td>
+  </tr>
+</table>
+</div>
+</form>
+<script language="JavaScript">
+  var require_note = '{$require_note}';
+  var show_refund  = '{$show_refund}';
+  var show_cancel = '{$show_cancel_note}';
+{literal}
+  function check()
+  {
+    if (require_note && document.forms['theForm'].elements['action_note'].value == '')
+    {
+      alert(pls_input_note);
+      return false;
+    }
+	if (show_cancel && document.forms['theForm'].elements['cancel_note'].value == '')
+	{
+	  alert(pls_input_cancel);
+	  return false;
+	}
+    if (show_refund)
+    {
+      var selected = false;
+      for (var i = 0; i < document.forms['theForm'].elements.length; i++)
+      {
+        ele = document.forms['theForm'].elements[i];
+        if (ele.tagName == 'INPUT' && ele.name == 'refund' && ele.checked)
+        {
+          selected = true;
+          break;
+        }
+      }
+      if (!selected)
+      {
+        alert(pls_select_refund);
+        return false;
+      }
+    }
+    return true;
+  }
+{/literal}
+</script>
+{include file="pagefooter.htm"}

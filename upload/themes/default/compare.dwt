@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='transport.js,common.js,utils.js'}
+<script language="javascript">
+function remove(id, url)
+{
+  if (document.getCookie("compareItems") != null)
+  {
+    var obj = document.getCookie("compareItems").parseJSON();
+    delete obj[id];
+    var date = new Date();
+    date.setTime(date.getTime() + 99999999);
+    document.setCookie("compareItems", obj.toJSONString());
+  }
+}
+
+var compare_no_goods = "{$lang.compare_no_goods}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="block box">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+<div class="blank"></div>
+<div class="block">
+  <h5><span>{$lang.goods_compare}</span></h5>
+  <div class="blank"></div>
+  <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+              <tr>
+                <th width="120" align="center" bgcolor="#ffffff">{$lang.goods_name}</th>
+                <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+                <td align="center" bgcolor="#ffffff" {if $smarty.foreach.goods_list.total gt 3}width="200"{else}{/if}> {$goods.goods_name}</td>
+                <!-- {/foreach} -->
+              </tr>
+              <tr>
+                <th align="left" bgcolor="#ffffff"></th>
+                <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+                <td  align="center" bgcolor="#ffffff" style="padding:5px;"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" class="ent_img" /></a></td>
+                <!-- {/foreach} -->
+              </tr>
+              <!-- {if $smarty.foreach.goods_list.total gt 2} -->
+              <tr>
+                <td bgcolor="#ffffff">&nbsp;</td>
+                <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+                <th bgcolor="#ffffff">
+                  <a href="compare.php?{$goods.ids}" onClick="return remove({$goods.goods_id});">{$lang.compare_remove}</a>                </th>
+                <!-- {/foreach} -->
+              </tr>
+              <!-- {/if} -->
+              <tr>
+                <th align="left" bgcolor="#ffffff">&nbsp;&nbsp;{$lang.brand}</th>
+                <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+                <td bgcolor="#ffffff">&nbsp;&nbsp;{$goods.brand_name}</td>
+                <!-- {/foreach} -->
+              </tr>
+              <tr>
+                <th align="left" bgcolor="#ffffff">&nbsp;&nbsp;{$lang.shop_price}</th>
+                <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+                <td bgcolor="#ffffff">&nbsp;&nbsp;{$goods.rank_price}</td>
+                <!-- {/foreach} -->
+              </tr>
+              <tr>
+                <th align="left" bgcolor="#ffffff">&nbsp;&nbsp;{$lang.goods_weight}</th>
+                <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+                <td bgcolor="#ffffff">&nbsp;&nbsp;{$goods.goods_weight}</td>
+                <!-- {/foreach} -->
+              </tr>
+              <!-- {foreach key=key from=$attribute item=val} -->
+              <tr>
+                <th align="left" bgcolor="#ffffff">&nbsp;&nbsp;{$val}</th>
+                <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+                <td bgcolor="#ffffff">&nbsp;&nbsp;
+                  <!-- {foreach from=$goods.properties item=property key=k} -->
+                  <!-- {if $k eq $key} -->
+                  {$property.value}
+                  <!-- {/if} -->
+                  <!-- {/foreach} -->                </td>
+                <!-- {/foreach} -->
+              </tr>
+              <!-- {/foreach} -->
+              <tr>
+                <td align="left" bgcolor="#ffffff">&nbsp;&nbsp;<strong>{$lang.goods_rank}</strong></td>
+                <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+                <td bgcolor="#ffffff">&nbsp;&nbsp;<span class="goods-price"><img src="images/stars{$goods.comment_rank}.gif" width="64" height="12" alt="comment rank {$goods.comment_rank}" /></span><br /></td>
+                <!-- {/foreach} -->
+              </tr>
+              <tr>
+                <td align="left" bgcolor="#ffffff">&nbsp;&nbsp;<strong>{$lang.brief}</strong></td>
+                <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+                <td bgcolor="#ffffff">&nbsp;&nbsp;<a href="{$goods.url}" target="_blank"> {$goods.goods_brief}</a></td>
+                <!-- {/foreach} -->
+              </tr>
+              <tr>
+                <td bgcolor="#ffffff">&nbsp;</td>
+                <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+                <td align='center' bgcolor="#ffffff"><a href="javascript:collect({$goods.goods_id});"><img src="images/bnt_colles.gif" alt="{$lang.collect}"  style="margin:2px auto;"/></a>
+                <a href="javascript:addToCart({$goods.goods_id})"><img src="images/bnt_cat.gif" alt="{$lang.add_to_cart}"  style="margin:2px auto;"/></a></td>
+                <!-- {/foreach} -->
+              </tr>
+  </table>
+</div>
+<div class="blank5"></div>
+<!--帮助-->
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+   </div>
+  </div>
+</div>
+<div class="blank"></div>
+<!--帮助-->
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div id="bottomNav" class="box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+<!--{/if}-->
+<!--友情链接 end-->
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

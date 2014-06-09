@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ECShop_mobile</title>
+</head>
+
+<body>
+<p align='left'>
+{$goods_info.goods_name}<br/>
+--------------<br/>
+{if $goods_info.brand_id}
+    商品品牌:<a href='brands.php?b_id={$goods_info.brand_id}'>{$brand_name}</a><br/>
+{/if}
+商品编号:{$goods_info.goods_sn}<br/>
+商品分类:
+{foreach from=$cat_array item=cat_data}
+    <a href='category.php?c_id={$cat_data.cat_id}'>{$cat_data.cat_name}</a>-&gt;
+{/foreach}
+{$goods_info.goods_name}<br/>
+{if $goods_info.goods_number neq ""}商品库存：
+{if $goods_info.goods_number eq 0}
+已售完
+{else}
+{$goods_info.goods_number}
+{/if}<br />
+{/if}
+市场价格:{$goods_info.market_price}<br/>
+商品价格:{if $promote_price_org}{$goods_info.promote_price}{else}{$goods_info.shop_price_formated}{/if}<br/>
+ <!-- {foreach from=$rank_prices item=rank_price key=key} 会员等级对应的价格-->
+       <strong>{$rank_price.rank_name}：</strong><font class="shop" id="ECS_RANKPRICE_{$key}">{$rank_price.price}</font><br />
+       <!--{/foreach}-->
+{if $goods_info.promote_price and $goods_info.gmt_end_time}促销价格:{$goods_info.promote_price}{/if}<br/>
+{foreach from=$specification item=spec key=spec_key}
+{$spec.name}:<br />
+  {if $spec.attr_type eq 1}
+    {foreach from=$spec.values item=value key=key}
+    <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if}/>
+    {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}]<br />
+    {/foreach}
+    <input type="hidden" name="spec_list" value="{$key}" />
+  {else}
+    {foreach from=$spec.values item=value key=key}
+    <input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}"/>
+    {$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}]<br />
+    {/foreach}
+    <input type="hidden" name="spec_list" value="{$key}" />
+  {/if}
+{/foreach}
+浏览次数:{$goods_info.click_count}<br/>
+商品说明:{$goods_info.goods_brief}<br/><br/>
+<a href='buy.php?id={$goods_id}'>购买此商品</a><br/>
+<a href='goods.php?act=view_img&amp;id={$goods_id}'>点击查看商品图片</a><br/>
+<a href='comment.php?g_id={$goods_id}'>商品评论({$comment.pager.record_count})</a><br/>
+
+--------------<br/>
+<a href="javascript:history.back(-1)">回上一页</a><br/>
+<a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</body>
+</html>

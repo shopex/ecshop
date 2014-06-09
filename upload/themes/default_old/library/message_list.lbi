@@ -1,0 +1,23 @@
+<div class="message-board-header">
+    <h3 class="message-board-title">{$lang.message_board}</h3>
+    <span><a href="#formMsg">{$lang.post_message}</a></span>
+</div>
+<div>
+    <ul id="message-board-list">
+    <!--{foreach name=message_lists from=$msg_lists key=key item=msg}-->
+      <li class="message-board-line1">
+         <strong>{$msg.user_name}</strong>
+         <i>{$msg.msg_time}</i>
+         <h4 class="msg-title">
+         {$msg.msg_title}
+         </h4>
+         <p class="msg-content">
+         {$msg.msg_content}
+         </p>
+         <p class="msg-reply">
+         {$msg.re_msg_content}
+         </p>
+       </li>
+     <!--{/foreach}-->
+     </ul>
+</div>

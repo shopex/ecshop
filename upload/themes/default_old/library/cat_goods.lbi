@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="title-div"><img src="../images/green_arrow.gif" width="37" height="37" alt="" border="0" style="vertical-align:middle" /><a href="{$goods_cat.url}">{$goods_cat.name|escape:html}</a></div>
+<div class="content-div">
+  <!--{foreach from=$cat_goods item=goods}-->
+  <table border="0" cellpadding="3" cellspacing="1" class="goods-table" style="float: left">
+    <tr>
+      <td align="center"><a href="{$goods.url}"><img src="{$goods.thumb}" border="0" alt="{$goods.name|escape:html}" class="thumb" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a><br />
+        <!-- {if $goods.promote_price neq ""} -->
+        {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span>
+        <!-- {else}-->
+        {$lang.shop_price}<span class="goods-price">{$goods.shop_price}</span>
+        <!--{/if}-->
+      </td>
+    </tr>
+  </table>
+  <!--{/foreach}-->
+  <br style="clear:both"/>
+</div>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+  <section id="list">
+    <title>红包类型列表</title>
+    <content>
+    <![CDATA[
+	<p>此页面列出您所有的红包类型信息</p>
+	<p>在此您可以进行如下操作:</p>
+	
+	<strong>快速编辑红包类型信息</strong>
+	<p>您可以快速编辑包括：<br><span class="link">类型名称</span> <span class="link">红包金额</span> <span class="link">订单下限</span> 等内容。<br>单击即可出现编辑文本框。输入您的新内容后回车，修改即可生效！</p>
+	<p class="tips"> 提示：如果红包类型的发放不是按订单金额，那么订单下限应设为0！</p>
+	
+	<strong>快速查看红包信息</strong>
+	<p>单击列表右边的<span class="link"> 查看 </span>链接,即可查看该红包类型所拥有的红包信息。</p>
+	
+	<strong>按发放类型发放红包</strong>
+	<p>您只要点击列表右边的<span class="link"> 发放红包 </span>链接，即可进入相应的操作页面。</p>
+	
+	<strong>添加红包类型</strong>
+	<p>您只要点击列表右边的<a href="bonus.php?act=add" target="main-frame"><span class="link"> 添加红包类型 </span></a>链接，即可进入到添加的操作页面。</p>
+	
+	<strong>编辑红包类型</strong>
+	<p>您只要单击列表右边的<span class="link"> 编辑 </span>链接，即可进行相应的编辑操作。</p>
+	
+	<strong>删除红包类型</strong>
+	<p>您只要点击列表右边的<span class="link"> 删除 </span>链接，按系统提示即可完成删除的操作。</p>
+	<p class="tips"> 提示：当您删除红包类型时，该类型下的红包也一并删除！</p>
+	
+	]]>
+    </content>
+  </section>
+  <section id="add">
+    <title>添加红包类型</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行红包类型的添加操作</p>
+	
+	<strong>类型名称</strong>
+	<p>在此您可以输入您要添加的新类型的名称。如：优惠礼金，小红包，店庆红包等等。类型名称建议在3～5个汉字之间为最佳！</p>
+	
+	<strong>红包金额</strong>
+	<p>在此输入此类型的金额。也就是用户在购物消费时，此类型的红包可以抵销的金额。</p>
+
+	<strong>如何发放此类型红包</strong>
+	<p>此项有三个选择项：<br><span class="tips">按用户发放：</span>此类型的红包只发放给指定的用户。 
+	<br><span class="tips">按商品发放：</span>此类型的红包只是在购买指定的商品时获得。<br><span class="tips">按订单金额发放：</span>此类型的红包只有在用户购物消费达到指定的订单金额时才能得到。</p>
+
+	<strong>发放起始日期</strong>
+	<p>指的是此类型的红包发放的起始日期。在发放结束日期之前可以发放此类型的红包。</p>
+	<strong>使用起始日期</strong>
+	<p>此处指的是此类型的红包在什么时候能够使用。在使用结束日期之前可以使用此类型的红包。</p>
+	<p></p>
+	<p></p>
+	]]>
+    </content>
+  </section>
+  <section id="edit">
+    <title>编辑红包类型信息</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行红包类型信息的编辑操作<br>(详细帮助信息请参见 <a href="bonus.php?act=add" target="main-frame"><span class="link"> 添加红包类型 </span></a> 部分)</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+]]>
+    </content>
+  </section>
+</help>

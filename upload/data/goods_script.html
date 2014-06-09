@@ -1,0 +1,20 @@
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+
+  {foreach from=$goods_list item=goods_item}
+  <tr>
+    {foreach from=$goods_item item=goods}
+    <td><table width="100%">
+      {if $need_image}
+      <tr>
+        <td align="center"><a href="{$goods_url}{$goods.goods_id}" target="_blank"><img src="{$url}{$goods.goods_thumb}" alt="{$goods.goods_name}" border="0" {if $thumb_width and $thumb_height}width="{$thumb_width}" height="{$thumb_height}"{/if}></a></td>
+      </tr>
+      {/if}
+      <tr>
+        <td align="center"><a href="{$goods_url}{$goods.goods_id}" target="_blank">{$goods.goods_name}</a><br />{$goods.goods_price}</td>
+      </tr>
+    </table></td>
+    {/foreach}
+  </tr>
+  {/foreach}
+
+</table>

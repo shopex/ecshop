@@ -1,0 +1,23 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $bought_goods} -->
+  <div class="title-div"><img src="../images/green_arrow.gif" alt="related products" width="37" height="37" /> {$lang.shopping_and_other}</div>
+  <div class="content-div">
+    <!--{foreach from=$bought_goods item=goods}-->
+    <table border="0" cellpadding="3" cellspacing="1" class="goods-table" style="float: left">
+      <tr>
+        <td align="center"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" border="0" alt="{$goods.goods_name}" /></a></td>
+      </tr>
+      <tr>
+        <td><a href="{$goods.url}" title="{$goods.goods_name}">{$goods.short_name}</a><br />
+        <!-- {if $goods.promote_price neq 0} -->
+        {$lang.promote_price} <span class="goods-price">{$goods.formated_promote_price}</span>
+        <!-- {else} -->
+        {$lang.shop_price} <span class="goods-price">{$goods.shop_price}</span>
+        <!-- {/if} -->
+        </td>
+      </tr>
+    </table>
+    <!--{/foreach}-->
+    <br style="clear: both" />
+  </div>
+<!-- {/if} -->

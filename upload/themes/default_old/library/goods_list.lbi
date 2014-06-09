@@ -1,0 +1,167 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="title-div"><img src="../images/goods_list.gif" alt="Goods List" width="158" height="39" align="left" />
+  <form method="GET" class="sort" name="listform">
+    <a href="javascript:;" onClick="javascript:display_mode('list')"><img src="images/display_mode_list<!-- {if $pager.display == 'list'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.list}"></a> <a href="javascript:;" onClick="javascript:display_mode('grid')"><img src="images/display_mode_grid<!-- {if $pager.display == 'grid'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.grid}"></a> <a href="javascript:;" onClick="javascript:display_mode('text')"><img src="images/display_mode_text<!-- {if $pager.display == 'text'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.text}"></a>&nbsp;&nbsp;
+    <select name="sort">
+      
+      {html_options options=$lang.sort selected=$pager.sort}
+    
+    </select>
+    <select name="order">
+      
+      {html_options options=$lang.order selected=$pager.order}
+    
+    </select>
+    <input type="image" name="imageField" src="../images/btn_go.gif" alt="go" />
+    <input type="hidden" name="category" value="{$category}" />
+    <input type="hidden" name="display" value="{$pager.display}" id="display" />
+    <input type="hidden" name="brand" value="{$brand_id}" />
+    <input type="hidden" name="price_min" value="{$price_min}" />
+    <input type="hidden" name="price_max" value="{$price_max}" />
+    <input type="hidden" name="filter_attr" value="{$filter_attr}" />
+    <input type="hidden" name="page" value="{$pager.page}" />
+  </form>
+</div>
+<div class="content-div">
+  <!-- {if $category > 0} -->
+  <form name="compareForm" action="compare.php" method="post" onSubmit="return compareGoods(this);">
+    <!-- {/if} -->
+    <!-- {if $pager.display == 'list'} -->
+    <!--{foreach from=$goods_list item=goods}-->
+    <table border="0" cellpadding="5" cellspacing="1" class="goods-list">
+      <tr>
+        <td width="35%" align="center">
+          <a href="{$goods.url}" style="position:relative;display:block;">
+            <img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" border="0"  />
+            <span style="position:absolute;right:10px;top:-3px;">
+              <!-- {if $goods.watermark_img eq watermark_promote_small} -->
+              <img src="images/watermark_promote_small.png" alt="" />
+              <!-- {else} -->
+              <!-- {if $goods.watermark_img eq watermark_new_small} -->
+              <img src="images/watermark_new_small.png" alt="" />
+              <!-- {else} -->
+              <!-- {if $goods.watermark_img eq watermark_hot_small} -->
+              <img src="images/watermark_hot_small.png" alt="" />
+              <!-- {else} -->
+              <!-- {if $goods.watermark_img eq watermark_best_small} -->
+              <img src="images/watermark_best_small.png" alt="" />
+              <!-- {/if} -->
+              <!-- {/if} -->
+              <!-- {/if} -->
+              <!-- {/if} -->
+            </span>
+          </a>
+        </td>
+        <td><a href="{$goods.url}"><strong>
+          <!-- {if $goods.goods_style_name} -->
+          {$goods.goods_style_name}
+          <!-- {else} -->
+          {$goods.goods_name}
+          <!-- {/if} -->
+          </strong></a> 
+          <!-- {if $goods.goods_brief} -->          
+          <br />
+          {$lang.goods_brief}{$goods.goods_brief}
+          <!-- {/if} -->
+          <br />
+          <!-- {if $show_marketprice} -->
+          {$lang.market_price}<span class="market-price">{$goods.market_price}</span>
+          <!-- {/if} -->
+          <!--{if $goods.promote_price neq "" } -->
+          {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span>
+          <!--{else}-->
+          {$lang.shop_price}<span class="goods-price">{$goods.shop_price}</span>
+          <!--{/if}-->
+          <div class="addto_cart"> <span style="float:right"> <a href="javascript:collect({$goods.goods_id});"><img src="../images/collect.gif" alt="{$lang.collect}" width="87" height="20" /></a> <a href="javascript:addToCart({$goods.goods_id})"><img src="../images/add_cart.gif" alt="{$lang.add_to_cart}" width="87" height="20" /></a></span> <img src="../images/arrow_compare.gif" alt="{$lang.compare}" /> <a href="javascript:;" id="compareLink" onClick="Compare.add({$goods.goods_id},'{$goods.goods_name|escape:"quotes"}','{$goods.type}')">{$lang.compare}</a> </div></td>
+      </tr>
+    </table>
+    <!--{/foreach}-->
+    <!-- {elseif $pager.display == 'grid'} -->
+    <table border="0" cellpadding="5" cellspacing="1" class="goods-list">
+      <tr>
+        <!--{foreach name=wrap from=$goods_list item=goods}-->
+        <td width="50%" align="center"><!-- {if $goods.goods_id} -->
+          <div style=" margin-left:30px; position:relative;float:left;"> <a href="{$goods.url}"> <img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" border="0"  /></a>
+            <div style="position:absolute;right:0px; bottom:1px;">
+              <!-- {if $goods.watermark_img eq watermark_promote_small} -->
+              <img src="images/watermark_promote_small.png" alt="" />
+              <!-- {else} -->
+              <!-- {if $goods.watermark_img eq watermark_new_small} -->
+              <img src="images/watermark_new_small.png" alt="" />
+              <!-- {else} -->
+              <!-- {if $goods.watermark_img eq watermark_hot_small} -->
+              <img src="images/watermark_hot_small.png" alt="" />
+              <!-- {else} -->
+              <img src="images/watermark_best_small.png" alt="" />
+              <!-- {/if} -->
+              <!-- {/if} -->
+              <!-- {/if} -->
+            </div>
+          </div>
+          <a href="{$goods.url}"><strong>{$goods.goods_name}</strong></a> 
+          <div style="text-align:left">
+          <!-- {if $show_marketprice} -->
+          <span class="market-price">{$goods.market_price}</span>
+          <!-- {/if} -->
+          <br />
+          <!--{if $goods.promote_price neq "" } -->
+          <span class="goods-price">{$goods.promote_price}</span>
+          <!--{else}-->
+          <span class="goods-price">{$goods.shop_price}</span>
+          <!--{/if}-->
+          </div>
+          <a href="javascript:;" onClick="Compare.add({$goods.goods_id},'{$goods.goods_name|escape:"quotes"}')">{$lang.compare}</a> <br />
+          <div class="addto_cart"> <a href="javascript:collect({$goods.goods_id});"><img src="../images/collect.gif" alt="{$lang.collect}" width="87" height="20" /></a> <a href="javascript:addToCart({$goods.goods_id})"><img src="../images/add_cart.gif" alt="{$lang.add_to_cart}" width="87" height="20" /></a> </div>
+          <!-- {/if} -->
+        </td>
+        <!-- {if ($smarty.foreach.wrap.iteration % 2 eq 0) and ($smarty.foreach.wrap.iteration ne $smarty.foreach.wrap.total) } -->
+      </tr>
+      <tr>
+        <!-- {/if} -->
+        <!--{/foreach}-->
+      </tr>
+    </table>
+    <!-- {elseif $pager.display == 'text'} -->
+    <!--{foreach from=$goods_list item=goods}-->
+    <table border="0" cellpadding="5" cellspacing="1" class="goods-list">
+      <tr>
+        <td><a href="{$goods.url}"><strong>
+          <!-- {if $goods.goods_style_name} -->
+          {$goods.goods_style_name}
+          <!-- {else} -->
+          {$goods.goods_name}
+          <!-- {/if} -->
+          </strong></a>
+          <!-- {if $goods.goods_brief} -->          
+          <br />
+          {$lang.goods_brief}{$goods.goods_brief}
+          <!-- {/if} -->
+          <br />
+          <!-- {if $show_marketprice} -->
+          {$lang.market_price}<span class="market-price">{$goods.market_price}</span>
+          <!-- {/if} -->
+          <!--{if $goods.promote_price neq "" } -->
+          {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span>
+          <!--{else}-->
+          {$lang.shop_price}<span class="goods-price">{$goods.shop_price}</span>
+          <!--{/if}-->
+          <div class="addto_cart" align="right"><a href="javascript:;" onClick="addToCookie({$goods.goods_id},'{$goods.goods_name}')">{$lang.compare}</a>  <a href="javascript:collect({$goods.goods_id});"><img src="../images/collect.gif" alt="{$lang.collect}" width="87" height="20" /></a> <a href="javascript:addToCart({$goods.goods_id})"><img src="../images/add_cart.gif" alt="{$lang.add_to_cart}" width="87" height="20" /></a> </div></td>
+      </tr>
+    </table>
+    <!--{/foreach}-->
+    <!-- {/if} -->
+    <!-- {if $category > 0} -->
+  </form>
+  <!-- {/if} -->
+</div>
+<script type="text/javascript">
+window.onload = function()
+{
+  Compare.init();
+  fixpng();
+}
+{foreach from=$lang.compare_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var compare_no_goods = "{$lang.compare_no_goods}";
+</script>

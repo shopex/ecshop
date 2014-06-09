@@ -1,0 +1,15 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="cell-title">
+  <div class="title-div"><img src="../images/gallery.gif" alt="" width="158" height="39" /></div>
+  <div class="content-div">
+    <!-- {foreach from=$pictures item=picture}-->
+    <table width="140" bgcolor="#DADADA" cellspacing="1" style="float:left; text-align: center;">
+      <tr>
+        <td bgcolor="#FFFFFF"><A href="gallery.php?id={$id}&amp;img={$picture.img_id}" target="_blank"><img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" alt="{$goods.goods_name}" border="0" class="thumb" /></A><br />
+          {$picture.img_desc|escape:html}</td>
+      </tr>
+    </table>
+    <!--{/foreach}-->
+    <br style="clear:both;"/>
+  </div>
+</div>

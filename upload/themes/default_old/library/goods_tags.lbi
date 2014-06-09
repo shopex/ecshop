@@ -1,0 +1,61 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="title-div"><img src="../images/tags.gif" alt="" width="158" height="39" /></div>
+<form name="tagForm" onsubmit="return submitTag(this)" style="padding: 5px">
+  <div id="ECS_TAGS">
+    <!-- 标记{foreach from=$tags item=tag}-->
+    <a href="search.php?keywords={$tag.tag_words|escape:url}">{$tag.tag_words|escape:html}[{$tag.tag_count}]</a>&nbsp;&nbsp;
+    <!-- 结束标记{/foreach} -->
+  </div>
+  <div>
+    <input type="text" name="tag" id="tag" />
+    <input type="submit" value="{$lang.button_submit_tag}" />
+    <input type="hidden" name="goods_id" value="{$goods.goods_id}" />
+  </div>
+</form>
+<script type="text/javascript">
+{literal}
+/**
+ * 用户添加标记的处理函数
+ */
+function submitTag(frm)
+{
+  try
+  {
+    var tag = frm.elements['tag'].value;
+    var idx = frm.elements['goods_id'].value;
+
+    if (tag.length > 0 && parseInt(idx) > 0)
+    {
+      Ajax.call('user.php?act=add_tag', "id=" + idx + "&tag=" + encodeURIComponent(tag), submitTagResponse, "POST", "JSON");
+    }
+  }
+  catch (e) { alert(e); }
+
+  return false;
+}
+
+function submitTagResponse(result)
+{
+  var div = document.getElementById('ECS_TAGS');
+
+  if (result.error > 0)
+  {
+    alert(result.message);
+  }
+  else
+  {
+    try
+    {
+      div.innerHTML = '';
+      var tags = result.content;
+
+      for (i = 0; i < tags.length; i++)
+      {
+        div.innerHTML += '<a href="search.php?keywords='+tags[i].word+'">' +tags[i].word + '[' + tags[i].count + ']</a>&nbsp;&nbsp; ';
+      }
+    }
+    catch (e) { alert(e); }
+  }
+}
+{/literal}
+</script>

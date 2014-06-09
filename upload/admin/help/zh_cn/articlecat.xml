@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list">
+    <title>文章分类管理</title>
+    <content>
+    <![CDATA[
+	<p><strong>文章分类管理</strong></p>
+	<p>该页面列出所有文章分类。分类名称和排序可以直接编辑。排序值小的排前面。<br />添加新分类请点击右上角<a href="articlecat.php?act=add" target="main-frame"><span class="link">添加新文章分类</span>链接</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="add">
+    <title>添加新文章分类</title>
+    <content>
+    <![CDATA[
+	<p><strong>添加新文章分类</strong></p>
+	<p>选项前右“？”图标的地方可点击查看帮助
+	<br />点击右上角<a href="articlecat.php?act=list" target="main-frame"><span class="link">文章分类管理</span>即可返回列表页面。</p>
+	]]>
+    </content>
+  </section>
+
+
+
+</help>

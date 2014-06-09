@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title> 登录入口 </title>
+<meta name="generator" content="editplus" />
+<meta name="author" content="" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+
+  处理登录入口地址："user.php?act=act_login"<br /><br /><br />
+  测试登录
+  <form method="post" action="user.php?act=act_login">
+    <table>
+        <tr>
+          <td>用户名</td>
+          <td><input type="text" name="username" /></td>
+        </tr>
+        <tr>
+          <td>密码</td>
+          <td><input type="password" name="password" /></td>
+        </tr>
+        <tr>
+          <!-- back_act为登录后返回地址,为空或不存在时登录后返回用户中心-->
+          <td colspan="2"><input type="hidden" name="back_act" value="index.php" /><input type="submit" value="登录" /></td>
+        </tr>
+    </table>
+  </form>
+
+</body>
+</html>

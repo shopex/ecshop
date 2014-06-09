@@ -1,0 +1,131 @@
+<!-- $Id: report_pv.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js"}
+<div class="tab-div">
+  <div id="tabbar-div">
+    <p>
+      <span class="tab-front" id="visit-tab">{$lang.integration_visit}</span><span
+      class="tab-back" id="seo-tab">{$lang.seo_analyse}</span><span 
+      class="tab-back" id="area-tab">{$lang.area_analyse}</span><span 
+      class="tab-back" id="site-tab">{$lang.visit_site}</span><span 
+      class="tab-back" id="key-tab">{$lang.key_analyse}</span>
+    </p>
+  </div>
+  <div class="form-div">
+  <form action="" method="post" name="theForm" enctype="multipart/form-data">
+    {$lang.start_date}
+    {html_select_date prefix="start_date" field_order="YMD" month_format="%m"  day_value_format="%02d" start_year="-1" end_year="+10" display_days=yes}
+    {$lang.end_date}
+    {html_select_date prefix="end_date" field_order="YMD" month_format="%m"  day_value_format="%02d" start_year="-1" end_year="+10" display_days=yes time=$ads.start_date}
+  <input type="submit" value="{$lang.query}" class="button" />
+  <input type="reset"  value="{$lang.button_reset}" class="button" />
+  </form>
+  </div>
+<!-- start list -->
+  <div id="tabbody-div">
+  <table width="80%" id="visit-table">
+    <tr>
+      <td align="center">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+        width="565" height="420" id="FCColumn2" align="middle">
+        <param NAME="movie" VALUE="../images/charts/line.swf?IsLocal=1&dataUrl={$CFG.BaseURL}data/stats/pv_stats.xml">
+        <param NAME="quality" VALUE="high">
+        <param NAME="bgcolor" VALUE="#FFFFFF">
+        <embed src="../../images/charts/line.swf?IsLocal=1&dataUrl={$CFG.BaseURL}data/stats/pv_stats.xml" quality=high bgcolor=#FFFFFF  width="565" height="420" name="FCColumn2" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+        </object>
+     </td>
+    </tr>
+  </table>
+  <table width="80%" id="seo-table">
+    <tr>
+      <td align="center">seo</td>
+    </tr>
+  </table>
+  <table width="80%" id="area-table">
+    <tr>
+      <td align="center">area</td>
+    </tr>
+  </table>
+  <table width="80%" id="site-table">
+    <tr>
+      <td align="center">site</td>
+    </tr>
+  </table>
+  <table width="80%" id="key-table">
+    <tr>
+      <td align="center">key</td>
+    </tr>
+  </table>
+  </div>
+ </div>
+<script language="JavaScript">
+<!--
+{literal}
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+
+document.getElementById("tabbar-div").onmouseover = function(e)
+{
+    var obj = Utils.srcElement(e);
+
+    if (obj.className == "tab-back")
+    {
+        obj.className = "tab-hover";
+    }
+}
+
+document.getElementById("tabbar-div").onmouseout = function(e)
+{
+    var obj = Utils.srcElement(e);
+
+    if (obj.className == "tab-hover")
+    {
+        obj.className = "tab-back";
+    }
+}
+
+document.getElementById("tabbar-div").onclick = function(e)
+{
+    var obj = Utils.srcElement(e);
+
+    if (obj.className == "tab-front")
+    {
+        return;
+    }
+    else
+    {
+        objTable = obj.id.substring(0, obj.id.lastIndexOf("-")) + "-table";
+
+        var tables = document.getElementsByTagName("table");
+        var spans  = document.getElementsByTagName("span");
+
+        for (i = 0; i < tables.length; i++)
+        {
+            if (tables[i].id == objTable)
+            {
+                tables[i].style.display = (Browser.isIE) ? "block" : "table";
+            }
+            else
+            {
+                tables[i].style.display = "none";
+            }
+        }
+        for (i = 0; spans.length; i++)
+        {
+            if (spans[i].className == "tab-front")
+            {
+                spans[i].className = "tab-back";
+                obj.className = "tab-front";
+                break;
+            }
+        }
+    }
+}
+-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

@@ -1,0 +1,48 @@
+<!-- $Id: adsense.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<!-- start ads_stats list -->
+<div class="list-div" id="listDiv">
+<table width="100%" border="0" cellpadding="3" cellspacing="1">
+  <tr>
+    <th>{$lang.adsense_name}</th>
+    <th>{$lang.cleck_referer}</th>
+    <th>{$lang.click_count}</th>
+    <th>{$lang.confirm_order}</th>
+    <th>{$lang.gen_order_amount}</th>
+  </tr>
+  {foreach from=$ads_stats item=list}
+  <tr>
+    <td>{$list.ad_name}</td>
+    <td>{$list.referer}</td>
+    <td align="right">{$list.clicks}</td>
+    <td align="right">{$list.order_confirm}</td>
+    <td align="right">{$list.order_num}</td>
+  </tr>
+  {/foreach}
+  {foreach from=$goods_stats item=info}
+  <tr>
+    <td>{$info.ad_name}</td>
+    <td>{$info.referer}</td>
+    <td align="right">{$info.clicks}</td>
+    <td align="right">{$info.order_confirm}</td>
+    <td align="right">{$info.order_num}</td>
+  </tr>
+  {foreachelse}
+    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+  {/foreach}
+</table>
+</div>
+<!-- end ads_stats list -->
+{insert_scripts files="../js/utils.js,validator.js"}
+{literal}
+<script type="text/javascript" language="JavaScript">
+<!--
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

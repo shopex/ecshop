@@ -1,0 +1,30 @@
+<!DOCTYPE wml PUBLIC '-//WAPFORUM//DTD WML 1.1//EN' 'http://www.wapforum.org/DTD/wml_1.1.xml'>
+<wml>
+<head><meta http-equiv='Cache-Control' content='max-age=0'/></head>
+<card id='ecshop' title='ECShop_WAP'>
+<p align='left'>
+{$goods_info.goods_name}<br/>
+--------------<br/>
+{if $goods_info.brand_id}
+    商品品牌:<a href='brands.php?b_id={$goods_info.brand_id}'>{$brand_name}</a><br/>
+{/if}
+商品编号:{$goods_info.goods_sn}<br/>
+商品分类:
+{foreach from=$cat_array item=cat_data}
+    <a href='category.php?c_id={$cat_data.cat_id}'>{$cat_data.cat_name}</a>-&gt;
+{/foreach}
+{$goods_info.goods_name}<br/>
+市场价格:{$goods_info.market_price}<br/>
+商品价格:{if $promote_price_org}{$goods_info.promote_price}{else}{$goods_info.shop_price_formated}{/if}<br/>
+浏览次数:{$goods_info.click_count}<br/>
+商品说明:{$goods_info.goods_brief}<br/>
+<a href='goods.php?act=view_img&amp;id={$goods_id}'>点击查看商品图片</a><br/>
+<a href='comment.php?g_id={$goods_id}'>商品评论({$comment.pager.record_count})</a><br/>
+<a href='buy.php'>购买此商品</a><br/>
+--------------<br/>
+<anchor title='back'>回上一页<prev/></anchor><br/>
+<a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</card>
+</wml>

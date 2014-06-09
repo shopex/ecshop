@@ -1,0 +1,15 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $price_grade} -->
+<div class="title-div"><img src="../images/price_grade.gif" alt="promotion products" width="158" height="39" /></div>
+<div class="content-div">
+  <ul id="price-grade">
+    <!-- {foreach from=$price_grade item=grade} -->
+    <!-- {if $grade.selected} -->
+    <li id="price-grade-current">{$grade.start} - {$grade.end} {if $grade.goods_num}({$grade.goods_num}){/if}</li>
+    <!-- {else} -->
+    <li><a href="{$grade.url}">{$grade.start} - {$grade.end}</a> {if $grade.goods_num}({$grade.goods_num}){/if}</li>
+    <!-- {/if} -->
+    <!-- {/foreach} -->
+  </ul>
+</div>
+<!-- {/if} -->

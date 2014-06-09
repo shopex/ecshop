@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list_all">
+    <title>留言管理</title>
+    <content>
+    <![CDATA[
+	<p><strong>留言管理</strong></p>
+	<p>本页面显示所有所有用户发表的留言。留言可以按用户名，类型，留言时间，是否已经回复进行排序。也可通过留言类型或留言标题进行检索。</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="view">
+    <title>留言回复</title>
+    <content>
+    <![CDATA[
+	<p><strong>留言回复</strong></p>
+	<p>对用户留言进行处理和回复。每条留言只能回复一次。重复回复将更新上一次回复。</p>
+	]]>
+    </content>
+  </section>
+
+
+</help>

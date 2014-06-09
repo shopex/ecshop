@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="gbk"?>
+<help>
+  <section id="add">
+    <title>商品批量上传</title>
+    <content>
+    <![CDATA[
+	<p>本页面商品批量上传的操作，使您能够批量的添加大量的商品信息。</p>
+	]]>
+    </content>
+  </section>
+</help>

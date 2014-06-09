@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta name="Description" content="{$description}" />
+{if $auto_redirect}
+<meta http-equiv="refresh" content="3;URL={$message.href}" />
+{/if}
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="block box">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+<div class="blank"></div>
+<div class="block clearfix">
+  <!--left start-->
+  <div class="AreaL">
+    <!-- TemplateBeginEditable name="左边区域" -->
+    <!-- #BeginLibraryItem "/library/cart.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_related.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_fittings.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_article.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/goods_attrlinked.lbi" --><!-- #EndLibraryItem -->
+    <!-- TemplateEndEditable -->
+    <!-- TemplateBeginEditable name="左边广告区域（宽200px）" -->
+    <!-- TemplateEndEditable -->
+    <!--AD end-->
+    <!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+  </div>
+  <!--left end-->
+  <!--right start-->
+  <div class="AreaR">
+  <!-- #BeginLibraryItem "/library/message_list.lbi" --><!-- #EndLibraryItem -->
+  <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+  <div class="blank5"></div>
+    <div class="box">
+     <div class="box_1">
+      <h3><span>{$lang.post_message}</span></h3>
+      <div class="boxCenterList">
+          <form action="message.php" method="post" name="formMsg" onSubmit="return submitMsgBoard(this)">
+            <table width="100%" border="0" cellpadding="3">
+              <tr>
+                <td align="right">{$lang.username}</td>
+                <td>
+                <!--{if $smarty.session.user_name}-->
+                <font class="f4_b">{$username}</font><label for="anonymous" style="margin-left:8px;"><input type="checkbox" name="anonymous" value="1" id="anonymous" />{$lang.message_anonymous}</label>
+                <!--{else}-->
+               {$lang.anonymous}
+                <!--{/if}-->
+                </td>
+              </tr>
+              <tr>
+                <td align="right">{$lang.email}</td>
+                <td><input name="user_email" type="text" class="inputBg" size="20" value="{$smarty.session.email|escape}" /></td>
+              </tr>
+              <tr>
+                <td align="right">{$lang.message_board_type}</td>
+                <td><input name="msg_type" type="radio" value="0" checked="checked" />
+                  {$lang.message_type[0]}
+                  <input type="radio" name="msg_type" value="1" />
+                  {$lang.message_type[1]}
+                  <input type="radio" name="msg_type" value="2" />
+                  {$lang.message_type[2]}
+                  <input type="radio" name="msg_type" value="3" />
+                  {$lang.message_type[3]}
+                  <input type="radio" name="msg_type" value="4" />
+                  {$lang.message_type[4]} </td>
+              </tr>
+              <tr>
+                <td align="right">{$lang.message_title}</td>
+                <td><input name="msg_title" type="text" class="inputBg" size="30" /></td>
+              </tr>
+            <!-- 判断是否启用验证码{if $enabled_mes_captcha} -->
+              <tr>
+                <td align="right">{$lang.comment_captcha}</td>
+                <td><input type="text" size="8" name="captcha"  class="inputBg" />
+                <img src="captcha.php?{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?'+Math.random()" /> </td>
+              </tr>
+            <!--{/if}-->
+              <tr>
+                <td align="right" valign="top">{$lang.message_content}</td>
+                <td><textarea name="msg_content" cols="50" rows="4" wrap="virtual" style="border:1px solid #ccc;"></textarea></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td><input type="hidden" name="act" value="act_add_message" />
+                  <input type="submit" value="{$lang.post_message}" class="bnt_blue_1" />
+                </td>
+              </tr>
+            </table>
+          </form>
+        <script type="text/javascript">
+        {foreach from=$lang.message_board_js item=item key=key}
+        var {$key} = "{$item}";
+        {/foreach}
+        {literal}
+        /**
+         * 提交留言信息
+        */
+        function submitMsgBoard(frm)
+        {
+            var msg = new Object;
+
+             msg.user_email  = frm.elements['user_email'].value;
+             msg.msg_title   = frm.elements['msg_title'].value;
+             msg.msg_content = frm.elements['msg_content'].value;
+             msg.captcha     = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+
+            var msg_err = '';
+
+            if (msg.user_email.length > 0)
+            {
+               if (!(Utils.isEmail(msg.user_email)))
+               {
+                  msg_err += msg_error_email + '\n';
+                }
+             }
+             else
+             {
+                  msg_err += msg_empty_email + '\n';
+             }
+            if (msg.msg_title.length == 0)
+            {
+                msg_err += msg_title_empty + '\n';
+            }
+            if (frm.elements['captcha'] && msg.captcha.length==0)
+            {
+                msg_err += msg_captcha_empty + '\n'
+            }
+            if (msg.msg_content.length == 0)
+            {
+                msg_err += msg_content_empty + '\n'
+            }
+            if (msg.msg_title.length > 200)
+            {
+                msg_err += msg_title_limit + '\n';
+            }
+
+            if (msg_err.length > 0)
+            {
+                alert(msg_err);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        {/literal}
+        </script>
+      </div>
+     </div>
+    </div>
+  </div>
+  <!--right end-->
+</div>
+<div class="blank5"></div>
+<!--帮助-->
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+   </div>
+  </div>
+</div>
+<div class="blank"></div>
+<!--帮助-->
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div id="bottomNav" class="box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+<!--{/if}-->
+<!--友情链接 end-->
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

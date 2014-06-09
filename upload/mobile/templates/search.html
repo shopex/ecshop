@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ECShop_mobile</title>
+</head>
+<body>
+
+<form name="searchForm" method="get" action="search.php">
+ <input name="keywords" type="text" />
+ <input type="submit" value="商品搜索"/>
+</form>
+{if $searchkeywords}
+ 热门搜索 ：
+ {foreach from=$searchkeywords item=val}
+ <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+ {/foreach}
+{/if}
+<br/>--------------<br/>
+当前搜索关键词：{$keywords}<br/><br/>
+{if $goods_data}
+<form action="search.php" method="post" name="listform">
+    <select name="sort">
+    {html_options options=$lang.sort selected=$pager.search.sort}
+    </select>
+    <select name="order">
+    {html_options options=$lang.order selected=$pager.search.order}
+    </select>
+    <input type="submit" value="进行排序" />
+    <input type="hidden" name="page" value="{$pager.page}" />
+    {foreach from=$pager.search key=key item=item}
+    {if $key neq "sort" and $key neq "order"}
+      {if $key eq 'keywords'}
+        <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+      {else}
+        <input type="hidden" name="{$key}" value="{$item}" />
+      {/if}
+    {/if}
+    {/foreach}
+  </form>
+{/if}
+{foreach from=$goods_data item=goods name=goods_list}
+ {$smarty.foreach.goods_list.iteration}.<a href='goods.php?id={$goods.goods_id}'>{$goods.goods_name}</a>[{$goods.shop_price}]<br/>
+{foreachelse}
+    暂无此类商品<br/>
+{/foreach}<br/><br/>
+{if $pagebar}
+{$pagebar}<br/>
+{/if}
+<br/>--------------<br/>
+<a href="javascript:history.back(-1)">回上一页</a><br/>
+<br/><a href='index.php'>返回首页</a>
+{$footer}
+</body>
+</html>

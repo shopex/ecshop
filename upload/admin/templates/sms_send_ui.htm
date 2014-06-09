@@ -1,0 +1,56 @@
+<!-- $Id: sms_send_ui.htm 16697 2009-09-24 03:57:47Z liuhui $ -->
+{include file="pageheader.htm"}
+
+<div class="main-div" id="sms-send">
+<form method="POST" action="sms.php?act=send_sms" name="sms-send-form" onsubmit="return validate();">
+<table >
+  <tr>
+    <td class="label">{$lang.phone}:</td>
+    <td><input name="send_num" type="text" size="35" />
+        {$lang.phone_notice}
+    </td>
+  </tr>
+    <tr>
+    <td class="label">{$lang.user_rand}:</td>
+    <td><select name="send_rank">
+        <option value='0'>{$lang.please_select}</option>
+          {html_options options=$send_rank}
+        </select></td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.msg}:</td>
+    <td><textarea name="msg" rows="6" cols="32"></textarea>{$lang.require_field} {$lang.msg_notice}</td>
+  </tr>
+  
+  <tr>
+    <td colspan="2" align="center">
+      <input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+
+<script type="text/javascript" language="JavaScript">
+<!--
+{literal}
+function  validate() {
+  var f = document['sms-send-form'];
+  var phone = f.elements['send_num'].value;
+  var msg = f.elements['send_rank'].value;
+
+  if(phone==''&&msg==0)
+	{
+		alert(send_empty_error);
+		return false;
+	}
+	else
+	{
+	  return true;
+	}
+}
+{/literal}
+//-->
+</script>
+{include file="pagefooter.htm"}

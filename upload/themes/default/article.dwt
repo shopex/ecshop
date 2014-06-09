@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="block box">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+<div class="blank"></div>
+<div class="block clearfix">
+  <!--left start-->
+  <div class="AreaL">
+<!-- #BeginLibraryItem "/library/cart.lbi" -->
+
+{insert_scripts files='transport.js'}
+<div class="cart" id="ECS_CARTINFO">
+ {insert name='cart_info'}
+</div>
+<div class="blank5"></div>
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/category_tree.lbi" -->
+
+<div class="box">
+ <div class="box_1">
+  <div id="category_tree">
+    <!--{foreach from=$categories item=cat}-->
+     <dl>
+     <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+     <!--{foreach from=$cat.children item=child}-->
+     <dd><a href="{$child.url}">{$child.name|escape:html}</a></dd>
+     <!--{/foreach}-->
+     </dl>
+    <!--{/foreach}-->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+
+ <!-- #EndLibraryItem -->
+ <!-- #BeginLibraryItem "/library/article_category_tree.lbi" --><!-- #EndLibraryItem -->
+ <!-- #BeginLibraryItem "/library/filter_attr.lbi" --><!-- #EndLibraryItem -->
+ <!-- #BeginLibraryItem "/library/price_grade.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateBeginEditable name="左边区域" -->
+<!-- #BeginLibraryItem "/library/goods_related.lbi" -->
+
+<!-- {if $related_goods} -->
+<div class="box">
+     <div class="box_1">
+      <h3><span>{$lang.releate_goods}</span></h3>
+      <div class="boxCenterList clearfix">
+      <!--{foreach from=$related_goods item=releated_goods_data}-->
+        <ul class="clearfix">
+          <li class="goodsimg"><a href="{$releated_goods_data.url}"><img src="{$releated_goods_data.goods_thumb}" alt="{$releated_goods_data.goods_name}" class="B_blue" /></a></li>
+          <li>
+        <a href="{$releated_goods_data.url}" title="{$releated_goods_data.goods_name}">{$releated_goods_data.short_name}</a><br />
+        <!-- {if $releated_goods_data.promote_price neq 0} -->
+        {$lang.promote_price}<font class="f1">{$releated_goods_data.formated_promote_price}</font>
+        <!-- {else} -->
+        {$lang.shop_price}<font class="f1">{$releated_goods_data.shop_price}</font>
+        <!-- {/if} -->
+          </li>
+        </ul>
+        <!--{/foreach}-->
+      </div>
+     </div>
+    </div>
+<div class="blank5"></div>
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="左边广告区域（宽200px）" -->
+<!-- TemplateEndEditable -->
+    <!--AD end-->
+    <!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+  </div>
+  <!--left end-->
+  <!--right start-->
+  <div class="AreaR">
+    <div class="box">
+     <div class="box_1">
+      <div style="border:4px solid #fcf8f7; background-color:#fff; padding:20px 15px;">
+         <div class="tc" style="padding:8px;">
+         <font class="f5 f6">{$article.title|escape:html}</font><br /><font class="f3">{$article.author|escape:html} / {$article.add_time}</font>
+         </div>
+         <!-- {if $article.content } -->
+          {$article.content}
+         <!-- {/if} -->
+         {if $article.open_type eq 2 or $article.open_type eq 1}<br />
+         <div><a href="{$article.file_url}" target="_blank">{$lang.relative_file}</a></div>
+          {/if}
+         <div style="padding:8px; margin-top:15px; text-align:left; border-top:1px solid #ccc;">
+         <!-- 上一篇文章 -->
+          {if $next_article}
+            {$lang.next_article}:<a href="{$next_article.url}" class="f6">{$next_article.title}</a><br />
+          {/if}
+          <!-- 下一篇文章 -->
+          {if $prev_article}
+            {$lang.prev_article}:<a href="{$prev_article.url}" class="f6">{$prev_article.title}</a>
+          {/if}
+         </div>
+      </div>
+    </div>
+  </div>
+  <div class="blank"></div>
+  <!-- #BeginLibraryItem "/library/comments.lbi" -->
+{insert_scripts files='transport.js,utils.js'}
+<div id="ECS_COMMENT"> {* ECSHOP 提醒您：动态载入comments_list.lbi，显示评论列表和评论表单 *}{insert name='comments' type=$type id=$id}</div>
+<!-- #EndLibraryItem -->
+
+  </div>
+  <!--right end-->
+</div>
+<div class="blank5"></div>
+<!--帮助-->
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+   </div>
+  </div>
+</div>
+<div class="blank"></div>
+<!--帮助-->
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div id="bottomNav" class="box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+<!--{/if}-->
+<!--友情链接 end-->
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

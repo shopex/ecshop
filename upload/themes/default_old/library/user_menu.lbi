@@ -1,0 +1,24 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="title-div"><img src="../images/member.gif" width="158" height="39" /></div>
+<div class="menu-div">
+  <ul>
+    <li><a href="user.php">{$lang.label_welcome}</a></li>
+    <li><a href="user.php?act=profile">{$lang.label_profile}</a></li>
+    <li><a href="user.php?act=order_list">{$lang.label_order}</a></li>
+    <li><a href="user.php?act=address_list">{$lang.label_address}</a></li>
+    <li><a href="user.php?act=collection_list">{$lang.label_collection}</a></li>
+    <li><a href="user.php?act=message_list">{$lang.label_message}</a></li>
+    <li><a href="user.php?act=tag_list">{$lang.label_tag}</a></li>
+    <li><a href="user.php?act=booking_list">{$lang.label_booking}</a></li>
+    <li><a href="user.php?act=bonus">{$lang.label_bonus}</a></li>
+    <!-- {if $affiliate.on eq 1} --><li><a href="user.php?act=affiliate">{$lang.label_affiliate}</a></li><!-- {/if} -->
+    <li><a href="user.php?act=comment_list">{$lang.label_comment}</a></li>
+    <!--<li><a href="user.php?act=group_buy">{$lang.label_group_buy}</a></li>-->
+    <li><a href="user.php?act=track_packages">{$lang.label_track_packages}</a></li>
+    <li><a href="user.php?act=account_log">{$lang.label_user_surplus}</a></li>
+    <!--{if $show_transform_points}-->
+    <li><a href="user.php?act=transform_points">{$lang.label_transform_points}</a></li>
+    <!--{/if}-->
+    <li><a href="user.php?act=logout">{$lang.label_logout}</a></li>
+  </ul>
+</div>

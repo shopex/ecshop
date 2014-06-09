@@ -1,0 +1,17 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{if $tag_linked_data}
+  <div id="tag_box">
+    <!--{foreach from=$tag_linked_data item=tag_data}-->
+      {if $tag_data.data}
+        <h3>{$tag_data.name}</h3>
+        {if $tag_data.type}
+          <ul>
+            <!--{foreach from=$tag_data.data item=show_data}-->
+            <li>{$show_data}</li>
+            <!--{/foreach}-->
+          </ul>
+        {/if}
+      {/if}
+    <!--{/foreach}-->
+  </div>
+{/if}

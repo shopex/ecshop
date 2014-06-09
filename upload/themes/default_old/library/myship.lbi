@@ -1,0 +1,57 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{insert_scripts files='utils.js,transport.js'}
+<table width="750" border="0" align="center" cellpadding="4" cellspacing="1" id="myship-list">
+  <tr>
+    <td>
+      {$lang.country_province}:
+      <select name="country" id="selCountries_{$sn}" onchange="region.changed(this, 1, 'selProvinces_{$sn}')">
+        <option value="0">{$lang.please_select}</option>
+        <!-- {foreach from=$country_list item=country} -->
+        <option value="{$country.region_id}" {if $choose.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="province" id="selProvinces_{$sn}" onchange="region.changed(this, 2, 'selCities_{$sn}')">
+        <option value="0">{$lang.please_select}</option>
+        <!-- {foreach from=$province_list.$sn item=province} -->
+        <option value="{$province.region_id}" {if $choose.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="city" id="selCities_{$sn}" onchange="region.changed(this, 3, 'selDistricts_{$sn}')">
+        <option value="0">{$lang.please_select}</option>
+        <!-- {foreach from=$city_list.$sn item=city} -->
+        <option value="{$city.region_id}" {if $choose.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+      <select name="district" id="selDistricts_{$sn}" {if !$district_list.$sn}style="display:none"{/if}>
+        <option value="0">{$lang.please_select}</option>
+        <!-- {foreach from=$district_list.$sn item=district} -->
+        <option value="{$district.region_id}" {if $choose.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+        <!-- {/foreach} -->
+      </select> <input type="submit" name="Submit" value="{$lang.search_ship}" />
+      <input type="hidden" name="act" value="viewship" />
+    </td>
+  </tr>
+</table>
+
+<table width="752" border="0" align="center" cellpadding="4" cellspacing="1" id="myship">
+  <tr class="myship-title">
+    <th width="20%">{$lang.name}</th>
+    <th>{$lang.describe}</th>
+    <th width="40%">{$lang.fee}</th>
+    <th width="15%">{$lang.insure_fee}</th>
+  </tr>
+  <!-- {foreach from=$shipping_list item=shipping} 循环配送方式 -->
+  <tr>
+    <td valign="top" class="colum1"><strong>{$shipping.shipping_name}</strong></td>
+    <td valign="top" class="colum2">{$shipping.shipping_desc}</td>
+    <td valign="top" class="colum1">{$shipping.fee}</td>
+    <td valign="top" align="center" class="colum2">
+      <!-- {if $shipping.insure neq 0} -->
+      {$shipping.insure_formated}
+      <!-- {else} -->
+      {$lang.not_support_insure}
+      <!-- {/if} -->
+    </td>
+  </tr>
+  <!-- {/foreach} 循环配送方式 -->
+</table>

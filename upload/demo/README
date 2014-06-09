@@ -1,0 +1,63 @@
+README                  		升级程序目录结构说明文件
+index.php               		升级程序之控制器
+languages/              		语言包
+templates/              		模板	
+packages/				升级包存放目录
+packages/v2.1.0/                 	升级包。从v2.0.5升级到v2.1.0
+packages/v2.1.0/changelog        	这里存放文件和数据结构的修改历史
+packages/v2.1.0/structure.sql    	数据结构升级文件
+packages/v2.1.0/data_zh_cn.sql   	数据升级文件之简体中文版
+packages/v2.1.0/data_zh_tw.sql   	数据升级文件之繁体中文版
+.
+.
+.
+
+
+备注：
+一、每个升级包只负责较之低一个版本号的升级任务。
+
+
+二、由于要进行前缀替换以及表名获取，为了精确匹配，
+在制作数据库安装或升级文件时，建议用以下SQL语句：
+CREATE TABLE
+DROP TABLE
+ALTER TABLE
+UPDATE
+REPLACE INTO
+INSERT INTO
+
+
+
+三、每个版本类，必须提供的接口有：
+
+方法：
+(1) update_database_optionally()
+在此函数中，用户可随心所欲地对数据库进行操作，提高了程序的灵活性和适应性。
+这主要是考虑到，有些操作在SQL文件中直接用SQL语句不方便进行的缘故。
+
+(2) update_files()
+在此函数中，用户可对系统的文件进行操作。
+
+属性：
+(1) $sql_files 
+该属性用于存放某个升级包中SQL文件存放的位置（相对于升级包所在的路径）。
+一般来说形式如下：
+var $sql_files = array(
+		    'structure' => 'structure.sql',
+		    'data' => array(
+					    'zh_cn' => 'data_zh_cn.sql',
+					    'zh_tw' => 'data_zh_tw.sql'
+		    )
+);
+而当data不区分语言时，形式则如下：
+var $sql_files = array(
+		    'structure' => 'structure.sql',
+		    'data' => ‘data.sql’);
+
+当然，该数组可以没有其中任何一个元素，甚至可以为空：
+var $sql_files = array('structure' => 'structure.sql');
+var $sql_files = array('data' => 'data.sql');
+var $sql_files = array();
+
+(2) $auto_match
+用来控制某升级包是否进行智能化的查询操作

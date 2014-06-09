@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list">
+    <title>夺宝奇兵活动列表</title>
+    <content>
+    <![CDATA[
+	<p><strong>快速编辑</strong></p>
+	<p>用户最多支付价格和消耗积分可以进行快速编辑（即点击该区域就可编辑）</p>
+	<p><strong>操作</strong></p>
+	<p>对每个活动的操作包括查看详情、编辑、移除<br />
+	   查看详情能查看到当前活动的所有用户的出价情况。并可获知当前状态是那个用户获奖。
+	</p>
+    <p><strong>添加活动</strong></p>
+	<p>点击右上角的<a href="snatch.php?act=add" target="main-frame"><span class="link">添加夺宝奇兵活动</span></a>链接就可进入添加页面</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="add">
+    <title>添加夺宝奇兵活动</title>
+    <content>
+    <![CDATA[
+	<p><strong>添加夺宝奇兵活动</strong><p>
+	<p>活动名称：你需要为每一次活动取个响亮的名称<br>
+	   活动商品：为该活动选取一个商品。<span class="tips">初始状态商品列表为空，你需要输入一个商品关键字，点击搜索将列出所有商品中商品名含有该关键字的所有商品。在活动商品中选取正确的商品</span><br />
+	   活动开始时间和结束时间可以直接编辑，不过格式必须填写为形如：2006-09-15 23:00:00<br />
+	   价格上下限为用户的出价范围。超出范围的视为无效。<br />
+	   最多需支付价格：为0时，获奖用户出价多少就按多少价格出售给用户。建议不要为0，这样可以鼓励用户在整个出价范围内出价。<br />
+	   活动描述：你对该活动的描述信息。将在前台展现给用户。<br />
+	   点击右上角的<a href="snatch.php?act=list" target="main-frame"><span class="link">夺宝奇兵活动列表</span></a>链接就可回到列表页面。
+	</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="view">
+    <title>活动详情</title>
+    <content>
+    <![CDATA[
+	<p><strong>活动详情</strong></p>
+	<p>如果已经用户参与该活动。将列出用户出价情况。并能提示出当前是哪个用户获胜。用户出价情况可按出价顺序，出价用户出价时间和所出价格排序查看<br />点击右上角的<a href="snatch.php?act=list" target="main-frame"><span class="link">夺宝奇兵活动列表</span></a>链接就可回到列表页面。</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="edit">
+    <title>夺宝奇兵编辑</title>
+    <content>
+    <![CDATA[<p><strong>夺宝奇兵编辑</strong></p><p>请参看夺宝奇兵添加帮助<br />点击右上角的<a href="snatch.php?act=list" target="main-frame"><span class="link">夺宝奇兵活动列表</span></a>链接就可回到列表页面</p>]]>
+    </content>
+  </section>
+
+</help>

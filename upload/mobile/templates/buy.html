@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ECShop_mobile</title>
+{insert_scripts files="../../js/utils.js,../js/transport.js"}
+{insert_scripts files="../../js/region.js"}
+
+<script type="text/javascript">
+region.isAdmin=true;
+</script>
+</head>
+
+<body>
+<p align='left'>
+{if $user_name}
+    [<a href='user.php?act=user_center'>用户中心</a>]&nbsp;[<a href='user.php?act=logout'>退出</a>]<br/>
+{else}
+    ［<a href='user.php?act=login'>登录</a>］&nbsp;［<a href='user.php?act=register'>免费注册</a>］<br/>
+{/if}
+{if $buy_type eq 1}
+收货人信息<br />
+---------------------<br />
+
+
+配送区域:
+<form action="order.php?act=order_lise" method="post" name="theForm" id="theForm">
+    <select name="country" id="selCountries" onchange="region.changed(this, 1, 'selProvinces')">
+        <option value="0">请选择国家</option>
+        <!-- {foreach from=$country_list item=country} -->
+        <option value="{$country.region_id}">{$country.region_name}</option>
+        <!-- {/foreach} -->
+      </select><br />
+      <select name="province" id="selProvinces" onchange="region.changed(this, 2, 'selCities')">
+        <option value="0">请选择省</option>
+        <!-- {foreach from=$province_list item=province} -->
+        <option value="{$province.region_id}">{$province.region_name}</option>
+        <!-- {/foreach} -->
+      </select><br />
+      <select name="city" id="selCities" onchange="region.changed(this, 3, 'selDistricts')">
+        <option value="0">请选择市</option>
+        <!-- {foreach from=$city_list item=city} -->
+        <option value="{$city.region_id}" >{$city.region_name}</option>
+        <!-- {/foreach} -->
+      </select><br />
+      <select name="district" id="selDistricts">
+        <option value="0">请选择区</option>
+        <!-- {foreach from=$district_lis item=district} -->
+        <option value="{$district.region_id}">{$district.region_name}</option>
+        <!-- {/foreach} -->
+      </select>
+    (必填)<br />
+    收货人姓名:<input name="consignee" type="text" class="inputBg" id="consignee" value="{$consignee.consignee|escape}" />
+    (必填)<br />
+    电子邮件地址:<input name="email" type="text" class="inputBg"  id="email" value="{$consignee.email|escape}" />
+    (必填 <br />
+    详细地址:<input name="address" type="text" class="inputBg"  id="address" value="{$consignee.address|escape}" />
+    (必填) <br />
+    邮政编码:<input name="zipcode" type="text" class="inputBg"  id="zipcode" value="{$consignee.zipcode|escape}" /> <br />
+    电话:<input name="tel" type="text" class="inputBg"  id="tel" value="{$consignee.tel|escape}" />
+    (必填) <br />
+    手机:<input name="mobile" type="text" class="inputBg"  id="mobile" value="{$consignee.mobile|escape}" /> <br />标志建筑:<input name="sign_building" type="text" class="inputBg"  id="sign_building" value="{$consignee.sign_building|escape}" /> <br />
+    最佳送货时间:<input name="best_time" type="text"  class="inputBg" id="best_time" value="{$consignee.best_time|escape}" /> <br />
+    <input type="submit" name="Submit" class="bnt_blue_2" value="配送这个地址" />
+
+      <input name="address_id" type="hidden" value="{$consignee.address_id}" />
+</form>
+
+{else}
+您还没有登陆，可以选择<br />
+<a href='user.php?act=login'>会员登陆</a><br />
+或者<a href='user.php?act=register'>注册用户</a><br />
+或者<a href='buy.php?act=consignee'>不登陆直接购买</a>
+
+{/if}
+ <br />
+
+<a href="javascript:history.back(-1)">回上一页</a><br/>
+<a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</body>
+</html>
+<script type="text/javascript">
+var process_request = "正在处理您的请求...";
+</script>

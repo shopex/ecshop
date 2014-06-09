@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,myship.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="block box">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+<div class="blank"></div>
+<div class="block">
+  <h5><span>{$lang.shipping_method}</span></h5>
+  <div class="blank"></div>
+  <!-- 开始收货人信息填写界面 -->
+      {insert_scripts files='region.js,utils.js'}
+      <script type="text/javascript">
+        region.isAdmin = false;
+        {foreach from=$lang.flow_js item=item key=key}
+        var {$key} = "{$item}";
+        {/foreach}
+
+        {literal}
+        onload = function() {
+          if (!document.all)
+          {
+            document.forms['theForm'].reset();
+          }
+        }
+
+        /* $Id : myship.js 4865 2007-01-31 14:04:10Z Hackfan $ */
+
+/* *
+ * 检查收货地址信息表单中填写的内容
+ */
+function checkForm(frm)
+{
+  var msg = new Array();
+  var err = false;
+
+  if (frm.elements['country'].value == 0)
+  {
+    msg.push(country_not_null);
+    err = true;
+  }
+
+  if (frm.elements['province'].value == 0 && frm.elements['province'].length > 1)
+  {
+    err = true;
+    msg.push(province_not_null);
+  }
+
+  if (frm.elements['city'].value == 0 && frm.elements['city'].length > 1)
+  {
+    err = true;
+    msg.push(city_not_null);
+  }
+
+  if (frm.elements['district'].length > 1)
+  {
+    if (frm.elements['district'].value == 0)
+    {
+      err = true;
+      msg.push(district_not_null);
+    }
+  }
+
+  if (err)
+  {
+    message = msg.join("\n");
+    alert(message);
+  }
+  return ! err;
+}
+
+        {/literal}
+      </script>
+<form action="myship.php" method="post" name="theForm" id="theForm" onsubmit="return checkForm(this)">
+    <!-- #BeginLibraryItem "/Library/myship.lbi" --><!-- #EndLibraryItem -->
+    </form>
+</div>
+<div class="blank5"></div>
+<!--帮助-->
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+   </div>
+  </div>
+</div>
+<div class="blank"></div>
+<!--帮助-->
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div id="bottomNav" class="box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>]
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+<!--{/if}-->
+<!--友情链接 end-->
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

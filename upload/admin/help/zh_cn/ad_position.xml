@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+  <section id="list">
+    <title>广告位置列表</title>
+    <content>
+    <![CDATA[
+	<p>广告位置列表页面列出您所有的广告位置信息</p>
+	<p>在此您可以进行如下操作:</p>
+	
+	<strong>快速编辑广告位置信息</strong>
+	<p>您可以快速编辑包括：<br><span class="link">位置名称</span> <span class="link">位置宽度</span> 
+	<span class="link">位置高度</span> <span class="link">描述信息</span> 等内容。<br>单击即可出现编辑文本框。输入您的新内容后回车，修改即可生效！</p>
+	<p class="tips"> 提示：在输入新的广告位置名称时，不能与现有名称的重复！</p>
+	
+	<strong>快速查看广告信息</strong>
+	<p>单击列表右边的<span class="link"> 广告内容 </span>链接,即可查看该广告位置的广告信息。</p>
+	
+	<strong>添加广告位置</strong>
+	<p>您只要点击列表右边的<a href="ads_position.php?act=add" target="main-frame"><span class="link"> 添加广告位 </span></a>链接，即可进入到添加广告位的操作页面。</p>
+	
+	<strong>编辑广告位置</strong>
+	<p>您只要单击列表右边的<span class="link"> 编辑 </span>链接，即可进行相应的编辑操作。</p>
+	
+	<strong>删除广告位置</strong>
+	<p>您只要点击列表右边的<span class="link"> 删除 </span>链接，按系统提示即可完成删除的操作。</p>
+	
+	]]>
+    </content>
+  </section>
+  <section id="add">
+    <title>添加广告位置</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行广告位置的添加操作</p>
+	
+	<strong>广告位置名称</strong>
+	<p>在此您可以输入如：<br>LOGO广告 页脚广告 通栏广告 页面左侧广告等等简洁明了的广告位置名称。</p>
+	
+	<strong>广告位置宽度</strong>
+	<p>在此输入该位置的广告所要显示的宽度，单位为像素。必须为整数，大小应在1～1024之间。</p>
+
+	<strong>广告位置高度</strong>
+	<p>在此输入该位置的广告所要显示的高度，单位为像素。必须为整数，大小应在1～1024之间。</p>
+
+	<strong>广告位模板</strong>
+	<p>系统已有默认的位置模板，如果觉得不合适当前的广告位，您也可以按自己的广告位情况进行相应的修改。</p>
+	<p></p>
+	<p></p>
+	]]>
+    </content>
+  </section>
+  <section id="edit">
+    <title>编辑广告位置</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行广告位置信息的编辑操作<br>(详细帮助信息请参见 <span class="link">添加广告位置</span> 部分)</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+]]>
+    </content>
+  </section>
+</help>

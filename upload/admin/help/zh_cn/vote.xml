@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+  <section id="list">
+    <title>在线调查列表</title>
+    <content>
+    <![CDATA[
+	<p>此页面列出您的在线调查信息</p>
+	<p>在此您可以进行如下操作:</p>
+	
+	<strong>快速编辑调查标题</strong>
+	<p>您可以快速编辑调查标题，单击即可出现编辑文本框。输入您的新内容后回车，修改即可生效！</p>
+	
+	<strong>添加新的在线调查</strong>
+	<p>您只要点击列表右边的<a href="vote.php?act=add" target="main-frame"><span class="link"> 添加调查 </span></a>链接，即可进入到添加的操作页面。</p>
+	
+	<strong>添加调查选项</strong>
+	<p>您只要点击列表右边的<span class="link"> 调查选项 </span>链接，即可进入到调查选项的添加操作页面。</p>
+	
+	<strong>编辑调查信息</strong>
+	<p>您只要单击列表右边的<span class="link"> 编辑 </span>链接，即可进行相应的编辑操作。</p>
+	
+	<strong>删除在线调查</strong>
+	<p>您只要点击列表右边的<span class="link"> 删除 </span>链接，按系统提示即可完成删除的操作。</p>
+	<p class="tips">提示：<br>删除在线调查标题，该调查的所有选项也相应的被删除！</p>
+	
+	]]>
+    </content>
+  </section>
+  <section id="add">
+    <title>添加在线调查</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行在线调查的添加操作</p>
+	
+	<strong>调查标题</strong>
+	<p>在此您可以输入您想要进行调查的标题名称。如：您觉得本站应该在哪些地方作改进呢?...</p>
+	
+	<strong>开始日期</strong>
+	<p>在此选择该在线调查的开始日期，在结束日期之前，此调查会一直显示。</p>
+
+	<strong>截止日期</strong>
+	<p>在此选择您的在线调查的结束日期，如果要提前结束，您也可以在此进行操作。</p>
+
+	<strong>能否多选</strong>
+	<p>此处有两个选项，指的是您的在线调查的选项是单选还是多选。<br>选择 能：您的调查选项将可以多选。<br>选择 不能：调查的选项只能选择其一。 </p>
+	]]>
+    </content>
+  </section>
+  <section id="edit">
+    <title>编辑在线调查信息</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行在线调查的编辑操作<br>(详细帮助信息请参见<a href="vote.php?act=add" target="main-frame"><span class="link"> 添加在线调查 </span></a> 部分)</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+]]>
+    </content>
+  </section>
+   <section id="option">
+    <title>在线调查选项</title>
+    <content>
+    <![CDATA[
+	<p>此列表列出了当前的在线调查所有的选项列表。</p>
+	<p>您还可以在此进行调查选项的<span class="link"> 添加 </span>操作</p>
+	<p>在<span class="link"> 添加投票选项 </span>后的表单中输入您想添加的投票选项，按回车键或者 确定 键均可完成添加的操作。</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+]]>
+    </content>
+  </section>
+
+
+</help>

@@ -1,0 +1,59 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<div id="append_parent"></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="3" id="page-header">
+  <tr>
+    <td id="cell-logo"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td rowspan="2"><a href="../index.php" name="top"><img src="../images/logo.gif" alt="shopping mall name" width="130" height="56" border="0" /></a></td>
+          <td align="right" valign="top" style="padding: 5px 10px">
+          <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+            <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+            <!-- {if !$smarty.foreach.nav_top_list.last} -->
+            |
+            <!-- {/if} -->
+          <!-- {/foreach} -->
+          <!-- {if $ecs_session.user_id} -->
+          |&nbsp;<a href="#" onclick="pmwin('open')">{$lang.shot_message}</a>&nbsp;
+          <!-- {/if} -->
+          </td>
+        </tr>
+        <tr>
+          <td align="center"></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td id="cell-nav"><ul>
+        <li><a href="../index.php">{$lang.home}</a><!-- {if $navigator_list.config.index eq 1} --><!-- {/if} --></li>
+        <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+            <!-- {if $smarty.foreach.nav_middle_list.last}-->
+                <li style="border-right:0px;"><a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a></li>
+            <!-- {else} -->
+                <li><a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a></li>
+            <!-- {/if} -->
+            <!-- {if $nav.active eq 1} -->
+            <!-- {/if} -->
+      <!-- {/foreach} -->
+      </ul></td>
+  </tr>
+</table>
+<div id="ECS_CATALOG" class="catalog-div" style="display:none"
+onMouseOver="if (this.style.display != 'block') this.style.display='block';"
+onMouseOut="if (this.style.display != 'none') this.style.display = 'none';">
+  <ul>
+    <!--{assign var="level" value=0}-->
+    <!-- {foreach from=$catalog_list item=cat} -->
+    <!-- {if $level > $cat.level} -->
+  </ul>
+  <!-- {/if}-->
+  <!-- {if $level < $cat.level} -->
+  <ul>
+  <!-- {/if} -->
+    <li class="{if $cat.level eq 0}top-cate{else}snd-cate{/if}"><a href="{$cat.url}" title="{if $cat.cat_desc neq ''}{$cat.cat_desc}{/if}">{$cat.cat_name}</a></li>
+    <!--{assign var="level" value=$cat.level}-->
+    <!-- {/foreach} -->
+  </ul>
+</div>

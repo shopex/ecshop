@@ -1,0 +1,68 @@
+<!-- $Id: merge_order.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js"}
+<div class="main-div">
+<table cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td class="label"><a href="javascript:showNotice('noticeOrderSn');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.to_order_sn}</td>
+    <td><input name="to_order_sn" type="text" id="to_order_sn">
+      <select name="to_list" id="to_list" onchange="if (this.value != '') document.getElementById('to_order_sn').value = this.value;">
+      <option value="">{$lang.select_please}</option>
+      {foreach from=$order_list item=order}
+      <option value="{$order.order_sn}">{$order.order_sn} [{$order.user_name}]</option>
+      {/foreach}
+      </select>
+      <span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticeOrderSn">{$lang.notice_order_sn}</span></td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.from_order_sn}</td>
+    <td><input name="from_order_sn" type="text" id="from_order_sn">
+      <select name="from_list" onchange="if (this.value != '') document.getElementById('from_order_sn').value = this.value;">
+      <option value="">{$lang.select_please}</option>
+      {foreach from=$order_list item=order}
+      <option value="{$order.order_sn}">{$order.order_sn} [{$order.user_name}]</option>
+      {/foreach}
+      </select></td>
+  </tr>
+  <tr>
+    <td colspan="2"><div align="center">
+      <input name="merge" type="button" id="merge" value="{$lang.merge}" class="button" onclick="if (confirm(confirm_merge)) merge()" />
+    </div></td>
+    </tr>
+</table>
+</div>
+{literal}
+<script language="JavaScript">
+    /**
+     * 合并
+     */
+    function merge()
+    {
+        var fromOrderSn = document.getElementById('from_order_sn').value;
+        var toOrderSn = document.getElementById('to_order_sn').value;
+        Ajax.call('order.php?is_ajax=1&act=ajax_merge_order','from_order_sn=o' + fromOrderSn + '&to_order_sn=o' + toOrderSn, mergeResponse, 'POST', 'JSON');
+    }
+
+    function mergeResponse(result)
+    {
+      if (result.message.length > 0)
+      {
+        alert(result.message);
+      }
+      if (result.error == 0)
+      {
+        //成功则清除用户填写信息
+        document.getElementById('from_order_sn').value = '';
+        document.getElementById('to_order_sn').value = '';
+        location.reload();
+      }
+    }
+
+    onload = function()
+    {
+        // 开始检查订单
+        startCheckOrder();
+    }
+</script>
+{/literal}
+{include file="pagefooter.htm"}

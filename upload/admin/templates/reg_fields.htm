@@ -1,0 +1,45 @@
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+
+<form method="post" action="" name="listForm">
+<!-- start reg_fiedls list -->
+<div class="list-div" id="listDiv">
+{/if}
+
+<table cellspacing='1' id="list-table">
+  <tr>
+    <th>{$lang.field_name}</th>
+    <th>{$lang.field_order}</th>
+    <th>{$lang.field_display}</th>
+    <th>{$lang.field_need}</th>
+    <th>{$lang.handler}</th>
+  </tr>
+  {foreach from=$reg_fields item=field}
+  <tr>
+    <td class="first-cell" ><span onclick="listTable.edit(this,'edit_name', {$field.id})">{$field.reg_field_name}</span></td>
+    <td align="center"><span onclick="listTable.edit(this,'edit_order', {$field.id})">{$field.dis_order}</span></td>
+    <td align="center"><img src="images/{if $field.display}yes{else}no{/if}.gif" onclick="listTable.toggle(this, 'toggle_dis', {$field.id})" /></td>
+    <td align="center"><img src="images/{if $field.is_need}yes{else}no{/if}.gif" onclick="listTable.toggle(this, 'toggle_need', {$field.id})" /></td>
+    <td align="right"><a href="?act=edit&id={$field.id}">{$lang.edit}</a>{if $field.type eq 0} | <a href="javascript:;" onclick="listTable.remove({$field.id}, '{$lang.drop_confirm}')" title="{$lang.remove}">{$lang.remove}</a>{/if}</td>
+  </tr>
+  {/foreach}
+  </table>
+
+{if $full_page}
+</div>
+<!-- end reg_fiedls list -->
+</form>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+{/literal}
+//-->
+</script>
+{include file="pagefooter.htm"}
+{/if}

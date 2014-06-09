@@ -1,0 +1,72 @@
+<!-- $Id: sale_general.htm 16869 2009-12-10 10:31:14Z liuhui $ -->
+<script src="DWConfiguration/ActiveContent/IncludeFiles/AC_RunActiveContent.js" type="text/javascript"></script>
+
+{include file="pageheader.htm"}
+<div class="form-div">
+  <form action="sale_general.php?act=list" method="post">
+  <strong>{$lang.year_status}</strong>
+  {html_select_date prefix="year_begin" time=$start_time start_year="2006" end_year="+1" display_days=false display_months=false}
+  -
+  {html_select_date prefix="year_end" time=$end_time start_year="2006" end_year="+1" display_days=false display_months=false}
+  <input type="submit" name="query_by_year" value="{$lang.query}" class="button" />
+  <br />
+  <strong>{$lang.month_status}</strong>
+  {html_select_date prefix="month_begin" time=$start_time start_year="2006" end_year="+1" display_days=false field_order="YMD" month_format="%m"}
+  -
+  {html_select_date prefix="month_end" time=$end_time start_year="2006" end_year="+1" display_days=false field_order="YMD" month_format="%m"}
+  <input type="submit" name="query_by_month" value="{$lang.query}" class="button" />
+  </form>
+</div>
+
+<div class="tab-div">
+   <div id="tabbar-div">
+      <p>
+        <span class="tab-front" id="order-tab">{$lang.order_status}</span><span
+        class="tab-back" id="turnover-tab">{$lang.turnover_status}</span>
+      </p>
+   </div>
+   <div id="tabbody-div">
+      <!-- 订单数量 -->
+      <table width="90%" id="order-table">
+        <tr><td align="center">
+          <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+            codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+            width="565" height="420" id="FCColumn2" align="middle">
+            <param NAME="movie" VALUE="images/charts/column3d.swf?dataXML={$data_count}">
+            <param NAME="quality" VALUE="high">
+            <param NAME="bgcolor" VALUE="#FFFFFF">
+            <embed src="images/charts/column3d.swf?dataXML={$data_count}" quality="high" bgcolor="#FFFFFF"  width="565" height="420" name="FCColumn2" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+          </object>
+          <div>{$data_count_name}</div>
+        </td></tr>
+      </table>
+
+      <!-- 营业额 -->
+      <table width="90%" id="turnover-table" style="display:none">
+        <tr><td align="center">
+          <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+            codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+            width="565" height="420" id="FCColumn2" align="middle">
+            <param NAME="movie" VALUE="images/charts/column3d.swf?dataXML={$data_amount}">
+            <param NAME="quality" VALUE="high">
+            <param NAME="bgcolor" VALUE="#FFFFFF">
+            <embed src="images/charts/column3d.swf?dataXML={$data_amount}" quality="high" bgcolor="#FFFFFF"  width="565" height="420" name="FCColumn2" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+          </object>
+          <div>{$data_amount_name}</div>
+        </td></tr>
+      </table>
+    </div>
+</div>
+{insert_scripts files="tab.js"}
+<script language="JavaScript">
+<!--
+{literal}
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+{/literal}
+-->
+</script>
+{include file="pagefooter.htm"}

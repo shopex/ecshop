@@ -1,0 +1,90 @@
+<!-- $Id: area_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="form-div">
+<form method="post" action="area_manage.php" name="theForm" onsubmit="return add_area()">
+{if $region_type eq '0'}{$lang.add_country}:
+{elseif $region_type eq '1'}{$lang.add_province}:
+{elseif $region_type eq '2'}{$lang.add_city}:
+{elseif $region_type eq '3'}{$lang.add_cantonal}: {/if}
+<input type="text" name="region_name" maxlength="150" size="40" />
+<input type="hidden" name="region_type" value="{$region_type}" />
+<input type="hidden" name="parent_id" value="{$parent_id}" />
+<input type="submit" value="{$lang.button_submit}" class="button" />
+</form>
+</div>
+
+<!-- start category list -->
+<div class="list-div">
+<table cellspacing='1' cellpadding='3' id='listTable'>
+  <tr>
+    <th>{$area_here}</th>
+  </tr>
+</table>
+</div>
+<div class="list-div" id="listDiv">
+{/if}
+
+<table cellspacing='1' cellpadding='3' id='listTable'>
+  <tr>
+    {foreach from=$region_arr item=list name=area_name}
+      {if $smarty.foreach.area_name.iteration > 1 and ($smarty.foreach.area_name.iteration-1) % 3 eq 0}
+      </tr><tr>
+      {/if}
+      <td class="first-cell" align="left">
+       <span onclick="listTable.edit(this, 'edit_area_name', '{$list.region_id}'); return false;">{$list.region_name|escape:"html"}</span>
+       <span class="link-span">
+       {if $region_type < 3}
+       <a href="area_manage.php?act=list&type={$list.region_type+1}&pid={$list.region_id}" title="{$lang.manage_area}">
+         {$lang.manage_area}</a>&nbsp;&nbsp;
+       {/if}
+       <a href="javascript:listTable.remove({$list.region_id}, '{$lang.area_drop_confirm}', 'drop_area')" title="{$lang.drop}">{$lang.drop}</a>
+       </span>
+      </td>
+    {/foreach}
+  </tr>
+</table>
+
+{if $full_page}
+</div>
+
+{literal}
+<script language="JavaScript">
+<!--
+
+onload = function() {
+  document.forms['theForm'].elements['region_name'].focus();
+  // 开始检查订单
+  startCheckOrder();
+}
+
+/**
+ * 新建区域
+ */
+function add_area()
+{
+    var region_name = Utils.trim(document.forms['theForm'].elements['region_name'].value);
+    var region_type = Utils.trim(document.forms['theForm'].elements['region_type'].value);
+    var parent_id   = Utils.trim(document.forms['theForm'].elements['parent_id'].value);
+
+    if (region_name.length == 0)
+    {
+        alert(region_name_empty);
+    }
+    else
+    {
+      Ajax.call('area_manage.php?is_ajax=1&act=add_area',
+        'parent_id=' + parent_id + '&region_name=' + region_name + '&region_type=' + region_type,
+        listTable.listCallback, 'POST', 'JSON');
+    }
+
+    return false;
+}
+
+//-->
+</script>
+{/literal}
+
+{include file="pagefooter.htm"}
+{/if}

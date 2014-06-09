@@ -1,0 +1,9 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="title-div"><img src="../images/top10.gif" alt="Top 10" width="158" height="39" /></div>
+<div class="content-div">
+  <ul class="top-list">
+    <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+    <li><img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" width="12" height="11" alt="top" /> <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a></li>
+    <!--{/foreach}-->
+  </ul>
+</div>

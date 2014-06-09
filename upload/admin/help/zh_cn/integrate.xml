@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+  <section id="list">
+    <title>会员数据整合</title>
+    <content>
+    <![CDATA[
+    <p>会员数据整合允许您将任何带有会员系统的第三方程序与 ECSHOP 进行会员数据的整合，从而实现会员数据共享。</p>
+    <p>右侧列表是您目前可用的会员数据整合插件，点击每一个插件右侧的“<span class="link">安装</span>”即可启用该整合插件。</p>
+    <p>如果您从 ECSHOP 官方站或其他第三方站点下载了整合插件，解压缩后将他们放置到 /includes/modules/integrates 目录，即可启用该整合插件。
+    ]]>
+    </content>
+  </section>
+  <section id="install">
+    <title>安装会员数据整合插件</title>
+    <content>
+    <![CDATA[
+    <p><strong>数据库帐号</strong></p>
+    <p>在这里填写需要整合的第三方系统正在使用的数据库相关信息，这些信息也就是您在安装第三方系统时所使用的信息。</p>
+    <p class="tips">如果数据库与 ECSHOP 不在同一服务器，请确认您的帐号是否有远程访问权限。</p>
+    <p><strong>Cookie 设置</strong></p>
+    <p>为了使在商城登录后转到被整合系统，或者在被整合系统登录转到商城后不需要进行第二次登录，您还需要对 Cookie 进行相应的设置。</p>
+    <p>1. 同一域名不同目录</p>
+    <p>例如：您的商城在 http://www.yourdomain.com，您的论坛在 http://www.yourdomain.com/bbs。您可以将 Cookie 域名设置为空，Cookie 路径设置为 /。</p>
+    <p>2 .一级域名相同，二级域名不同</p>
+    <p>例如：您的商城在 http://www.yourdomain.com，您的论坛在 http://bbs.yourdomain.com。这时您可以将 Cookie 域名设置为 .yourdomain.com（<span class="tips">注意 yourdomain.com 前面有一个句点。</span>）， Cookie 路径设置为 /。</p>
+    
+    ]]>
+    </content>
+  </section>
+  <section id="setup">
+    <title>设置会员数据整合插件</title>
+    <content>
+    <![CDATA[请参考“安装会员数据整合插件”]]>
+    </content>
+  </section>
+  <section id="sync">
+    <title>同步会员数据</title>
+    <content>
+    <![CDATA[
+    <p>当您使用 ECSHOP 商城一段时间后，需整合一个论坛，此时需要把数据同步到“目前整合的第三方系统”；当您想更换论坛时，可以把数据同步到商城ECSHOP，然后再同步到新论坛。</p>
+    <p>如果您的会员数据很多，在同步时您会需要分批次进行导入，这时您在第一次操作时需要设置导入的起始位置和每次导入的记录数量。第一次操作成功后系统会自动修改相应的数值。</p>
+    ]]>
+    </content>
+  </section>
+</help>

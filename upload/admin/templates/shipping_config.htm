@@ -1,0 +1,29 @@
+<!-- $Id: shipping_config.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<div class="form-div">
+<form method="post" action="shipping.php">
+<table cellspacing='1' cellpadding='3'>
+  {foreach from=$modules item=module}
+  <tr>
+    <td class="first-cell"><a href="{$module.website}" target="_blank">{$module.name}</a></td>
+    <td>{$module.desc}</td>
+    <td><a href="mailto:{$module.email}">{$module.author}</a></td>
+    <td align="center">{$module.act}</td>
+  </tr>
+  {/foreach}
+</table>
+<input type="hidden" name="act" value="$form_action" />
+</form>
+</div>
+{literal}
+<script type="Text/Javascript" language="JavaScript">
+<!--
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

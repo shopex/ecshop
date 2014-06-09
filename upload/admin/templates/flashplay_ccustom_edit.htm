@@ -1,0 +1,246 @@
+ {include file="pageheader.htm"}
+<div class="main-div">
+  <form action="flashplay.php" method="post" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
+  <table width="100%" id="general-table">
+  <tbody>
+    <tr>
+      <td  class="label">
+        {$lang.lable_flash_name}</td>
+      <td>
+        <input type="text" name="ad[ad_name]" id="ad_name" value="{$ad.ad_name}" size="35" /><span class="require-field">*</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">{$lang.lable_flash_type}</td>
+      <td>
+       <select name="ad[ad_type]" id="ad_type" onchange="showMedia(this.value)">
+       <option value='0'>{$lang.ad_img}</option>
+       <option value='1'>{$lang.ad_flash}</option>
+       <option value='2'>{$lang.ad_html}</option>
+       <option value='3'>{$lang.ad_text}</option>
+       </select>
+      </td>
+    </tr>
+  </tbody>
+
+  <tbody id="content_01">
+    <tr>
+      <td  class="label">
+        <a href="javascript:showNotice('title_upload');" title="{$lang.form_notice}">
+        <img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.lable_upload}</td>
+      <td>
+        <input type='file' name='ad_img' id='ad_img' size='35' />
+        <br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="title_upload">{$width_height}</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">{$lang.lable_from_web}</td>
+      <td><input type="text" name="content[url]" id="ad_url" value="{$ad.ad_url}" size="35" /></td>
+    </tr>
+  </tbody>
+
+  <tbody id="edit_img">
+    <tr>
+      <td class="label">&nbsp;</td>
+      <td><input type="text" name="content[img_url]" id="img_url" value="{$ad.content}" size="35" disabled="disabled"/></td>
+    </tr>
+  </tbody>
+
+  <tbody id="content_23">
+    <tr>
+      <td class="label">{$lang.lable_content}</td>
+      <td><textarea name="content[htmls]" id="htmls" cols="50" rows="7">{$ad.content}</textarea></td>
+    </tr>
+  </tbody>
+
+  <tbody id="url_tr">
+    <tr>
+      <td class="label">{$lang.lable_url}</td>
+      <td><input type="text" name="ad[url]" id="url" value="{$ad.url}" size="35" /></td>
+    </tr>
+  </tbody>
+
+  <tbody>
+    <tr>
+      <td class="label">{$lang.lable_flash_status}</td>
+      <td><input type="radio" name="ad[ad_status]" id="ad_status" value="0" {if $ad.ad_status eq 0}checked="checked"{/if}>关闭
+      <input type="radio" name="ad[ad_status]" id="ad_status" value="1" {if $ad.ad_status eq 1}checked="checked"{/if}>启用</td>
+    </tr>
+    <tr>
+       <td class="label">&nbsp;</td>
+       <td>
+        <input type="submit" value="{$lang.button_submit}" class="button" />
+        <input type="reset" value="{$lang.button_reset}" class="button" />
+        <input type="hidden" name="act" id="act" value="custom_update" />
+        <input type="hidden" name="ad[id]" id="ad_id" value="{$ad.ad_id}" />
+      </td>
+    </tr>
+  </tbody>
+  </table>
+  </form>
+  </div>
+    <script language="JavaScript">
+<!--
+// 初始页面参数
+var status_code = {$ad.ad_type}; //{$ad.ad_type};
+
+
+onload = function()
+{
+
+  // 开始检查订单
+  startCheckOrder();
+
+  // 初始化表单项
+  initialize_form(status_code);
+    /**
+ * 广告修改
+ */
+
+    if (result['ad_type'] == 0 || result['ad_type'] == 1)
+    {
+      document.getElementById('edit_img').style.display = display_yes;
+      document.getElementById('img_url').value = result['content'];
+    }
+    document.getElementById('ad_id').value = result['ad_id'];
+    document.getElementById('ad_name').value = result['ad_name'];
+    document.getElementById('ad_type').options[result['ad_type']].selected = true;
+    document.getElementById('url').value = result['url'];
+    document.getElementById('act').value = 'custom_update';
+    document.getElementById('htmls').value = result['content'];
+}
+
+/**
+ * 初始化表单项目
+ */
+function initialize_form(status_code)
+{
+  var nt = navigator_type();
+  var display_yes = (nt == 'IE') ? 'block' : 'table-row-group';
+  status_code = parseInt(status_code);
+  status_code = status_code ? status_code : 0;
+  document.getElementById('ad_type').options[status_code].selected = true;
+
+
+  switch (status_code) {
+    case 0 :
+      document.getElementById('content_01').style.display = display_yes;
+      document.getElementById('content_23').style.display = 'none';
+      document.getElementById('url_tr').style.display = display_yes;
+            document.getElementById('title_upload').innerHTML = '{$width_height}';
+            document.getElementById('edit_img').style.display = display_yes;
+    break;
+    case 1 :
+
+      document.getElementById('content_01').style.display = display_yes;
+      document.getElementById('content_23').style.display = 'none';
+      document.getElementById('url_tr').style.display = 'none';
+            document.getElementById('title_upload').innerHTML = '{$lang.title_upload_notice}';
+            document.getElementById('edit_img').style.display = display_yes;
+    break;
+    case 2 :
+      document.getElementById('content_01').style.display = 'none';
+      document.getElementById('content_23').style.display = display_yes;
+      document.getElementById('url_tr').style.display = 'none';
+            document.getElementById('edit_img').style.display = 'none';
+    break;
+    case 3 :
+      document.getElementById('content_01').style.display = 'none';
+      document.getElementById('content_23').style.display = display_yes;
+      document.getElementById('url_tr').style.display = display_yes;
+            document.getElementById('edit_img').style.display = 'none';
+    break;
+  }
+
+  return true;
+}
+
+/**
+ * 类型表单项切换
+ */
+function showMedia(code)
+{
+  var obj = document.getElementById('ad_type');
+
+  initialize_form(code);
+}
+
+
+
+
+
+/**
+ * 广告状态修改
+ */
+function custom_status(ad_id, ad_status)
+{
+  if (ad_id)
+  {
+    Ajax.call('flashplay.php?is_ajax=1&act=custom_status&ad_status=' + ad_status, 'id=' + ad_id, custom_status_edit, 'GET', 'JSON');
+  }
+}
+function custom_status_edit(result)
+{
+  if (result.error == 0)
+  {
+    document.getElementById('listDiv').innerHTML = result.content;
+
+    // 初始化表单项
+    initialize_form(status_code);
+  }
+}
+
+function check_del()
+{
+  if (confirm('{$lang.custom_del_confirm}'))
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+/**
+ * 系统设置提示
+ */
+function system_set()
+{
+  alert('{$lang.tab_change_alert}');
+}
+
+/**
+ * 判断当前浏览器类型
+ */
+function navigator_type()
+{
+  var type_name = '';
+
+  if (navigator.userAgent.indexOf('MSIE') != -1)
+  {
+    type_name = 'IE'; // IE
+  }
+  else if(navigator.userAgent.indexOf('Firefox') != -1)
+  {
+    type_name = 'FF'; // FF
+  }
+  else if(navigator.userAgent.indexOf('Opera') != -1)
+  {
+    type_name = 'Opera'; // Opera
+  }
+  else if(navigator.userAgent.indexOf('Safari') != -1)
+  {
+    type_name = 'Safari'; // Safari
+  }
+  else if(navigator.userAgent.indexOf('Chrome') != -1)
+  {
+    type_name = 'Chrome'; // Chrome
+  }
+
+  return type_name;
+}
+//-->
+</script>
+
+{include file="pagefooter.htm"}

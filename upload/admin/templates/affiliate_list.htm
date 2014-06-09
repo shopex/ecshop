@@ -1,0 +1,72 @@
+{if $full_page}
+<!-- $Id: users_list.htm 15617 2009-02-18 05:18:00Z sunxiaodong $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+
+<div class="form-div">
+{$lang.page_note}{$lang.total_records}{$record_count}{$lang.how_many_user}
+</div>
+
+<form method="POST" action="" name="listForm">
+
+<!-- start users list -->
+<div class="list-div" id="listDiv">
+{/if}
+<!--用户列表部分-->
+<table cellpadding="3" cellspacing="1">
+  <tr>
+    <th>{$lang.record_id}</th>
+    <th>{$lang.username}</th>
+    <th>{$lang.affiliate_level}{$lang.level}</th>
+    <th>{$lang.email}</th>
+    <th>{$lang.is_validated}</th>
+    <th>{$lang.user_money}</th>
+    <th>{$lang.frozen_money}</th>
+    <th>{$lang.rank_points}</th>
+    <th>{$lang.pay_points}</th>
+    <th>{$lang.reg_date}</th>
+    <th>{$lang.handler}</th>
+  <tr>
+  {foreach from=$user_list item=user}
+  <tr>
+    <td>{$user.user_id}</td>
+    <td class="first-cell">{$user.user_name|escape}</td>
+    <td class="first-cell">{$user.level}</td>
+    <td><span onclick="listTable.edit(this, 'edit_email', {$user.user_id})">{$user.email}</span></td>
+    <td align="center">{if $user.is_validated} <img src="images/yes.gif"> {else} <img src="images/no.gif"> {/if}</td>
+    <td>{$user.user_money}</td>
+    <td>{$user.frozen_money}</td>
+    <td>{$user.rank_points}</td>
+    <td>{$user.pay_points}</td>
+    <td align="center">{$user.reg_time}</td>
+    <td align="center">
+      <a href="users.php?act=edit&id={$user.user_id}" title="{$lang.edit}"><img src="images/icon_edit.gif" border="0" height="16" width="16" /></a>
+      <a href="users.php?act=address_list&id={$user.user_id}" title="{$lang.address_list}"><img src="images/book_open.gif" border="0" height="16" width="16" /></a>
+      <a href="order.php?act=list&user_id={$user.user_id}" title="{$lang.view_order}"><img src="images/icon_view.gif" border="0" height="16" width="16" /></a>
+      <a href="account_log.php?act=list&user_id={$user.user_id}" title="{$lang.view_deposit}"><img src="images/icon_account.gif" border="0" height="16" width="16" /></a>
+      <a href="javascript:confirm_redirect('{$lang.remove_confirm}', 'users.php?act=remove&id={$user.user_id}')" title="{$lang.remove}"><img src="images/icon_drop.gif" border="0" height="16" width="16" /></a>
+    </td>
+  </tr>
+  {foreachelse}
+  <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+  {/foreach}
+</table>
+
+{if $full_page}
+</div>
+<!-- end users list -->
+</form>
+<script type="text/javascript" language="JavaScript">
+<!--
+{literal}
+onload = function()
+{
+    document.forms['searchForm'].elements['keyword'].focus();
+    // 开始检查订单
+    startCheckOrder();
+}
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}
+{/if}

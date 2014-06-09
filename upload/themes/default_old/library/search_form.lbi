@@ -1,0 +1,39 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div style="padding:0px 15px;">
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()">
+    <img src="../images/icon_search.gif" alt="search" />
+    <select name="category" id="category" style="vertical-align:middle;">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+    <input name="keywords" class="textbox" type="text" id="keyword" value="{$search_keywords|escape}" />
+    <input type="image" name="imageField" src="../images/btn_go.gif" />
+    <a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+  </form>
+</div>
+{if $searchkeywords}
+<div style="padding:0px 15px;text-align: right;">
+{$lang.hot_search} : 
+{foreach from=$searchkeywords item=val}
+ <a href="search.php?keywords={$val|escape}">{$val}</a>
+{/foreach}
+</div>
+{/if}
+
+<script type="text/javascript">
+{literal}
+<!--
+function checkSearchForm()
+{
+    if(document.getElementById('keyword').value)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+-->
+{/literal}
+</script>

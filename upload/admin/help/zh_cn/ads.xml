@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+  <section id="list">
+    <title>广告列表</title>
+    <content>
+    <![CDATA[
+	<p>广告列表页面列出您所有的广告信息，包括站内广告以及您在其他网站投放的站外广告信息。</p>
+	<p>在此您可以进行如下操作:</p>
+	
+	<strong>快速编辑广告名称</strong>
+	<p>您只要单击需要修改的<span class="link"> 广告名称 </span>，即可出现编辑文本框。输入您的新内容后回车，修改即可生效！</p>
+	<p class="tips"> 提示：快速编辑广告名称时，新的广告名称不能与现有的重复。另外广告名称建议不宜过长，3～5个字符为最佳！</p>
+	
+	<strong>广告的添加</strong>
+	<p>您只要点击页面右上角的<a href="ads.php?act=add" target="main-frame"><span class="link"> 添加广告 </span></a>链接，进入到添加的操作页面。</p>
+	
+	<strong>广告的编辑</strong>
+	<p>您只要点击列表右边的<span class="link"> 编辑 </span>链接，即可进入到编辑的操作页面。</p>
+	
+	<strong>广告的删除</strong>
+	<p>您只要点击列表右边的<span class="link"> 删除 </span>链接，按系统提示即可完成相应的操作。</p>
+
+	<strong>生成广告的JS代码</strong>
+	<p>如果您的广告要投放在其他的网站，那么列表右边的操作项里有一<span class="link"> 生成JS代码 </span>的链接，点击即可完成相应的操作。</p>
+	]]>
+    </content>
+  </section>
+  <section id="add">
+    <title>添加广告页面</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行广告的添加操作</p>
+	
+	<strong>媒介类型</strong>
+	<p>您可以添加四种类型的广告：分别是<span class="link">图片、Flash、代码</span>和<span class="link">文字广告</span></p>
+	
+	<strong>广告位置</strong>
+	<p>在此选择新广告所要显示的位置，如果是投放到其他网站的广告，请选择 <span class="link">站外广告</span></p>
+	
+	<strong>当添加图片类型的广告时</strong>
+	<p>您需要注意以下几点：</p>
+
+	<strong>上传广告图片</strong>
+	<p>您需要在此上传广告的图片。请注意图片的格式必须为GIF，JPG，PNG格式。</p>
+
+	<strong>或图片网址</strong>
+	<p>在此提供了远程调用广告图片的功能。如果您的广告图片不在本地，您可以在此输入广告图片所在的URL网址。</p>
+	<p class="tips">提示：在添加图片类型的广告时，如果您既上传了图片又填写了远程图片URL，那么广告图片将以远程URL地址的图片为准。</p>
+
+	<strong>当添加Flash广告时</strong>
+	<p>添加Flash广告的操作与添加图片广告的操作类似。</p>
+	
+	<strong>当添加代码广告时</strong>
+	<p>添加代码广告时，您需要在 <span class="link">输入广告内容</span> 一栏输入您的广告代码即可。</p>
+
+	<strong>添加文字广告</strong>
+	<p>文字广告的操作类似代码广告</p>
+
+    <strong>是否开启</strong>
+	<p>提供了广告的 <span class="link">开启/关闭</span> 功能。如果您要提前结束或者暂时关闭某条广告，选择 <span class="link">关闭</span> 即可。</p>
+
+	]]>
+    </content>
+  </section>
+  <section id="edit">
+    <title>编辑广告</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行广告的编辑操作<br>(详细帮助信息请参见 <span class="link">添加广告</span> 部分)</p>
+    <p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+
+]]>
+    </content>
+  </section>
+
+  <section id="add_js">
+    <title>生成广告JS代码</title>
+    <content>
+    <![CDATA[
+	<p>您可以在此进行广告的JS代码复制操作</p>
+	<strong>投放广告的站点名称</strong>
+	<p>此表单用于填写您的站外广告所要投放的网站名称。如：手机之家 18900商城</p>
+
+	<strong>生成JS代码</strong>
+	<p>此处的JS代码您可以用于在其他网站投放此条广告。<br>点击<span class="link"> 复制JS代码 </span>按钮，即可将此段JS代码复制到剪贴板</p>
+]]>
+    </content>
+  </section>
+
+
+</help>

@@ -1,0 +1,734 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,global.js,compare.js'}
+</head>
+<body>
+<div id="globalWrapper">
+  <div style="float:left;"><img src="images/page_left.gif" alt="" /></div>
+  <div id="wrapper"><!-- #BeginLibraryItem "/library/page_header.lbi" -->
+<table width="100%" border="0" cellpadding="0" cellspacing="3" id="page-header">
+  <tr>
+    <td id="cell-logo"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td rowspan="2"><a href="index.php" name="top" id="top"><img src="images/logo.gif" alt="shopping mall name" width="130" height="56" border="0" /></a></td>
+          <td align="right" valign="top" style="padding: 5px 10px">
+          <!-- {foreach name=navigator_list from=$nav_top_list item=nav} -->
+            <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target=&quot;_blank&quot; <!-- {/if} -->&gt;{$nav.name}</a> 
+            <!-- {if !$smarty.foreach.navigator_list.last} -->
+            |
+            <!-- {/if} -->
+          <!-- {/foreach} -->
+          </td>
+        </tr>
+        <tr>
+          <td align="center"></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td id="cell-nav"><ul>
+        <li><a href="index.php">{$lang.home}</a></li>
+        <!-- {foreach name=navigator_list from=$nav_middle_list item=nav} -->
+            <!-- {if $smarty.foreach.navigator_list.last}-->
+                <li style="border-right:0px;"><a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target=&quot;_blank&quot; <!-- {/if} -->&gt;{$nav.name}</a></li>
+            <!-- {else} -->
+                <li><a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target=&quot;_blank&quot; <!-- {/if} -->&gt;{$nav.name}</a></li>
+            <!-- {/if} -->
+      <!-- {/foreach} -->
+      </ul></td>
+  </tr>
+</table>
+<div id="ECS_CATALOG" class="catalog-div" style="display:none"
+onmouseover="if (this.style.display != 'block') this.style.display='block';"
+onmouseout="if (this.style.display != 'none') this.style.display = 'none';">
+  <ul>
+    <!--{assign var="level" value=0}-->
+    <!-- {foreach from=$catalog_list item=cat} -->
+    <!-- {if $level > $cat.level} -->
+  </ul>
+  <!-- {/if}-->
+  <!-- {if $level < $cat.level} -->
+  <ul>
+  <!-- {/if} -->
+    <li class="{if $cat.level eq 0}top-cate{else}snd-cate{/if}"><a href="{$cat.url}" title="{if $cat.cat_desc neq ''}{$cat.cat_desc}{/if}">{$cat.cat_name}</a></li>
+    <!--{assign var="level" value=$cat.level}-->
+    <!-- {/foreach} -->
+  </ul>
+</div>
+<!-- #EndLibraryItem --><div id="search-bar">
+      <div id="search-left"><!-- TemplateBeginEditable name="导航栏下方左侧" --> <!-- #BeginLibraryItem "/library/ur_here.lbi" -->
+        <div style="padding:3px 15px 0px 15px;">{$lang.ur_here} {$ur_here}</div>
+        <!-- #EndLibraryItem --> <!-- TemplateEndEditable --></div>
+      <div id="search-right"><!-- TemplateBeginEditable name="导航栏下方右侧" --><!-- #BeginLibraryItem "/library/search_form.lbi" -->
+<div style="padding:0px 15px;">
+  <form id="searchForm" name="searchForm" method="get" action="library/search.php">
+    <img src="images/icon_search.gif" alt="search" />
+    <select name="category" id="category" style="vertical-align:middle;">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+    <input name="keywords" class="textbox" type="text" id="keyword" value="{$search_keywords|escape}" />
+    <input type="image" name="imageField" src="images/btn_go.gif" />
+    <a href="library/search.php?act=advanced_search">{$lang.advanced_search}</a>
+  </form>
+</div>
+{if $searchkeywords}
+<div style="padding:0px 15px;text-align: right;">
+{foreach from=$searchkeywords item=val}
+ <a href="library/search.php?keywords={$val|escape}">{$val}</a>
+{/foreach}
+</div>
+{/if}
+<!-- #EndLibraryItem --><!-- TemplateEndEditable --></div>
+    </div>
+    <!-- End #search-bar -->
+    <!-- TemplateBeginEditable name="通栏广告位" --> <!-- TemplateEndEditable -->
+    {insert_scripts files='common.js'}
+    <div id="container">
+      <div id="page-left"> <!-- TemplateBeginEditable name="主区域左侧" --><!-- #BeginLibraryItem "/library/member.lbi" -->
+
+{insert_scripts files='transport.js,utils.js'}
+<div><img src="images/memeber_login.jpg" alt="Login" width="170" height="40" /></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="background:url(images/login_bg.gif);">
+  <tr>
+    <td id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </td>
+    <td width="9" valign="top"><img src="images/login_right.gif" alt="shadow" width="9" height="131" /></td>
+  </tr>
+</table>
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/category_tree.lbi" -->
+<div class="title-div"><img src="images/category.gif" alt="Category" width="158" height="39" /></div>
+<div id="cat-div" style="padding:5px 10px;">
+  <ul>
+    <!--{foreach from=$categories item=cat}-->
+    <li> <span class="parent-cat"><a href="{$cat.url}">{$cat.name|escape:html}</a></span><br />
+      <!--{foreach from=$cat.children item=child}-->
+      <span style="white-space:nowrap;"><a href="{$child.url}">{$child.name|escape:html}</a></span>
+      <!--{/foreach}-->
+    </li>
+    <!--{/foreach}-->
+  </ul>
+</div>
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/top10.lbi" -->
+<div class="title-div"><img src="images/top10.gif" alt="Top 10" width="158" height="39" /></div>
+<div class="content-div">
+  <ul class="top-list">
+    <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+    <li><img src="images/top_{$smarty.foreach.top_goods.iteration}.gif" width="12" height="11" alt="top" /> <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a></li>
+    <!--{/foreach}-->
+  </ul>
+</div>
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/history.lbi" -->
+<div class="title-div"><img src="images/history.gif" alt="History" width="158" height="39" /></div>
+<div class="content-div">
+  <ul class="history-list">
+    {insert name='history'}
+  </ul>
+</div><!-- #EndLibraryItem --><!-- TemplateEndEditable -->
+<p style="text-align:center;"><a href="{$feed_url}"><img src="images/xml_rss2.gif" width="80" height="15" alt="" border="0" /></a></p>
+</div>
+
+      <!-- End #page-left -->
+      <div id="page-middle">
+        <div>
+          <div class="title-div"><img src="images/blue_arrow.gif" alt="arrow" width="37" height="37" style="vertical-align:middle;" /> <span style="vertical-align:middle; font-weight: bold;">{$brand.brand_name}</span></div>
+          <table width="100%" border="0">
+            <tr>
+              <td><!-- {if $brand.brand_logo} -->
+                <img src="{$data_dir}/brandlogo/{$brand.brand_logo}" />
+                <!-- {/if} --></td>
+              <td><p>{$brand.brand_desc|nl2br}</p>
+                <!-- {if $brand.site_url} -->
+                <p><b>{$lang.official_site}</b><a href="{$brand.site_url}" target="_blank">{$brand.site_url}</a></p>
+                <!-- {/if} -->
+                <p><b>{$lang.brand_category}</b>
+                  <!-- {foreach from=$brand_cat_list item=cat} -->
+                  <span><a href="{$cat.url}">{$cat.cat_name|escape:html} {if $cat.goods_count}({$cat.goods_count}){/if}</a></span>
+                  <!-- {/foreach} -->
+                </p></td>
+            </tr>
+          </table>
+          
+        </div>
+        <!-- TemplateBeginEditable name="主区域中间" --><!-- #BeginLibraryItem "/library/recommend_best.lbi" -->
+<!-- {if $best_goods} -->
+<div class="title-div"><img src="images/best_products.gif" alt="best products" width="158" height="39" /></div>
+<div class="content-div">
+  <!--{foreach from=$best_goods item=goods}-->
+  <table border="0" cellpadding="3" cellspacing="1" class="goods-table" style="float: left">
+    <tr>
+      <td align="center"><a href="{$goods.url}"><img src="{$goods.thumb}" border="0" alt="{$goods.name|escape:html}" class="thumb" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a><br />
+        <!-- {if $goods.promote_price neq ""} -->
+        {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span>
+        <!-- {else}-->
+        {$lang.shop_price}<span class="goods-price">{$goods.shop_price}</span>
+        <!--{/if}-->
+      </td>
+    </tr>
+  </table>
+  <!--{/foreach}-->
+  <br style="clear:both"/>
+  <div style="text-align:right"><a href="search.php?intro=best">more...</a></div>
+</div>
+<!-- {/if} -->
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/goods_list.lbi" -->
+<div class="title-div"><img src="images/goods_list.gif" alt="Goods List" width="158" height="39" align="left" />
+  <form action="{$smarty.server.PHP_SELF}" method="post" name="form" class="sort" id="form">
+  <a href="javascript:;" onclick="javascript:display_mode('list')">
+  <img src="library/images/display_mode_list&lt;!-- {if $pager.display == 'list'} --&gt;_act&lt;!-- {/if} --&gt;.gif" alt="{$lang.display.list}" />
+  </a>
+  <a href="javascript:;" onclick="javascript:display_mode('grid')">
+  <img src="library/images/display_mode_grid&lt;!-- {if $pager.display == 'grid'} --&gt;_act&lt;!-- {/if} --&gt;.gif" alt="{$lang.display.grid}" />
+  </a>
+  <a href="javascript:;" onclick="javascript:display_mode('text')">
+  <img src="library/images/display_mode_text&lt;!-- {if $pager.display == 'text'} --&gt;_act&lt;!-- {/if} --&gt;.gif" alt="{$lang.display.text}" />
+  </a>&nbsp;&nbsp;
+    <select name="sort">
+      {html_options options=$lang.sort selected=$pager.sort}
+    </select>
+    <select name="order">
+      {html_options options=$lang.order selected=$pager.order}
+    </select>
+    <input type="image" name="imageField" src="images/btn_go.gif" alt="go" />
+    <input type="hidden" name="category" value="{$category}" />
+    <input type="hidden" name="display" value="{$pager.display}" />
+    <input type="hidden" name="brand" value="{$brand_id}" />
+		<input type="hidden" name="price_min" value="{$price_min}" />
+		<input type="hidden" name="price_max" value="{$price_max}" />
+    <input type="hidden" name="page" value="{$pager.page}" />
+  </form>
+</div>
+<div class="content-div">
+  <!-- {if $category > 0} -->
+  <form action="library/compare.php" method="post" name="compareForm" id="compareForm" onsubmit="return compareGoods(this);">
+    <!-- {/if} -->
+    <!-- {if $pager.display == 'list'} -->
+        <!--{foreach from=$goods_list item=goods}-->
+        <table border="0" cellpadding="5" cellspacing="1" class="goods-list">
+          <tr>
+            <td width="35%" align="center"><!-- {if $category > 0} --><a href="javascript:;" onclick="addToCookie({$goods.goods_id},'{$goods.goods_name}')">{$lang.compare}</a>
+              <!-- {/if} -->
+			  <div style=" margin-left:30px; position:relative;float:left;">
+              <a href="{$goods.url}">
+              <img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" border="0"></a>
+			  <div style="position:absolute;right:0px; bottom:1px;">
+			   <!--{if $goods.promote_price } -->
+              <img src="library/images/watermark_promote.gif" />
+              <!--{else}-->
+                  <!--{if $goods.is_new} -->
+                  <img src="library/images/watermark_new.gif" />
+                  <!--{else}-->
+                    <!--{if $goods.is_best} -->
+                    <img src="library/images/watermark_best.gif" />
+                    <!--{/if}-->
+                  <!--{/if}-->
+              <!--{/if}-->
+			  </div>
+			  </div></td>
+            <td><a href="{$goods.url}"><strong>{$goods.goods_style_name}</strong></a><br />
+              {$goods.goods_brief}<br />
+              <!-- {if $show_marketprice} -->
+              {$lang.market_price}<span class="market-price">{$goods.market_price}</span>
+              <!-- {/if} -->
+              <!--{if $goods.promote_price neq "" } -->
+              {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span>
+              <!--{else}-->
+              {$lang.shop_price}<span class="goods-price">{$goods.shop_price}</span>
+              <!--{/if}-->
+              <div class="addto_cart"> <a href="javascript:collect({$goods.goods_id});"><img src="images/collect.gif" alt="{$lang.collect}" width="87" height="20" /></a> <a href="javascript:addToCart({$goods.goods_id})"><img src="images/add_cart.gif" alt="{$lang.add_to_cart}" width="87" height="20" /></a> </div></td>
+          </tr>
+        </table>
+        <!--{/foreach}-->
+    <!-- {elseif $pager.display == 'grid'} -->
+        <table border="0" cellpadding="5" cellspacing="1" class="goods-list">
+          <tr>
+          <!--{foreach name=wrap from=$goods_list item=goods}-->
+            <td width="50%" align="center">
+              <div style=" margin-left:30px; position:relative;float:left;">
+            <!-- {if $goods.goods_id} -->
+              <a href="{$goods.url}">
+              <img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" border="0"></a>
+			  <div style="position:absolute;right:0px; bottom:1px;">
+			   <!--{if $goods.promote_price } -->
+              <img src="library/images/watermark_promote.gif" />
+              <!--{else}-->
+                  <!--{if $goods.is_new} -->
+                  <img src="library/images/watermark_new.gif" />
+                  <!--{else}-->
+                    <!--{if $goods.is_best} -->
+                    <img src="library/images/watermark_best.gif" />
+                    <!--{/if}-->
+                  <!--{/if}-->
+              <!--{/if}-->
+			  </div>
+			  </div>
+                <br />
+                <!-- {if $show_marketprice} -->
+                    <span class="market-price">{$goods.market_price}</span>
+                <!-- {/if} -->
+                &nbsp;&nbsp;
+                <!--{if $goods.promote_price neq "" } -->
+                <span class="goods-price">{$goods.promote_price}</span>
+                <!--{else}-->
+                <span class="goods-price">{$goods.shop_price}</span>
+                <!--{/if}-->
+                <!-- {if $category > 0} -->
+                    <br /><a href="javascript:;" onclick="addToCookie({$goods.goods_id},'{$goods.goods_name}')">{$lang.compare}</a>
+                <!-- {/if} -->
+                <br />
+                <a href="{$goods.url}"><strong>{$goods.goods_name}</strong></a><br />
+                {$goods.goods_brief}<br />
+                <div class="addto_cart"> <a href="javascript:collect({$goods.goods_id});"><img src="images/collect.gif" alt="{$lang.collect}" width="87" height="20" /></a> <a href="javascript:addToCart({$goods.goods_id})"><img src="images/add_cart.gif" alt="{$lang.add_to_cart}" width="87" height="20" /></a> </div>
+            <!-- {/if} -->
+            </td>
+            <!-- {if ($smarty.foreach.wrap.iteration % 2 eq 0) and ($smarty.foreach.wrap.iteration ne $smarty.foreach.wrap.total) } -->
+        </tr>
+        <tr>
+            <!-- {/if} -->
+          <!--{/foreach}-->
+          </tr>
+        </table>
+    <!-- {elseif $pager.display == 'text'} -->
+        <!--{foreach from=$goods_list item=goods}-->
+        <table border="0" cellpadding="5" cellspacing="1" class="goods-list">
+          <tr>
+            <td><a href="{$goods.url}"><strong>{$goods.goods_style_name}</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- {if $category > 0} --><a href="javascript:;" onclick="addToCookie({$goods.goods_id},'{$goods.goods_name}')">{$lang.compare}</a>
+              <!-- {/if} -->
+              <br />
+              {$goods.goods_brief}<br />
+              <!-- {if $show_marketprice} -->
+              {$lang.market_price}<span class="market-price">{$goods.market_price}</span>
+              <!-- {/if} -->
+              <!--{if $goods.promote_price neq "" } -->
+              {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span>
+              <!--{else}-->
+              {$lang.shop_price}<span class="goods-price">{$goods.shop_price}</span>
+              <!--{/if}-->
+              <div class="addto_cart"> <a href="javascript:collect({$goods.goods_id});"><img src="images/collect.gif" alt="{$lang.collect}" width="87" height="20" /></a> <a href="javascript:addToCart({$goods.goods_id})"><img src="images/add_cart.gif" alt="{$lang.add_to_cart}" width="87" height="20" /></a> </div></td>
+          </tr>
+        </table>
+        <!--{/foreach}-->
+    <!-- {/if} -->
+    <!-- {if $category > 0} -->
+  </form>
+  <!-- {/if} -->
+</div>
+<script type="text/javascript">
+
+{foreach from=$lang.compare_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var compare_no_goods = "{$lang.compare_no_goods}";
+{literal}
+var catId = {$category};
+
+function addToCookie(goodsId,goodsName)
+{
+  var obj = new Object();
+  if(document.getCookie("compareItem" + catId) != null)
+  {
+    var value   = document.getCookie("compareItem" + catId);
+    obj = value.parseJSON();
+  }
+  var counter = 0;
+  for (var k in obj)
+  {
+    if (typeof(obj[k]) == "function")
+      continue;
+    counter++
+  }
+  if(counter>=4)
+  {
+    alert(count_limit);
+    return;
+  }
+  if (!obj[goodsId])
+  {
+    obj[goodsId] = goodsName;
+  }
+  else
+  {
+    alert(exist.replace("%s",goodsName)); 
+    return;
+  }
+
+  var li = document.createElement("LI");
+  li.innerHTML = goodsName;
+  li.id = "compareItem_" + goodsId;
+  li.style.listStyle = "none";
+  li.style.paddingLeft = "0px";
+
+  var delBtn = document.createElement("IMG");
+  delBtn.src = "images/drop.gif";
+  delBtn.className = goodsId;
+  delBtn.onclick = function()
+  {
+    document.getElementById("compareList").removeChild(this.parentNode);
+    removeItem(this.className);
+  }
+  li.insertBefore(delBtn,li.childNodes[0]);
+  document.getElementById("compareList").appendChild(li);
+
+  var date = new Date();
+  date.setTime(date.getTime() + 99999999);
+  
+  document.setCookie("compareItem" + catId, obj.toJSONString(), date.toGMTString())
+  if (document.getElementById("compareBox").style.display != "")
+    document.getElementById("compareBox").style.display = "";
+
+}
+
+function removeItem(id)
+{
+  var cookieValue = document.getCookie("compareItem" + catId);
+  var obj = cookieValue.parseJSON();
+  delete obj[id];
+  var date = new Date();
+  date.setTime(date.getTime() + 99999999);
+  document.removeCookie("compareItem" + catId);
+  var JSONString = obj.toJSONString();
+  document.setCookie("compareItem" + catId, obj.toJSONString(), date.toGMTString())
+  if(JSONString == "{}"){
+    document.getElementById("compareBox").style.display = "none";
+  }
+}
+
+window.onload = function()
+{
+  var compareBox = document.createElement("DIV");
+  var submitBtn = document.createElement("INPUT");
+  var compareList = document.createElement("UL");
+  compareBox.id = "compareBox";
+  compareBox.style.display = "none";
+  compareBox.style.top = "200px";
+  compareBox.align = "center";
+  submitBtn.type = "button";
+  submitBtn.value = button_compare;
+  submitBtn.onclick = function() {
+    var cookieValue = document.getCookie("compareItem" + catId);
+    var obj = cookieValue.parseJSON();
+    var url = document.location.href;
+    url = url.substring(0,url.lastIndexOf('/')+1) + "compare.php"; 
+    var i = 0;
+    for(var k in obj)
+    {
+      if(typeof(obj[k])=="function")
+      continue;
+      if(i==0)
+        url += "?goods[]=" + k;
+      else
+        url += "&goods[]=" + k;
+      i++;
+    }
+    if(i<2)
+    {
+      alert(compare_no_goods);
+      return ;
+    }
+    document.location.href = url;
+  }
+
+  compareBox.appendChild(submitBtn);
+  compareList.id = "compareList";
+  compareBox.appendChild(compareList);
+  document.body.appendChild(compareBox);
+  
+  var cookieValue = document.getCookie("compareItem" + catId);
+  
+  if (cookieValue != null)
+  {
+    if(cookieValue != "{}"){
+    compareBox.style.display = "";
+  }
+  var obj = cookieValue.parseJSON();
+  for (var k in obj)
+  {
+    if(typeof(obj[k])=="function")
+      continue;
+    var li = document.createElement("LI");
+    li.innerHTML = obj[k];
+    li.style.listStyle = "none";
+    var delBtn = document.createElement("IMG");
+    delBtn.src = "images/drop.gif";
+    delBtn.className = k;
+    delBtn.onclick = function(){
+    document.getElementById("compareList").removeChild(this.parentNode);
+    removeItem(this.className);
+  }
+  li.insertBefore(delBtn,li.childNodes[0]);
+
+  document.getElementById("compareList").appendChild(li);
+  
+}}
+};
+
+var lastScrollY = 0;
+
+  window.setInterval(function heartBeat()
+  {
+    if (!document.getElementById("compareBox")) return;
+    if (document.getElementById("compareBox").style.display != "") return;
+    var diffY = Math.max(document.documentElement.scrollTop,document.body.scrollTop);
+
+    var percent =.2*(diffY-lastScrollY);
+    if(percent>0) 
+      percent = Math.ceil(percent);
+    else
+      percent = Math.floor(percent);
+    document.getElementById("compareBox").style.top = parseInt(document.getElementById("compareBox").style.top)+ percent + "px";
+
+    lastScrollY = lastScrollY + percent;
+  },10);
+
+{/literal}
+</script>
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/pages.lbi" -->
+<form action="{$smarty.server.PHP_SELF}" method="get" name="selectPageForm" id="selectPageForm">
+  <div id="pager"> {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+    <!--{foreach from=$pager.search key=key item=item}-->
+    <input type="hidden" name="{$key}" value="{$item}" />
+    <!--{/foreach}-->
+    <select name="page" id="page" onchange="selectPage(this)">
+    {html_options options=$pager.array selected=$pager.page}
+    </select>
+  </div>
+</form>
+<script type="text/javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>
+<!-- #EndLibraryItem --><!-- TemplateEndEditable --></div>
+      <!-- End #page-middle -->
+      <div id="page-right"> <!-- TemplateBeginEditable name="主区域右侧" --><!-- #BeginLibraryItem "/library/recommend_promotion.lbi" -->
+<!-- {if $promotion_goods} -->
+<div class="title-div"><img src="images/sales.gif" alt="promotion products" width="158" height="39" /></div>
+<div class="content-div">
+  <!--{foreach from=$promotion_goods item=goods}-->
+  <table border="0" cellpadding="3" cellspacing="1" class="goods-table" style="float: left">
+    <tr>
+      <td align="center"><a href="{$goods.url}"><img src="{$goods.thumb}" border="0" alt="{$goods.name|escape:html}" class="thumb" /></a></td>
+    </tr>
+    <tr>
+      <td><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a><br />
+        {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span></td>
+    </tr>
+  </table>
+  <!--{/foreach}-->
+  <br />
+  <br style="clear: both" />
+  <div style="text-align:right"><a href="search.php?intro=promotion">more...</a></div>
+</div>
+<!-- {/if} -->
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/cart.lbi" -->
+{insert_scripts files='transport.js'}
+<div class="title-div"><img src="images/cart.gif" alt="Cart" width="158" height="39" /></div>
+<div class="cart-div" id="ECS_CARTINFO">{insert name='cart_info'}</div><!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/vote.lbi" -->
+<!-- {if $vote} -->
+
+{insert_scripts files='transport.js'}
+<div id="ECS_VOTE">
+  <div class="title-div"><img src="images/vote.gif" alt="Cart" width="158" height="39" /></div>
+  <div class="content-div">
+    <form id="formvote" name="ECS_VOTEFORM" method="post" action="javascript:submit_vote()">
+      <table id="vote_zone" width="100%" border="0" align="center" cellpadding="0" cellspacing="1">
+        <tr>
+          <!-- {foreach from=$vote item=title} -->
+          <td>{$title.vote_name}<br />
+            ({$lang.vote_times}:{$title.vote_count})</td>
+          <!-- {/foreach} -->
+        </tr>
+        <tr>
+          <!-- {foreach from=$vote item=title} -->
+          <td bgcolor="#FFFFFF" valign="top"><!-- {foreach from=$title.options item=item} -->
+            <!-- {if $title.can_multi eq 0} -->
+            <input type="checkbox" name="option_id" value="{$item.option_id}" />
+            {$item.option_name} ({$item.percent}%)<br />
+            <!-- {else} -->
+            <input type="radio" name="option_id" value="{$item.option_id}" />
+            {$item.option_name} ({$item.percent}%)<br />
+            <!-- {/if} -->
+            <!-- {/foreach} -->
+            <input type="hidden" name="type" value="{$title.can_multi}" />
+          </td>
+          <!-- {/foreach} -->
+        </tr>
+        <tr>
+          <td align="center"><br />
+            <input type="hidden" name="id" value="{$vote_id}" />
+            <input type="submit" name="submit" value="{$lang.submit_vote}" />
+            <input type="reset" value="{$lang.submit_reset}" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+{literal}
+/**
+ * 处理用户的投票
+ */
+function submit_vote()
+{
+  var frm     = document.forms['ECS_VOTEFORM'];
+  var type    = frm.elements['type'].value;
+  var vote_id = frm.elements['id'].value;
+  var option_id = 0;
+
+  if (frm.elements['option_id'].checked)
+  {
+    option_id = frm.elements['option_id'].value;
+  }
+  else
+  {
+    for (i=0; i<frm.elements['option_id'].length; i++ )
+    {
+      if (frm.elements['option_id'][i].checked)
+      {
+        option_id = (type == 0) ? option_id + "," + frm.elements['option_id'][i].value : frm.elements['option_id'][i].value;
+      }
+    }
+  }
+
+  if (option_id == 0)
+  {
+    return;
+  }
+  else
+  {
+    Ajax.call('vote.php', 'vote=' + vote_id + '&options=' + option_id + "&type=" + type, voteResponse, 'POST', 'JSON');
+  }
+}
+
+/**
+ * 处理投票的反馈信息
+ */
+function voteResponse(result)
+{
+  if (result.message.length > 0)
+  {
+    alert(result.message);
+  }
+  if (result.error == 0)
+  {
+    var layer = document.getElementById('ECS_VOTE');
+
+    if (layer)
+    {
+      layer.innerHTML = result.content;
+    }
+  }
+}
+{/literal}
+</script>
+<!-- {/if} --><!-- #EndLibraryItem --><!-- TemplateEndEditable --></div>
+      <!-- End #page-right -->
+      <div class="clear"></div>
+    </div>
+    <!-- #BeginLibraryItem "/library/help.lbi" -->
+<!--{if $helps}-->
+<table width="801" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#DADADA" class="clear" style="margin:10px auto 5px auto;">
+  <tr>
+    <!-- {foreach from=$helps item=help_cat} -->
+    <td class="help-cat"><img src="images/grey_arrow.gif" alt="" width="37" height="37" />{$help_cat.cat_name}</td>
+    <!-- {/foreach} -->
+  </tr>
+  <tr>
+    <!-- {foreach from=$helps item=help_cat} -->
+    <td bgcolor="#FFFFFF" valign="top"><ul>
+        <!-- {foreach from=$help_cat.article item=item} -->
+        <li><a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a></li>
+        <!-- {/foreach} -->
+      </ul></td>
+    <!-- {/foreach} -->
+  </tr>
+</table>
+<!--{/if}-->
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+<table width="801" border="0" align="center" cellpadding="5" cellspacing="0" style="margin:10px 0 20px 0;" id="footer-table">
+  <tr>
+    <td><img src="images/ecshop.gif" alt="ECSHOP" width="133" height="46" hspace="10" /></td>
+    <td width="6" id="foot-logo"><img src="images/footer_bg.gif" width="6" height="80" alt="" /></td>
+    <td> {$copyright}<br />
+      {$shop_address} {$shop_postcode} <br />
+      <!-- 客服电话{if $service_phone} -->
+      Tel: {$service_phone}
+      <!-- 结束客服电话{/if} -->
+      <!-- QQ 号码 {foreach from=$qq item=im} -->
+      <!-- {if $im} -->
+      <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$im}&amp;Site={$shop_name}&amp;Menu=yes" target="_blank"><img src="http://wpa.qq.com/pa?p=1:{$im}:4" height="16" border="0" alt="QQ" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束QQ号码 -->
+      <!-- 淘宝旺旺 {foreach from=$ww item=im} -->
+      <!-- {if $im} -->
+      <a href="http://amos1.taobao.com/msg.ww?v=2&amp;uid={$im|escape:url}&amp;s=2" target="_blank"><img src="http://amos1.taobao.com/online.ww?v=2&amp;uid={$im|escape:url}&amp;s=2" width="16" height="16" border="0" alt="淘宝旺旺" /> {$im}</a>
+      <!-- {/if} -->
+      <!--{/foreach} 结束淘宝旺旺 -->
+      <!-- Yahoo Messenger {foreach from=$ym item=im} -->
+      <!-- {if $im} -->
+      <a href="http://edit.yahoo.com/config/send_webmesg?.target={$im}n&amp;.src=pg" target="_blank"><img src="images/yahoo.gif" width="18" height="17" border="0" alt="Yahoo Messenger" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束Yahoo Messenger -->
+      <!-- MSN Messenger {foreach from=$msn item=im} -->
+      <!-- {if $im} -->
+      <img src="images/msn.gif" width="18" height="17" border="0" alt="MSN" /> {$im}
+      <!-- {/if} -->
+      <!-- {/foreach} 结束MSN Messenger -->
+      <!-- Skype {foreach from=$skype item=im} -->
+      <!-- {if $im} -->
+      <img src="http://mystatus.skype.com/smallclassic/{$im|escape:url}" alt="Skype" /><a href="skype:{$im|escape:url}?call">{$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} -->
+      <div>
+        <!-- 开始相关声明{foreach from=$declaration item=article} -->
+        <a href="{$article.url}" target="_blank">{$article.title}</a>
+        <!-- 相关声明{/foreach}-->
+      <!-- {foreach name=navigator_list from=$nav_bottom_list item=nav} -->
+        <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target=&quot;_blank&quot; <!-- {/if} -->&gt;{$nav.name}</a> 
+        <!-- {if !$smarty.foreach.navigator_list.last} -->
+        |
+        <!-- {/if} -->
+      <!-- {/foreach} -->
+      </div>
+      <!-- ICP 证书{if $icp_number} -->
+      <div> {$lang.icp_number}:<a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a> </div>
+      <!-- 结束ICP 证书{/if} -->
+      {insert name='query_info'}<br />
+      <a href="http://www.ecshop.com" target="_blank" style="font-size:10px">Powered by <strong><span style="color: #3366FF">ECSHOP</span> <span style="color: #FF9966">{$ecs_version}</span></strong></a><br />
+    </td>
+  </tr>
+</table>
+{if $stats_code}
+<div align="center">{$stats_code}</div>
+{/if}
+
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<!-- #EndLibraryItem --></div>
+  <!-- End #Wrapper -->
+  <div style="float:left;"><img src="images/page_right.gif" alt="" /></div>
+</div>
+<!-- End #globalWrapper -->
+</body>
+</html>

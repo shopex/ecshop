@@ -1,0 +1,183 @@
+<div id="footer">
+{$query_info}{$gzip_enabled}{$memory_info}<br />
+{$lang.copyright}
+</div>
+{insert_scripts files="../js/utils.js"}
+<!-- 新订单提示信息 -->
+<div id="popMsg">
+  <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#cfdef4" border="0">
+  <tr>
+    <td style="color: #0f2c8c" width="30" height="24"></td>
+    <td style="font-weight: normal; color: #1f336b; padding-top: 4px;padding-left: 4px" valign="center" width="100%"> {$lang.order_notify}</td>
+    <td style="padding-top: 2px;padding-right:2px" valign="center" align="right" width="19"><span title="关闭" style="cursor: hand;cursor:pointer;color:red;font-size:12px;font-weight:bold;margin-right:4px;" onclick="Message.close()" >×</span><!-- <img title=关闭 style="cursor: hand" onclick=closediv() hspace=3 src="msgclose.jpg"> --></td>
+  </tr>
+  <tr>
+    <td style="padding-right: 1px; padding-bottom: 1px" colspan="3" height="70">
+    <div id="popMsgContent">
+      <p>{$lang.new_order_1}<strong style="color:#ff0000" id="spanNewOrder">1</strong>{$lang.new_order_2}
+      <strong style="color:#ff0000" id="spanNewPaid">0</strong>{$lang.new_order_3}</p>
+      <p align="center" style="word-break:break-all"><a href="order.php?act=list"><span style="color:#ff0000">{$lang.new_order_link}</span></a></p>
+    </div>
+    </td>
+  </tr>
+  </table>
+</div>
+
+<!--
+<embed src="images/online.wav" width="0" height="0" autostart="false" name="msgBeep" id="msgBeep" enablejavascript="true"/>
+-->
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash2/cabs/swflash.cab#version=4,0,0,0" id="msgBeep" width="1" height="1">
+  <param name="movie" value="images/online.swf">
+  <param name="quality" value="high">
+  <embed src="images/online.swf" name="msgBeep" id="msgBeep" quality="high" width="0" height="0" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?p1_prod_version=shockwaveflash">
+  </embed>
+</object>
+
+<script language="JavaScript">
+document.onmousemove=function(e)
+{
+  var obj = Utils.srcElement(e);
+  if (typeof(obj.onclick) == 'function' && obj.onclick.toString().indexOf('listTable.edit') != -1)
+  {
+    obj.title = '{$lang.span_edit_help}';
+    obj.style.cssText = 'background: #278296;';
+    obj.onmouseout = function(e)
+    {
+      this.style.cssText = '';
+    }
+  }
+  else if (typeof(obj.href) != 'undefined' && obj.href.indexOf('listTable.sort') != -1)
+  {
+    obj.title = '{$lang.href_sort_help}';
+  }
+}
+<!--
+{if $enable_order_check eq '0'}
+startCheckOrder = function(){}
+{/if}
+{literal}
+
+var MyTodolist;
+function showTodoList(adminid)
+{
+  if(!MyTodolist)
+  {
+    var global = $import("../js/global.js","js");
+    global.onload = global.onreadystatechange= function()
+    {
+      if(this.readyState && this.readyState=="loading")return;
+      var md5 = $import("js/md5.js","js");
+      md5.onload = md5.onreadystatechange= function()
+      {
+        if(this.readyState && this.readyState=="loading")return;
+        var todolist = $import("js/todolist.js","js");
+        todolist.onload = todolist.onreadystatechange = function()
+        {
+          if(this.readyState && this.readyState=="loading")return;
+          MyTodolist = new Todolist();
+          MyTodolist.show();
+        }
+      }
+    }
+  }
+  else
+  {
+    if(MyTodolist.visibility)
+    {
+      MyTodolist.hide();
+    }
+    else
+    {
+      MyTodolist.show();
+    }
+  }
+}
+
+if (Browser.isIE)
+{
+  onscroll = function()
+  {
+    //document.getElementById('calculator').style.top = document.body.scrollTop;
+    document.getElementById('popMsg').style.top = (document.body.scrollTop + document.body.clientHeight - document.getElementById('popMsg').offsetHeight) + "px";
+  }
+}
+
+if (document.getElementById("listDiv"))
+{
+  document.getElementById("listDiv").onmouseover = function(e)
+  {
+    obj = Utils.srcElement(e);
+
+    if (obj)
+    {
+      if (obj.parentNode.tagName.toLowerCase() == "tr") row = obj.parentNode;
+      else if (obj.parentNode.parentNode.tagName.toLowerCase() == "tr") row = obj.parentNode.parentNode;
+      else return;
+
+      for (i = 0; i < row.cells.length; i++)
+      {
+        if (row.cells[i].tagName != "TH") row.cells[i].style.backgroundColor = '#F4FAFB';
+      }
+    }
+
+  }
+
+  document.getElementById("listDiv").onmouseout = function(e)
+  {
+    obj = Utils.srcElement(e);
+
+    if (obj)
+    {
+      if (obj.parentNode.tagName.toLowerCase() == "tr") row = obj.parentNode;
+      else if (obj.parentNode.parentNode.tagName.toLowerCase() == "tr") row = obj.parentNode.parentNode;
+      else return;
+
+      for (i = 0; i < row.cells.length; i++)
+      {
+          if (row.cells[i].tagName != "TH") row.cells[i].style.backgroundColor = '#FFF';
+      }
+    }
+  }
+
+  document.getElementById("listDiv").onclick = function(e)
+  {
+    var obj = Utils.srcElement(e);
+
+    if (obj.tagName == "INPUT" && obj.type == "checkbox")
+    {
+      if (!document.forms['listForm'])
+      {
+        return;
+      }
+      var nodes = document.forms['listForm'].elements;
+      var checked = false;
+
+      for (i = 0; i < nodes.length; i++)
+      {
+        if (nodes[i].checked)
+        {
+           checked = true;
+           break;
+         }
+      }
+
+      if(document.getElementById("btnSubmit"))
+      {
+        document.getElementById("btnSubmit").disabled = !checked;
+      }
+      for (i = 1; i <= 10; i++)
+      {
+        if (document.getElementById("btnSubmit" + i))
+        {
+          document.getElementById("btnSubmit" + i).disabled = !checked;
+        }
+      }
+    }
+  }
+
+}
+{/literal}
+//-->
+</script>
+</body>
+</html>

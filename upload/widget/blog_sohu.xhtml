@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<title>ECSHOP</title>
+<link rel="icon" type="image/x-icon" href="http://www.ecshop.com/favicon.ico" />
+<meta name="author" content="ECSHOP"/>
+<meta name="website" content="http://www.ecshop.com" />
+<meta name="version" content="0.2" />
+<meta name="keyword" content="ECSHOP 卖否 免费商店 免费网店 免费开店" />
+<meta name="screenshot" content="http://widget.maifou.net/widget/images/screenshot.jpg" />
+<meta name="thumbnail" content="http://widget.maifou.net/widget/images/thumbnail.jpg" />
+<meta name="debugMode" content="false" />
+<meta name="description" content="这是ECSHOP一个商品展示的widget.通过这个widget,您只要填写您的网店域名,就可以轻松的在您的Blog上展示您的商品了!(注:最多随机展示10个商品)" />
+<widget:preferences>
+  <preference type="text" name="domain" label="网址" />
+  <preference type="text" name="title" label="标题" />
+  <preference type="text" name="number" label="显示数" />
+</widget:preferences>
+
+<style type="text/css">
+<!--
+  dl,dt,dd { margin:0; padding:0; }
+  img { border:0; }
+  #goods_list { font-size:12px; border:1px solid #eaeaea; }
+  #goods_list dl { overflow:hidden; height:80px; padding:5px; border-bottom:1px dotted #f1f1f1; }
+  #goods_list dt { float:left; margin-right:5px; }
+  #goods_list dt img { width:80px; height:80px; }
+  #goods_list dd { color:#595959; padding-top:4px; }
+  #goods_list dd.name a { font-weight:bold; text-decoration:none; color:#96B0AF; }
+  #goods_list dd.name a:hover { text-decoration:underline; color:#595959; }
+  #goods_list .price { font-size:12px; font-style:italic; color:#f50; }
+  #goods_list .desc { color:#999; height:30px; }
+  #goods_list .more { text-align:right; padding:0 15px 0; }
+  #goods_list .more a { text-decoration:underline; color:#595959; }
+}
+-->
+</style>
+<script type="text/javascript">
+<!--
+  widget.onLoad = function ()
+  {
+    widget_request();
+  }
+
+  widget.onRefresh = function()
+  {
+    widget_request();
+  }
+
+  function widget_request()
+  {
+    var request_url = "/widget/blog_sohu.php";
+    var domain = widget.getValue("domain");
+    var title = widget.getValue("title");
+    var num = widget.getValue("number");
+    domain = domain.replace("http://", '');
+    domain = 'http://' + domain;
+    if (!title)
+    {
+        title = "我的小店";
+    }
+    if (domain)
+    {
+      widget.setTitle(title);
+      request_url = domain + request_url + '?num=' + num;
+      UWA.Data.getJson(request_url, show_goods)
+    }
+  }
+
+  function show_goods(obj)
+  {
+    var div = UWA.$element(widget.body.getElementsByTagName("div")[0]);
+    div.addClassName("main-div");
+    div.empty();
+    var goods = obj.goods;
+    if (goods.length > 0)
+    {
+      for (var i = 0; i < goods.length; i++)
+      {
+        var goods_link = obj.domain + 'goods.php?id=' + goods[i].goods_id;
+        var content = '<dl>';
+        content += '<dt><a href="' + goods_link + '" target="_blank"><img src="' + obj.domain + goods[i].goods_thumb + '" alt="' + goods[i].goods_name + '" /></a></dt>';
+        content += '<dd class="name">商品名称:&nbsp;&nbsp;<a href="' + goods_link + '">' + goods[i].goods_name + '</a></dd>';
+        content += '<dd>商品价格:&nbsp;&nbsp;<span class="price">' + goods[i].shop_price + '</span></dd>';
+        if (goods[i].promote_price > 0)
+        {
+          content += '<dd>促销价格:&nbsp;&nbsp;<span class="price">' + goods[i].shop_price + '</span></dd>';
+        }
+        if (goods[i].goods_brief)
+        {
+          content += '<dd class="desc">商品简介:&nbsp;&nbsp;' + goods[i].goods_brief + '</dd>';
+        }
+        content += '</dl>';
+        div.addContent(content);
+      }
+      content = '<p class="more"><a href="' + obj.domain + '">&gt;&gt;更多商品</a></p>';
+      div.addContent(content);
+    }
+  }
+-->
+</script>
+</head>
+<body>
+<div id="goods_list">
+点击"设置",填写您的网店域名(含http://)及显示数量,就可以展示您的网店商品拉!最多显示10个商品.<br />
+如果您还没有网店,请到<a href="http://www.maifou.net" target="_blank">http://www.maifou.net</a>免费申请注册一个即可!
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="list">
+    <title>文章列表</title>
+    <content>
+    <![CDATA[
+	<p><strong>文章列表</strong></p>
+	<p>列出所有的文章，可对文章标题，是否显示进行直接编辑。点击标题栏可对该栏目进行排序。<br />搜索栏可对文章标题进行关键字搜索<br />选中文章编号前的复选框可进行批量删除。</p>
+    <p><strong>添加新文章</strong></p>
+	<p>点击页面右上角的<a href="article.php?act=add" target="main-frame"><span class="link">添加新文章</span></a>链接即可。<span class="tips">第一次添加新文章前需先添加文章分类</span></p>
+	]]>
+    </content>
+  </section>
+
+  <section id="add">
+    <title>添加新文章</title>
+    <content>
+    <![CDATA[
+	<p><strong>添加新文章</strong></p>
+	<p>添加文章起始是文章一些基础信息。如果文章分类为空，说明你还没有添加文章分类，请先添加文章分类。带有红色星号选项必须填写。为文章增加内容请点击<span class="link">文章内容</span>标签。<span class="tips">如果在firefox下出现不能编辑文章情况请点击两次编辑区工具栏中的“Source”按钮。</span>。<br />
+	点击页面右上角的<a href="article.php?act=list" target="main-frame"><span class="link">文章列表</span></a>链接即可返回列表页面。
+	</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="edit">
+    <title>编辑文章</title>
+    <content>
+    <![CDATA[
+	<p><strong>编辑文章</strong></p>
+	<p><span class="tips">请在文章编辑器的载入完后再提交编辑内容，点击文章内容标签可查看文章编辑器是否载入完成</span></p>
+	]]>
+    </content>
+  </section>
+
+</help>

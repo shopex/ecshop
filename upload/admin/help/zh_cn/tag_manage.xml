@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="gbk"?>
+<help>
+    <section id="list">
+        <title>标签管理</title>
+        <content>
+            <![CDATA[
+<p>这里你可以查看用户添加的标签</p>
+<p>或者对标签进行删除操作</p>
+            ]]>
+        </content>
+    </section>
+</help>

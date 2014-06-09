@@ -1,0 +1,163 @@
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js"}
+<form action="cron.php" method="post" name="form">
+<div class="main-div">
+<table cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <th width="30%"></th>
+    <th width="70%"></th>
+  </tr>
+  <tr>
+    <td class="label">{$lang.cron_name}</td>
+    <td>
+      <input name="cron_name" type="text" value="{$cron.cron_name|escape}" size="40" readonly="readonly" style="background:#dddddd" />
+    </td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.cron_desc}</td>
+    <td><textarea name="cron_desc" cols="80" rows="5" style="" readonly="readonly" style="background:#dddddd" >{$cron.cron_desc|escape}</textarea></td>
+  </tr>
+  {foreach from=$cron.cron_config item=config}
+  <tr>
+    <td class="label">{$config.label}</td>
+    <!-- {if $config.type == "text"} -->
+    <td><input name="cfg_value[]" type="{$config.type}" value="{$config.value}" size="40" /></td>
+    <!-- {elseif $config.type == "textarea"} -->
+    <td><textarea name="cfg_value[]" cols="80" rows="5">{$config.value}</textarea></td>
+    <!-- {elseif $config.type == "select"} -->
+    <td><select name="cfg_value[]">{html_options options=$config.range selected=$config.value}</select></td>
+    <!-- {/if} -->
+    <input name="cfg_name[]" type="hidden" value="{$config.name}" />
+    <input name="cfg_type[]" type="hidden" value="{$config.type}" />
+  </tr>
+  {/foreach}
+  <tr>
+    <td class="label">{$lang.cron_time}</td>
+    <td>
+      <input type="radio" name="ttype" id="ttype_day" value="day" onClick="dotype('day');" />{$lang.cron_month}
+      <select name="cron_day" id="cron_day" disabled="true">{html_options options=$days selected=$cron.cronday}</select>&nbsp;{$lang.cron_day}&nbsp;
+      <input type="radio" name="ttype" id="ttype_week" value="week" onClick="dotype('week');"/>{$lang.cron_week}
+      <select name="cron_week" id="cron_week" disabled="true">{html_options options=$week selected=$cron.cronweek}</select>
+      <input type="radio" name="ttype" id="ttype_unlimit" value="unlimit" onClick="dotype('unlimit')">{$lang.cron_unlimit}
+      <br />
+      {$lang.cron_thatday}<select name="cron_hour">{html_options options=$hours selected=$cron.cronhour}</select>&nbsp;{$lang.cron_hour}&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="label"><a href="javascript:showNotice('notice_minute');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.cron_minute}</td>
+    <td><input name="cron_minute" type="text" value="{$cron.cronminute}" size="40" />
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+<span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="notice_minute">{$lang.notice_minute}</span></td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.cron_run_once}</td>
+    <td><input name="cron_run_once" type="checkbox" value="1" {$cron.autoclose} /></td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.cron_advance}</td>
+    <td><label><input name="show_advance" id="show_advance" type="checkbox" value="1" onClick="show();" />{$lang.cron_show_advance}</label></td>
+  </tr>
+  <tr id="advance_1">
+    <td class="label"><a href="javascript:showNotice('notice_alow_ip');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.cron_allow_ip}</td>
+    <td><input name="allow_ip" type="text" value="{$cron.allow_ip}" size="40" />
+    </td>
+  </tr>
+  <tr id="advance_2">
+    <td></td>
+    <td>
+<span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="notice_alow_ip">{$lang.notice_alow_ip}</span></td>
+  </tr>
+  <tr id="advance_3">
+    <td class="label"><a href="javascript:showNotice('notice_alow_files');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.cron_alow_files}</td>
+    <td>
+    {foreach from=$page_list key=page_list item=list}
+    <div style="width:200px;float:left;">
+    <label><input type="checkbox" name="alow_files[]" value="{$page_list}.php" id="{$page_list}" class="checkbox" {if $list eq 1} checked="true" {/if} />
+    {$lang.page.$page_list}</label>
+    </div>
+    {/foreach}
+    </td>
+  </tr>
+  <tr id="advance_4">
+    <td></td>
+    <td>
+<span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="notice_alow_files">{$lang.notice_alow_files}</span></td>
+  </tr>
+  <tr align="center">
+    <td colspan="2">
+      <input type="hidden"  name="cron_id"       value="{$cron.cron_id}" />
+      <input type="hidden"  name="step"       value="2" />
+      <input type="hidden"  name="act"       value="{$cron.cron_act}" />
+      <input type="hidden"  name="cron_code"     value="{$cron.cron_code}" />
+      <input type="submit" class="button" name="Submit"       value="{$lang.button_submit}" />
+      <input type="reset" class="button"  name="Reset"        value="{$lang.button_reset}" />
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+function dotype(type)
+{
+    var a,b;
+    if(type=='unlimit')
+    {
+      document.getElementById('cron_day').disabled = true;
+      document.getElementById('cron_week').disabled = true;
+      document.getElementById('ttype_unlimit').checked = true;
+    }
+    else if(type == 'day')
+    {
+      document.getElementById('cron_day').disabled = false;
+      document.getElementById('cron_week').disabled = true;
+      document.getElementById('ttype_day').checked = true;
+    }
+    else if(type == 'week')
+    {
+      document.getElementById('cron_day').disabled = true;
+      document.getElementById('cron_week').disabled = false;
+      document.getElementById('ttype_week').checked = true;
+    }
+}
+function show()
+{
+    if(document.form.show_advance.checked)
+    {
+        document.getElementById('advance_1').style.display="";
+        document.getElementById('advance_2').style.display="";
+        document.getElementById('advance_3').style.display="";
+        document.getElementById('advance_4').style.display="";
+    }
+    else
+    {
+        document.getElementById('advance_1').style.display="none";
+        document.getElementById('advance_2').style.display="none";
+        document.getElementById('advance_3').style.display="none";
+        document.getElementById('advance_4').style.display="none";
+    }
+}
+{/literal}
+{if $cron.cronday > 0}
+dotype('day');
+{elseif $cron.cronweek > 0}
+dotype('week');
+{else}
+dotype('unlimit');
+{/if}
+        document.getElementById('advance_1').style.display="none";
+        document.getElementById('advance_2').style.display="none";
+        document.getElementById('advance_3').style.display="none";
+        document.getElementById('advance_4').style.display="none";
+//-->
+</script>
+{include file="pagefooter.htm"}

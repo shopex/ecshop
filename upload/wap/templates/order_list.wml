@@ -1,0 +1,26 @@
+<!DOCTYPE wml PUBLIC '-//WAPFORUM//DTD WML 1.1//EN' 'http://www.wapforum.org/DTD/wml_1.1.xml'>
+<wml>
+<head><meta http-equiv='Cache-Control' content='max-age=0'/></head>
+<card id='ecshop' title='ECShop_WAP'>
+<p align='left'>
+我的订单<br/>
+--------------<br/>
+{foreach from=$orders item=order_data}
+    {$order_data.order_id}.订单号:{$order_data.order_sn}<br/>
+    下单时间:{$order_data.order_time},价格:{$order_data.total_fee}
+    订单状态:{$order_data.order_status}<br/>
+    --------------<br/>
+ {foreachelse}
+    暂时您没有订单<br/>
+    --------------<br/>
+{/foreach}
+{if $pagebar}
+    {$pagebar}<br/>
+{/if}
+<anchor title='back'>回上一页<prev/></anchor><br/>
+<a href='user.php'>回用户中心</a><br/>
+<a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</card>
+</wml>

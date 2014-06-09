@@ -1,0 +1,20 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $group_buy_goods} -->
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.group_buy_goods}</span><a href="group_buy.php"><img src="../images/more.gif"></a></h3>
+    <div class="centerPadd">
+    <div class="clearfix goodsBox" style="border:none;">
+      <!--{foreach from=$group_buy_goods item=goods}-->
+      <div class="goodsItem">
+           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.goods_name|escape:html}" class="goodsimg" /></a><br />
+					 <p><a href="{$goods.url}" title="{$goods.goods_name|escape:html}">{$goods.short_style_name|escape:html}</a></p>
+           <font class="shop_s">{$goods.last_price}</font>
+        </div>
+      <!--{/foreach}-->
+    </div>
+    </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->

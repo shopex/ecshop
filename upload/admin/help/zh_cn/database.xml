@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<help>
+
+  <section id="backup">
+    <title>数据库管理</title>
+    <content>
+    <![CDATA[
+	<p><strong>数据库备份</strong></p>
+	<p>标准备份备份包括商品相关，订单相关，文章相关，会员数据，网店设置，支付配送 相关的数据表。备份结束将所有备份文件打包下载。<br />
+	备份文件名可以随意更改，但后缀名必须为.zip。
+	</p>
+
+    <p><strong>备份恢复</strong></p>
+	<p>备份回复只能能识别sql文件。使用本软件备份的数据需解压缩后才能上传。</p>
+	]]>
+    </content>
+  </section>
+
+  <section id="optimize">
+    <title>数据库表优化</title>
+    <content>
+    <![CDATA[
+	<p><strong>数据库备份</strong></p>
+	<p>该页面显示ecshop所使用得所有数据表的记录数，数据大小，索引值，碎片个数。当最后一列碎片数太多时就需要进行数据表优化。<br />数据表优化可以清理碎片，提高数据表访问速度。</p>
+	]]>
+    </content>
+  </section>
+
+</help>

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ECShop_mobile</title>
+{insert_scripts files="../../js/utils.js,../js/transport.js"}
+{insert_scripts files="../../js/region.js"}
+
+<script type="text/javascript">
+region.isAdmin=true;
+</script>
+</head>
+
+<body>
+<p align='left'>
+{if $user_name}
+    [<a href='user.php?act=user_center'>用户中心</a>]&nbsp;[<a href='user.php?act=logout'>退出</a>]<br/>
+{else}
+    ［<a href='user.php?act=login'>登录</a>］&nbsp;［<a href='user.php?act=register'>免费注册</a>］<br/>
+{/if}
+<br />
+<font color="#FF0000">{$tips}</font>
+<br />
+<br />
+
+<a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</body>
+</html>

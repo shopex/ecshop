@@ -1,0 +1,114 @@
+<!-- $Id: exchange_goods_info.htm 15544 2009-01-09 01:54:28Z zblikai $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,selectzone.js,validator.js"}
+<!-- start goods form -->
+<div class="tab-div">
+<form  action="exchange_goods.php" method="post" name="theForm" onsubmit="return validate();">
+  <table width="90%" id="general-table">
+    <tr>
+      <td align="right">{$lang.keywords}</td>
+      <td><input type="text" name="keywords" size="30" />
+      <input type="button" value="{$lang.button_search}" class="button" onclick="searchGoods()" {if $form_action eq 'update'} disabled="true" {/if}></td>
+    </tr>
+    <tr>
+      <td class="label"><a href="javascript:showNotice('noticegoodsid');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.goodsid}</td>
+      <td>
+        <select name="goods_id">
+        {$goods.option}
+        </select>
+        {$lang.require_field}
+       <br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticegoodsid">{$lang.notice_goodsid}</span></td>
+    </tr>
+    <tr>
+      <td class="label"><a href="javascript:showNotice('noticepackagePrice');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.integral}</td>
+      <td><input type="text" name="exchange_integral" maxlength="60" size="20" value="{$goods.exchange_integral}" />{$lang.require_field}<br /><span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticepackagePrice">{$lang.notice_integral}</span></td>
+    </tr>
+    <tr>
+      <td class="narrow-label">{$lang.is_exchange}</td>
+      <td>
+        <input type="radio" name="is_exchange" value="1" {if $goods.is_exchange eq 1}checked{/if}> {$lang.isexchange}
+        <input type="radio" name="is_exchange" value="0" {if $goods.is_exchange eq 0}checked{/if}> {$lang.isnotexchange}{$lang.require_field}</td>
+    </tr>
+    <tr>
+      <td class="narrow-label">{$lang.is_hot}</td>
+      <td>
+        <input type="radio" name="is_hot" value="1" {if $goods.is_hot eq 1}checked{/if}> {$lang.ishot}
+        <input type="radio" name="is_hot" value="0" {if $goods.is_hot eq 0}checked{/if}> {$lang.isnothot}{$lang.require_field}</td>
+    </tr>
+  </table>
+
+  <div class="button-div">
+    <input type="hidden" name="act" value="{$form_action}" />
+    <input type="submit" value="{$lang.button_submit}" class="button"  />
+    <input type="reset" value="{$lang.button_reset}" class="button" />
+  </div>
+</form>
+</div>
+<!-- end goods form -->
+<script language="JavaScript">
+
+{literal}
+onload = function()
+{
+  // 开始检查订单
+  startCheckOrder();
+}
+
+function validate()
+{
+  var validator = new Validator('theForm');
+  validator.isNullOption("goods_id", no_goods_id);
+  validator.isNumber("exchange_integral", invalid_exchange_integral, true);
+
+
+  return validator.passed();
+}
+
+function searchGoods()
+{
+    var filter = new Object;
+    filter.keyword = document.forms['theForm'].elements['keywords'].value;
+
+    Ajax.call('exchange_goods.php?is_ajax=1&act=search_goods', filter, searchGoodsResponse, 'GET', 'JSON')
+}
+
+function searchGoodsResponse(result)
+{
+  var frm = document.forms['theForm'];
+  var sel = frm.elements['goods_id'];
+
+  if (result.error == 0)
+  {
+    /* 清除 options */
+    sel.length = 0;
+
+    /* 创建 options */
+    var goods = result.content;
+    if (goods)
+    {
+        for (i = 0; i < goods.length; i++)
+        {
+            var opt = document.createElement("OPTION");
+            opt.value = goods[i].goods_id;
+            opt.text  = goods[i].goods_name;
+            sel.options.add(opt);
+        }
+    }
+    else
+    {
+        var opt = document.createElement("OPTION");
+        opt.value = 0;
+        opt.text  = search_is_null;
+        sel.options.add(opt);
+    }
+  }
+
+  if (result.message.length > 0)
+  {
+    alert(result.message);
+  }
+}
+
+{/literal}
+</script>
+{include file="pagefooter.htm"}

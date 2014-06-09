@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="title-div"><img src="../images/grey_arrow.gif" width="37" height="37" alt="" border="0" style="vertical-align:middle" /><a href="{$articles_cat.url}">{$articles_cat.name|escape:html}</a></div>
+<div class="content-div">
+  <ul class="article-list">
+  <!--{foreach from=$articles item=article}-->
+  <li><a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title}</a> {$article.add_time}</li>
+  <!--{/foreach}-->
+  </ul>
+  <p><div align="right"><a href="{$articles_cat.url}"><img src="../images/more.gif" alt="more" width="50" height="11" border="0" /></a></div></p>
+</div>

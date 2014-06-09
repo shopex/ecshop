@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ECShop_mobile</title>
+</head>
+
+<body>
+
+<p align='left'>
+{if $user_name}
+	[<a href='user.php?act=user_center'>用户中心</a>]&nbsp;[<a href='user.php?act=logout'>退出</a>]<br/>
+{else}
+    ［<a href='user.php?act=login'>登录</a>］&nbsp;［<a href='user.php?act=register'>免费注册</a>］<br/>
+{/if}
+<img src='{$wap_logo|default:../images/wap_logo.png}' alt='LOGO' /><br/>
+
+&gt;&gt;商品分类&gt;&gt;<br/>
+{foreach from=$pcat_array item=pcat_data}
+<a href='category.php?c_id={$pcat_data.id}'>{$pcat_data.name}</a><br/>
+{foreach from=$pcat_data['cat_id'] item=cat_data}
+><a href='category.php?c_id={$cat_data.id}'>{$cat_data.name}</a><br/>
+{/foreach}
+{/foreach}
+<br />
+<a href="javascript:history.back(-1)">回上一页</a><br/>
+<br />
+<a href='index.php'>返回首页</a>
+{$footer}
+
+</body>
+</html>

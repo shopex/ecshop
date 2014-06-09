@@ -1,0 +1,56 @@
+<!-- $Id: sms_send_history_query_ui.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<div id="main-div">
+<div class="main-div">
+<form method="POST" action="sms.php?act=get_send_history" name="sms-send-history-form" onsubmit="return validate();">
+<table>
+  <tr>
+    <td class="label">{$lang.start_date}:</td>
+    <td><input type="text" name="start_date" maxlength="20" size="20" value="" />&nbsp;&nbsp;&nbsp;&nbsp;{$lang.date_notice}</td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.end_date}:</td>
+    <td><input type="text" name="end_date" maxlength="20" size="20" value="" />&nbsp;&nbsp;&nbsp;&nbsp;{$lang.date_notice}</td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+</div>
+{literal}
+<script type="text/javascript" language="JavaScript">
+<!--
+function  validate() {
+  var f = document['sms-send-history-form'],
+  start_date = f.start_date.value,
+  end_date = f.end_date.value;
+
+  var reEmpty = /^\s*$/,
+      reDateFormat = /^\d{4}-\d{2}-\d{2}$/,
+      errorStr = '';
+
+  if (!reEmpty.test(start_date) && !reDateFormat.test(start_date)) {
+    errorStr += start_date_format_error + "\n";
+  }
+
+  if (!reEmpty.test(end_date) && !reDateFormat.test(end_date)) {
+    errorStr += end_date_format_error + "\n";
+  }
+
+  if (errorStr === '') {
+    return true;
+  } else {
+    alert(errorStr);
+    return false;
+  }
+}
+
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

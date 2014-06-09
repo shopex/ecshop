@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ECShop_mobile</title>
+</head>
+
+<body>
+<p align='left'>
+{if $all_cat}
+分类列表<br/>
+--------------<br/>
+{foreach from=$cat_array item=cat_data}
+<a href='category.php?c_id={$cat_data.id}'>{$cat_data.name}</a><br/>
+{foreach from=$cat_data['cat_id'] item=ccat_data}
+><a href='category.php?c_id={$ccat_data.id}'>{$ccat_data.name}</a><br/>
+{/foreach}
+{/foreach}
+{else}
+{$cat_name}的商品列表<br/>
+--------------<br/>
+
+{if $smarty.get.order_price}
+当前为价格降序排列，<a href='category.php?c_id={$smarty.get.c_id}{if $smarty.get.page}&page={$smarty.get.page}{/if}'>转换成价格升序排列</a>
+{else}
+当前为价格升序排列，<a href='category.php?c_id={$smarty.get.c_id}&order_price=1{if $smarty.get.page}&page={$smarty.get.page}{/if}'>转换成价格降序排列</a>
+{/if}<br/><br/>
+{if $cat_children}
+  下级分类<br/>
+    {foreach from=$cat_children item=child_data}
+        <a href='category.php?c_id={$child_data.id}'>{$child_data.name}</a><br/>
+    {/foreach}
+    --------------<br/>
+{/if}
+{foreach from=$goods_data item=goods}
+    {$goods.i}.<a href='goods.php?id={$goods.id}'>{$goods.name}</a>[{$goods.price}]<br/>
+{foreachelse}
+    暂无此类商品<br/>
+{/foreach}<br/>
+{if $pagebar}
+{$pagebar}<br/>
+{/if}
+{/if}
+--------------<br/>
+<a href="javascript:history.back(-1)">回上一页</a><br/>
+{if $pcat_array}
+    <a href='category.php?c_id={$pcat_array.cat_id}'>回{$pcat_array.cat_name}</a><br/>
+{/if}
+{if $c_id}
+    <a href='category.php'>回所有分类</a><br/>
+{/if}
+<a href='index.php'>返回首页</a>
+{$footer}
+</p>
+</body>
+</html>

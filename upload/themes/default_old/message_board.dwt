@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta name="Description" content="{$description}" />
+{if $auto_redirect}
+<meta http-equiv="refresh" content="3;URL={$message.href}" />
+{/if}
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+<body>
+<div id="globalWrapper">
+  <div style="float:left;"><img src="images/page_left.gif" alt="" /></div>
+  <div id="wrapper"><!-- #BeginLibraryItem "/library/page_header.lbi" -->
+<table width="100%" border="0" cellpadding="0" cellspacing="3" id="page-header">
+  <tr>
+    <td id="cell-logo"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td rowspan="2"><a href="index.php" name="top" id="top"><img src="images/logo.gif" alt="shopping mall name" width="130" height="56" border="0" /></a></td>
+          <td align="right" valign="top" style="padding: 5px 10px"><a href="flow.php">{$lang.view_cart}</a> | <a href="pick_out.php">{$lang.pick_out}</a> | <a href="group_buy.php">{$lang.group_buy_goods}</a> | <a href="snatch.php">{$lang.snatch}</a> | <a href="catalog.php" onmouseover="showCatalog(this)" onmouseout="hideCatalog()"><strong>{$lang.catalog}</strong></a> | <a href="tag_cloud.php">{$lang.tag_cloud}</a> | <a href="user.php">{$lang.user_center}</a> </td>
+        </tr>
+        <tr>
+          <td align="center"></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td id="cell-nav"><ul>
+        <li><a href="index.php">{$lang.home}</a></li>
+        <!-- {foreach name=nav_list from=$nav_list item=nav} -->
+        <!-- {if $smarty.foreach.nav_list.last}-->
+        <li style="border-right:0px;"><a href="{$nav.url}">{$nav.label}</a></li>
+        <!-- {else}-->
+        <li><a href="{$nav.url}">{$nav.label}</a></li>
+        <!-- {/if}-->
+        <!-- {/foreach} -->
+      </ul></td>
+  </tr>
+</table>
+<div id="ECS_CATALOG" class="catalog-div" style="display:none"
+onmouseover="if (this.style.display != 'block') this.style.display='block';"
+onmouseout="if (this.style.display != 'none') this.style.display = 'none';">
+  <ul>
+    <!--{assign var="level" value=0}-->
+    <!-- {foreach from=$catalog_list item=cat} -->
+    <!-- {if $level > $cat.level} -->
+  </ul>
+  <!-- {/if}-->
+  <!-- {if $level < $cat.level} -->
+  <ul>
+    <!-- {/if} -->
+    <li class="{if $cat.level eq 0}top-cate{else}snd-cate{/if}"><a href="{$cat.url}" title="{if $cat.cat_desc neq ''}{$cat.cat_desc}{/if}">{$cat.cat_name}</a></li>
+    <!--{assign var="level" value=$cat.level}-->
+    <!-- {/foreach} -->
+  </ul>
+</div>
+<!-- #EndLibraryItem --><div id="search-bar">
+      <div id="search-left"><!-- TemplateBeginEditable name="导航栏下方左侧" -->
+<!-- #BeginLibraryItem "/library/ur_here.lbi" -->
+
+<div style="padding:3px 15px 0px 15px;">{$lang.ur_here} {$ur_here}</div>
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable --></div>
+      <div id="search-right"><!-- TemplateBeginEditable name="导航栏下方右侧" -->
+<!-- #BeginLibraryItem "/library/search_form.lbi" -->
+
+<div style="padding:0px 15px;">
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()">
+    <img src="../images/icon_search.gif" alt="search" />
+    <select name="category" id="category" style="vertical-align:middle;">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+    <input name="keywords" class="textbox" type="text" id="keyword" value="{$search_keywords|escape}" />
+    <input type="image" name="imageField" src="../images/btn_go.gif" />
+    <a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+  </form>
+</div>
+{if $searchkeywords}
+<div style="padding:0px 15px;text-align: right;">
+{$lang.hot_search} : 
+{foreach from=$searchkeywords item=val}
+ <a href="search.php?keywords={$val|escape}">{$val}</a>
+{/foreach}
+</div>
+{/if}
+
+<script type="text/javascript">
+{literal}
+<!--
+function checkSearchForm()
+{
+    if(document.getElementById('keyword').value)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+-->
+{/literal}
+</script>
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable --></div>
+    </div>
+    <!-- End #search-bar --><!-- TemplateBeginEditable name="通栏广告位" -->
+<!-- TemplateEndEditable -->
+    <div id="container4">
+      <div id="page-left"> <!-- TemplateBeginEditable name="主区域左侧" -->
+<!-- #BeginLibraryItem "/library/member.lbi" -->
+
+
+{insert_scripts files='transport.js,utils.js'}
+<div><img src="../images/memeber_login.jpg" alt="Login" width="170" height="40" /></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="background:url(../images/login_bg.gif);">
+  <tr>
+    <td id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </td>
+    <td width="9" valign="top"><img src="../images/login_right.gif" alt="shadow" width="9" height="131" /></td>
+  </tr>
+</table>
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/top10.lbi" -->
+
+<div class="title-div"><img src="../images/top10.gif" alt="Top 10" width="158" height="39" /></div>
+<div class="content-div">
+  <ul class="top-list">
+    <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+    <li><img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" width="12" height="11" alt="top" /> <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a></li>
+    <!--{/foreach}-->
+  </ul>
+</div>
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/history.lbi" -->
+
+<div class="title-div"><img src="../images/history.gif" alt="History" width="158" height="39" /></div>
+<div class="content-div">
+  <ul class="history-list">
+    {insert name='history'}
+  </ul>
+</div>
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable --></div>
+      <!-- End #page-left -->
+<div id="page-right" style="float:left;width:628px;padding:0px 1px;">
+<!-- TemplateBeginEditable name="主区域右侧" -->
+<!-- #BeginLibraryItem "/library/message_list.lbi" -->
+<div class="message-board-header">
+    <h3 class="message-board-title">{$lang.message_board}</h3>
+    <span><a href="#formMsg">{$lang.post_message}</a></span>
+</div>
+<div>
+    <ul id="message-board-list">
+    <!--{foreach name=message_lists from=$msg_lists key=key item=msg}-->
+      <li class="message-board-line1">
+         <strong>{$msg.user_name}</strong>
+         <i>{$msg.msg_time}</i>
+         <h4 class="msg-title">
+         {$msg.msg_title}
+         </h4>
+         <p class="msg-content">
+         {$msg.msg_content}
+         </p>
+         <p class="msg-reply">
+         {$msg.re_msg_content}
+         </p>
+       </li>
+     <!--{/foreach}-->
+     </ul>
+</div>
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+
+        <!-- #BeginLibraryItem "/library/pages.lbi" -->
+<form action="{$smarty.server.PHP_SELF}" method="get" name="selectPageForm" id="selectPageForm">
+  <div id="pager"> {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+    <!--{foreach from=$pager.search key=key item=item}-->
+    <input type="hidden" name="{$key}" value="{$item}" />
+    <!--{/foreach}-->
+    <select name="page" id="page" onchange="selectPage(this)">
+    {html_options options=$pager.array selected=$pager.page}
+    </select>
+  </div>
+</form>
+<script type="text/javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>
+<!-- #EndLibraryItem -->
+          <a name="formMsg"></a>
+          <form action="message.php" method="post" name="formMsg" onSubmit="return submitMsgBoard()">
+            <table width="100%" border="0" cellpadding="3" style="border-top:2px solid #dadada;margin:10px 0;border-collapse:collapse;">
+              <tr>
+                <td align="right">{$lang.username}</td>
+                <td><!--{if $smarty.session.user_name}-->{$username}<label for="anonymous"><input type="checkbox" name="anonymous" value="1" id="anonymous" />{$lang.message_anonymous}</label><!--{else}--><input name="user_name" type="text" size="15" value="{$lang.anonymous}" /><!--{/if}--></td>
+              </tr>
+              <tr>
+                <td align="right">{$lang.email}</td>
+                <td><input name="user_email" type="text" size="20" value="{$smarty.session.email|escape}" /></td>
+              </tr>
+              <tr>
+                <td align="right">{$lang.message_board_type}</td>
+                <td><input name="msg_type" type="radio" value="0" checked="checked" />
+                  {$lang.message_type[0]}
+                  <input type="radio" name="msg_type" value="1" />
+                  {$lang.message_type[1]}
+                  <input type="radio" name="msg_type" value="2" />
+                  {$lang.message_type[2]}
+                  <input type="radio" name="msg_type" value="3" />
+                  {$lang.message_type[3]}
+                  <input type="radio" name="msg_type" value="4" />
+                  {$lang.message_type[4]} </td>
+              </tr>
+              <tr>
+                <td align="right">{$lang.message_title}</td>
+                <td><input name="msg_title" type="text" size="30" /></td>
+              </tr>
+            <!-- 判断是否启用验证码{if $enabled_captcha} -->
+              <tr>
+                <td align="right">{$lang.comment_captcha}</td>
+                <td><input type="text" size="8" name="captcha" />
+                <img src="captcha.php?{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?'+Math.random()" /> </td>
+              </tr>
+            <!--{/if}-->
+              <tr>
+                <td align="right" valign="top">{$lang.message_content}</td>
+                <td><textarea name="msg_content" cols="50" rows="4" wrap="virtual"></textarea></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td><input type="hidden" name="act" value="act_add_message" />
+                  <input type="submit" value="{$lang.post_message}" />
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td> {$lang.img_type_tips}<br />
+                  {$lang.img_type_list} </td>
+              </tr>
+            </table>
+          </form>
+        <script type="text/javascript">
+        {foreach from=$lang.message_board_js item=item key=key}
+        var {$key} = "{$item}";
+        {/foreach}
+        {literal}
+        /**
+         * 提交评论信息
+        */
+        function submitMsgBoard(frm)
+        {
+            var frm         = document.forms['formMsg'];
+            var msg_title   = frm.elements['msg_title'].value;
+            var msg_content = frm.elements['msg_content'].value;
+            var msg = '';
+
+            if (msg_title.length == 0)
+            {
+                msg += msg_title_empty + '\n';
+            }
+            if (frm.elements['captcha'] && frm.elements['captcha'].value.length==0)
+            {
+                msg += msg_captcha_empty + '\n'
+            }
+            if (msg_content.length == 0)
+            {
+                msg += msg_content_empty + '\n'
+            }
+            if (msg_title.length > 200)
+            {
+                msg += msg_title_limit + '\n';
+            }
+
+            if (msg.length > 0)
+            {
+                alert(msg);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        {/literal}
+        </script>
+</div>
+      <!-- End #page-right -->
+      <div class="clear"></div>
+    </div>
+    <!-- #BeginLibraryItem "/library/help.lbi" -->
+<!--{if $helps}-->
+<table width="801" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#DADADA" class="clear" style="margin:10px auto 5px auto;">
+  <tr>
+    <!-- {foreach from=$helps item=help_cat} -->
+    <td class="help-cat"><img src="images/grey_arrow.gif" alt="" width="37" height="37" />{$help_cat.cat_name}</td>
+    <!-- {/foreach} -->
+  </tr>
+  <tr>
+    <!-- {foreach from=$helps item=help_cat} -->
+    <td bgcolor="#FFFFFF" valign="top"><ul>
+        <!-- {foreach from=$help_cat.article item=item} -->
+        <li><a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a></li>
+        <!-- {/foreach} -->
+      </ul></td>
+    <!-- {/foreach} -->
+  </tr>
+</table>
+<!--{/if}-->
+<!-- #EndLibraryItem --><!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+<table width="801" border="0" align="center" cellpadding="5" cellspacing="0" style="margin:10px 0 20px 0;" id="footer-table">
+  <tr>
+    <td><img src="images/ecshop.gif" alt="ECSHOP" width="133" height="46" hspace="10" /></td>
+    <td width="6" id="foot-logo"><img src="images/footer_bg.gif" width="6" height="80" alt="" /></td>
+    <td> {$copyright}<br />
+      {$shop_address} {$shop_postcode} <br />
+      <!-- 客服电话{if $service_phone} -->
+      Tel: {$service_phone}
+      <!-- 结束客服电话{/if} -->
+      <!-- QQ 号码 {foreach from=$qq item=im} -->
+      <!-- {if $im} -->
+      <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin={$im}&amp;Site={$shop_name}&amp;Menu=yes" target="_blank"><img src="http://wpa.qq.com/pa?p=1:{$im}:4" height="16" border="0" alt="QQ" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束QQ号码 -->
+      <!-- 淘宝旺旺 {foreach from=$ww item=im} -->
+      <!-- {if $im} -->
+      <a href="http://amos1.taobao.com/msg.ww?v=2&amp;uid={$im|escape:url}&amp;s=2" target="_blank"><img src="http://amos1.taobao.com/online.ww?v=2&amp;uid={$im|escape:url}&amp;s=2" width="16" height="16" border="0" alt="淘宝旺旺" /> {$im}</a>
+      <!-- {/if} -->
+      <!--{/foreach} 结束淘宝旺旺 -->
+      <!-- Yahoo Messenger {foreach from=$ym item=im} -->
+      <!-- {if $im} -->
+      <a href="http://edit.yahoo.com/config/send_webmesg?.target={$im}n&amp;.src=pg" target="_blank"><img src="images/yahoo.gif" width="18" height="17" border="0" alt="Yahoo Messenger" /> {$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} 结束Yahoo Messenger -->
+      <!-- MSN Messenger {foreach from=$msn item=im} -->
+      <!-- {if $im} -->
+      <img src="images/msn.gif" width="18" height="17" border="0" alt="MSN" /> {$im}
+      <!-- {/if} -->
+      <!-- {/foreach} 结束MSN Messenger -->
+      <!-- Skype {foreach from=$skype item=im} -->
+      <!-- {if $im} -->
+      <img src="http://mystatus.skype.com/smallclassic/{$im|escape:url}" alt="Skype" /><a href="skype:{$im|escape:url}?call">{$im}</a>
+      <!-- {/if} -->
+      <!-- {/foreach} -->
+      <div>
+        <!-- 开始相关声明{foreach from=$declaration item=article} -->
+        <a href="{$article.url}" target="_blank">{$article.title}</a>
+        <!-- 相关声明{/foreach}-->
+      </div>
+      <!-- ICP 证书{if $icp_number} -->
+      <div> {$lang.icp_number}:<a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a> </div>
+      <!-- 结束ICP 证书{/if} -->
+      {insert name='query_info'}<br />
+      <a href="http://www.ecshop.com" target="_blank" style="font-size:10px">Powered by <strong><span style="color: #3366FF">ECSHOP</span> <span style="color: #FF9966">{$ecs_version}</span></strong></a><br />
+    </td>
+  </tr>
+</table>
+{if $stats_code}
+<div align="center">{$stats_code}</div>
+{/if}
+
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<!-- #EndLibraryItem --></div>
+  <!-- End #Wrapper -->
+  <div style="float:left;"><img src="images/page_right.gif" alt="" /></div>
+</div>
+<!-- End #globalWrapper -->
+</body>
+</html>

@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="title-div"><img src="../images/category.gif" alt="Category" width="158" height="39" /></div>
+<div id="cat-div" style="padding:5px 10px;">
+  <ul>
+    <!--{foreach from=$categories item=cat}-->
+    <li> <span class="parent-cat"><A href="{$cat.url}">{$cat.name|escape:html}</A></span><br />
+      <!--{foreach from=$cat.children item=child}-->
+      <span style="white-space:nowrap;"><A href="{$child.url}">{$child.name|escape:html}</A></span>
+      <!--{/foreach}-->
+    </li>
+    <!--{/foreach}-->
+  </ul>
+</div>

@@ -1,0 +1,79 @@
+<!-- {if $full_page} -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="form-div">
+{if $smarty.get.auid}
+{$lang.show_affiliate_orders}
+{else}
+<form action="affiliate_ck.php?act=list">
+  {$lang.sch_stats.info}
+  <a href="affiliate_ck.php?act=list">{$lang.sch_stats.all}</a>
+  <a href="affiliate_ck.php?act=list&status=0">{$lang.sch_stats.0}</a>
+  <a href="affiliate_ck.php?act=list&status=1">{$lang.sch_stats.1}</a>
+  <a href="affiliate_ck.php?act=list&status=2">{$lang.sch_stats.2}</a>
+{$lang.sch_order}
+
+<input type="hidden" name="act" value="list" />
+<input name="order_sn" type="text" id="order_sn" size="15"><input type="submit" value="{$lang.button_search}" class="button" />
+</form>
+{/if}
+</div>
+<form method="post" action="" name="listForm">
+<div class="list-div" id="listDiv">
+<!-- {/if} -->
+<table cellspacing='1' cellpadding='3'>
+<tr>
+  <th width="20%">{$lang.order_id}</th>
+  <th width="8%">{$lang.order_stats.name}</th>
+  <th width="8%">{$lang.sch_stats.name}</th>
+  <th>{$lang.log_info}</th>
+  <th width="8%">{$lang.separate_type}</th>
+  <th width="10%">{$lang.handler}</th>
+</tr>
+<!-- {foreach from=$logdb item=val} -->
+<tr>
+  <td align="center"><a href="order.php?act=info&order_id={$val.order_id}">{$val.order_sn}</a></td>
+  <td>{$lang.order_stats[$val.order_status]}</td>
+  <td>{$lang.sch_stats[$val.is_separate]}</td>
+  <td>{$val.info}</td>
+  <td>{$lang.separate_by.$val.separate_type}</td>
+  <td>
+  <!-- {if $val.is_separate eq 0 && $val.separate_able eq 1 && $on eq 1} -->
+  <a href="javascript:confirm_redirect(separate_confirm, 'affiliate_ck.php?act=separate&oid={$val.order_id}')">{$lang.affiliate_separate}</a> | <a href="javascript:confirm_redirect(cancel_confirm, 'affiliate_ck.php?act=del&oid={$val.order_id}')">{$lang.affiliate_cancel}</a>
+  <!-- {elseif $val.is_separate eq 1} -->
+<a href="javascript:confirm_redirect(rollback_confirm, 'affiliate_ck.php?act=rollback&logid={$val.log_id}')">{$lang.affiliate_rollback}</a>
+  <!-- {else} -->
+  -
+  <!-- {/if} -->
+  </td>
+</tr>
+    <!-- {foreachelse} -->
+    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+<!-- {/foreach} -->
+</table>
+  <table cellpadding="4" cellspacing="0">
+    <tr>
+      <td align="right">{include file="page.htm"}</td>
+    </tr>
+  </table>
+<!-- {if $full_page} -->
+</div>
+</form>
+<script type="Text/Javascript" language="JavaScript">
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+
+<!-- {literal} -->
+onload = function()
+{
+  // 开始检查订单
+  startCheckOrder();
+}
+<!-- {/literal} -->
+</script>
+{include file="pagefooter.htm"}
+<!-- {/if} -->

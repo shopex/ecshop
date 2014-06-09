@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $promotion_info} -->
+<!-- 促销信息 -->
+<div class="title-div"><img src="../images/promotion.gif" alt="" width="158" height="39" /></div>
+<div class="content-div">
+  <div style="list-style: none; margin: 10px; padding: 0;">
+    <!-- {foreach from=$promotion_info item=item key=key} -->
+    <!-- {if $item.type eq "snatch"} -->
+    <a href="snatch.php" title="{$lang.$item.type}">{$lang.snatch_promotion}</a>
+    <!-- {elseif $item.type eq "group_buy"} -->
+    <a href="group_buy.php" title="{$lang.$item.type}">{$lang.group_promotion}</a>
+    <!-- {elseif $item.type eq "auction"} -->
+    <a href="auction.php" title="{$lang.$item.type}">{$lang.auction_promotion}</a>
+    <!-- {elseif $item.type eq "favourable"} -->
+    <a href="activity.php" title="{$lang.$item.type}">{$lang.favourable_promotion}</a>
+    <!-- {/if} -->
+    <a href="{$item.url}" title="{$lang.$item.type} {$item.act_name}{$item.time}">{$item.act_name}</a><br />
+    <!-- {/foreach} -->
+  </div>
+</div>
+<!-- {/if} -->

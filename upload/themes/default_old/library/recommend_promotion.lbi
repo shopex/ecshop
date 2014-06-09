@@ -1,0 +1,20 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $promotion_goods} -->
+<div class="title-div"><img src="../images/sales.gif" alt="promotion products" width="158" height="39" /></div>
+<div class="content-div">
+  <!--{foreach from=$promotion_goods item=goods}-->
+  <table border="0" cellpadding="3" cellspacing="1" class="goods-table" style="float: left">
+    <tr>
+      <td align="center"><A href="{$goods.url}"><img src="{$goods.thumb}" border="0" alt="{$goods.name|escape:html}" class="thumb" /></A></td>
+    </tr>
+    <tr>
+      <td><A href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</A><br />
+        {$lang.promote_price}<span class="goods-price">{$goods.promote_price}</span></td>
+    </tr>
+  </table>
+  <!--{/foreach}-->
+  <br />
+  <br style="clear: both" />
+  <div style="text-align:right"><A href="../search.php?intro=promotion">more...</A></div>
+</div>
+<!-- {/if} -->

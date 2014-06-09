@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- 开始循环属性关联的商品 {foreach from=$attribute_linked item=linked}-->
+<!-- {if $linked.goods} -->
+<div class="title-div"><img src="../images/blue_arrow.gif" alt="arrow" />{$linked.title}</div>
+<div class="content-div">
+  <ul class="history-list">
+  <!-- {foreach from=$linked.goods item=goods} -->
+  <li><a href="{$goods.url}" title="{$goods.goods_name|escape:html}">{$goods.short_name|escape:html}</a></li>
+  <!-- {/foreach} -->
+  </ul>
+</div>
+<!-- {/if} -->
+<!-- 结束属性关联的商品 {/foreach}-->

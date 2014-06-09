@@ -1,0 +1,8 @@
+<div style="border:1px solid #CCC;margin:5px auto 10px auto;padding:5px;">
+{$info}<br>
+{if $member}
+{foreach from=$member item=val}
+	{$val.user_name} 
+{/foreach}
+{/if}
+</div>

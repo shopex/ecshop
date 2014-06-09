@@ -1,0 +1,109 @@
+<!-- $Id: integrates_points.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<!-- start integrate plugins list -->
+<div class="list-div" id="listDiv">
+<form name="theForm" action="integrate.php?act=edit_points" method="post" onsubmit="return valid()" >
+<table>
+  <tr>
+    <th width="350">{$lang.rule_name}</th>
+    <th>{$lang.rule_rate}</th>
+    <th width="100">{$lang.handler}</th>
+  </tr>
+  {foreach from=$rule_list item=val key=key}
+    {if $key eq $rule_index}
+     <tr>
+      <td style="padding-left:8px;">
+        <select name="rule_index">
+          {html_options options=$select_rule selected=$rule_index}
+        </select>
+      </td>
+      <td style="padding-left:8px;"><input type="text" style="width:50px;"  name="from_val" value="{$from_val}" /> : <input type="text" style="width:50px;" name="to_val" value="{$to_val}" /></td>
+      <td align="center"><input type="hidden" name="old_rule_index" value="{$rule_index}" /><input type="submit" value="{$lang.button_submit}" /> <a href="integrate.php?act=edit_points&rule_index={$key}">{$lang.remove}</a></td>
+    </tr>
+    {else}
+    <tr>
+      <td style="padding-left:8px;">
+        {$exist_rule.$key}
+      </td>
+      <td style="padding-left:8px;">{$val}</td>
+      <td align="center"><a href="integrate.php?act=points_set&rule_index={$key}">{$lang.modify}</a> <a href="integrate.php?act=edit_points&rule_index={$key}">{$lang.remove}</a></td>
+    </tr>
+    {/if}
+  {/foreach}
+  {if $allow_add}
+   <tr id="addRow" style="display:none">
+    <td style="padding-left:8px;">
+      <select name="rule_index">
+        {html_options options=$select_rule}
+      </select>
+    </td>
+    <td style="padding-left:8px;"><input type="text" name="from_val" style="width:50px;" value="0" /> : <input type="text" name="to_val" style="width:50px;" value="0" /></td>
+    <td align="center"><input type="submit" value="{$lang.button_submit}" /> <a href="javascript:;" onclick="removeRow()">{$lang.remove}</a></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><input type="button" name="addRule" value="{$lang.add_rule}" onclick="addRow()" /></td>
+  </tr>
+  {else}
+  <tr>
+    <td colspan="3" align="center"><input type="button" name="addRule" value="{$lang.add_rule}" disabled="disabled" /></td>
+  </tr>
+  {/if}
+</table>
+</form>
+</div>
+<!-- end integrate plugins list -->
+{literal}
+<script type="Text/Javascript" language="JavaScript">
+<!--
+
+onload = function()
+{
+  // 开始检查订单
+  startCheckOrder();
+}
+
+function valid()
+{
+  var frm = document.forms['theForm'];
+  var from_val = frm.elements['from_val'].value;
+  var to_val = frm.elements['to_val'].value;
+
+  if (from_val.length == 0 || to_val.length == 0)
+  {
+    alert(rate_not_null);
+
+    return false;
+  }
+
+  var reg = /\d/;
+  if ((!reg.test(from_val)) || (!reg.test(to_val)) )
+  {
+    alert(rate_not_int);
+    return false;
+  }
+
+  if (parseInt(from_val) <= 0 || parseInt(to_val) <= 0)
+  {
+    alert(rate_invailed);
+    return false;
+  }
+
+  return true;
+}
+
+function addRow()
+{
+  document.getElementById('addRow').style.display = '';
+  document.forms['theForm'].elements['addRule'].disabled = "disabled";
+}
+
+function removeRow()
+{
+  document.getElementById('addRow').style.display = 'none';
+  document.forms['theForm'].elements['addRule'].disabled = "";
+}
+
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

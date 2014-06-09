@@ -1,0 +1,76 @@
+<!-- $Id: user_account_manage.htm 14598 2008-05-21 07:41:15Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<div class="form-div">
+  <form name="TimeInterval" action="user_account_manage.php" method="post" style="margin:0px">
+    {$lang.start_date}&nbsp;
+    <input name="start_date" type="text" id="start_date" size="15" value='{$start_date}' readonly="readonly" /><input name="selbtn1" type="button" id="selbtn1" onclick="return showCalendar('start_date', '%Y-%m-%d', false, false, 'selbtn1');" value="{$lang.btn_select}" class="button"/>&nbsp;&nbsp;
+    {$lang.end_date}&nbsp;
+    <input name="end_date" type="text" id="end_date" size="15" value='{$end_date}' readonly="readonly" /><input name="selbtn2" type="button" id="selbtn2" onclick="return showCalendar('end_date', '%Y-%m-%d', false, false, 'selbtn2');" value="{$lang.btn_select}" class="button"/>&nbsp;&nbsp;
+    <input type="submit" name="submit" value="{$lang.query}" class="button" />
+  </form>
+</div>
+<!-- start charger  -->
+<div class="list-div">
+<table cellspacing='1' cellpadding='3'>
+  <tr>
+    <th colspan="4" class="group-title">{$lang.user_account_info}</th>
+  </tr>
+  <tr>
+    <td width="20%"><a href="user_account.php?act=list&process_type=0&ispaid=1&start_date={$start_date}&end_date={$end_date}">{$lang.user_add_money}</a></td>
+    <td width="30%"><strong>{$account.voucher_amount}</strong></td>
+    <td width="20%"><a href="user_account.php?act=list&process_type=1&ispaid=1&start_date={$start_date}&end_date={$end_date}">{$lang.user_repay_money}</a></td>
+    <td width="30%"><strong>{$account.to_cash_amount}</strong></td>
+  </tr>
+  <tr>
+    <td><a href="users.php?act=list">{$lang.user_money}</a></td>
+    <td><strong>{$account.user_money}</strong></td>
+    <td><a href="users.php?act=list">{$lang.frozen_money}</a></td>
+    <td><strong style="color: red">{$account.frozen_money}</strong></td>
+  </tr>
+</table>
+</div>
+<!-- end charge -->
+<br />
+<!-- start -->
+<div class="list-div">
+<table cellspacing='1' cellpadding='3'>
+  <tr>
+    <th colspan="4" class="group-title">{$lang.surplus_info}</th>
+  </tr>
+  <tr>
+    <td width="20%"><a href="user_account_manage.php?act=surplus&start_date={$start_date}&end_date={$end_date}">{$lang.order_surplus}</a></td>
+    <td width="30%"><strong>{$account.surplus}</strong></td>
+    <td width="20%"><a href="user_account_manage.php?act=surplus&start_date={$start_date}&end_date={$end_date}">{$lang.integral_money}</a></td>
+    <td width="30%"><strong >{$account.integral_money}</strong></td>
+  </tr>
+  <tr>
+    <td><a href="goods.php?act=list&amp;intro_type=is_new">{$lang.new_goods}</a></td>
+    <td><strong>{$goods.new}</strong></td>
+    <td><a href="goods.php?act=list&amp;intro_type=is_best">{$lang.recommed_goods}</a></td>
+    <td><strong>{$goods.best}</strong></td>
+  </tr>
+  <tr>
+    <td><a href="goods.php?act=list&amp;intro_type=is_hot">{$lang.hot_goods}</a></td>
+    <td><strong>{$goods.hot}</strong></td>
+    <td><a href="goods.php?act=list&amp;intro_type=is_promote">{$lang.sales_count}</a></td>
+    <td><strong>{$goods.promote}</strong></td>
+  </tr>
+</table>
+</div>
+<!-- end  -->
+<br />
+{literal}
+<script type="Text/Javascript" language="JavaScript">
+<!--
+onload = function()
+{
+  /* 检查订单 */
+  startCheckOrder();
+}
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}
