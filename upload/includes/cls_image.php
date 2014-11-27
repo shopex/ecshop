@@ -578,7 +578,7 @@ class cls_image
      * @author: weber liu
      * @return string
      */
-    function random_filename()
+    public static function random_filename()
     {
         $str = '';
         for($i = 0; $i < 9; $i++)
@@ -597,7 +597,7 @@ class cls_image
      *
      * @return  string      文件名
      */
-    function unique_name($dir)
+    public static function unique_name($dir)
     {
         $filename = '';
         while (empty($filename))
@@ -620,7 +620,7 @@ class cls_image
      *
      * @return  string      文件后缀名
      */
-    function get_filetype($path)
+    public static function get_filetype($path)
     {
         $pos = strrpos($path, '.');
         if ($pos !== false)
@@ -675,7 +675,7 @@ class cls_image
      * @access      public
      * @return      int         可能的值为0，1，2
      */
-    function gd_version()
+    public static function gd_version()
     {
         static $version = -1;
 

@@ -1,1 +1,4 @@
-.*
+.idea
+upload/data
+upload/temp
+upload/images
