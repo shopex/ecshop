@@ -366,7 +366,7 @@ class cls_mysql
         }
     }
 
-    function escape_string($unescaped_string)
+    public static function escape_string($unescaped_string)
     {
         if (PHP_VERSION >= '4.3')
         {
